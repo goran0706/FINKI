@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<form action="#" method="post">
+    <fieldset>
+        <legend>Your Details:</legend>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" name="name" type="text"/>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input id="email" name="email" type="email"/>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Your Review:</legend>
+        <div class="form-group">
+            <p>How did you hear about us:</p>
+            <label>
+                <select name="">
+                    <option selected="selected" value="">Select an option</option>
+                    <option selected="selected" value="1">Google</option>
+                    <option selected="selected" value="2">Friend</option>
+                    <option selected="selected" value="3">Advert</option>
+                    <option selected="selected" value="4">Other</option>
+                </select>
+            </label>
+        </div>
+        <div class="form-group">
+            <p>Would you visit again?</p>
+            <label>
+                <input name="choice" type="radio" value="yes"/> Yes
+            </label>
+            <label>
+                <input name="choice" type="radio" value="no"/> No
+            </label>
+            <label>
+                <input name="choice" type="radio" value="maybe"/> Maybe
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="comments" style="display: block">Comments:</label>
+            <textarea id="comments" name="comments"></textarea>
+        </div>
+        <div class="form-group">
+            <input id="signup" name="signup" type="checkbox" value="yes"/>
+            <label for="signup">Sign me up for email updates</label>
+        </div>
+        <button type="submit">Submit review</button>
+    </fieldset>
+</form>
+
+</body>
+</html>

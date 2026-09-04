@@ -1,0 +1,63 @@
+<!--
+### Exercise 2.1 — Referencing CSS and Resets
+
+**Topic:** External stylesheet, CSS reset, `box-sizing`
+
+**Exact requirements:**
+
+- Take your `index.html` from Exercise 1.1
+- Create a file called `styles.css` in the same folder
+- Link it correctly in the `<head>` using `<link>`
+    - In `styles.css` write a minimal CSS reset covering:
+    - Set `box-sizing: border-box` on `*` and `*::before`, `*::after`
+    - Remove default `margin` and `padding` on `*`
+    - Set `font-family` on `body` to: `Georgia, 'Times New Roman', serif`
+    - Set `line-height` on `body` to `1.6`
+    - Add styles for `h1`:
+    - `font-size: 2.5rem`
+    - `margin-bottom: 0.5rem`
+    - Add styles for `p`:
+    - `font-size: 1rem`
+    - `max-width: 65ch`
+
+**Do not change the HTML. Changes must be CSS only.**
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Roast & Co. — Specialty Coffee</title>
+
+    <!-- Include this line but will not link external CSS -->
+    <link href="styles.css" rel="stylesheet" type="text/css">
+
+    <style>
+        *, *:before, *:after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1rem;
+            max-width: 65ch;
+        }
+    </style>
+</head>
+<body>
+<h1>Roast & Co.</h1>
+<p>Specialty coffee roasted in small batches since 2010.</p>
+</body>
+</html>

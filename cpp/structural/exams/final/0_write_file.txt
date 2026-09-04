@@ -1,0 +1,5 @@
+The project started back in XXYY with only Y developers on the team.
+By the time we reached phase X.Y in mid-XXXX, that number grew to YX.
+We processed roughly YXXX.Y gigabytes of data every single day.
+If you look at error log XXX, you will notice that YX attempts failed out of YXX total requests.
+The final build took XX.Y seconds to compile successfully.

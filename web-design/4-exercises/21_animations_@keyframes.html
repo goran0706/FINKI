@@ -1,0 +1,162 @@
+<!--
+### Exercise 5.2 — CSS Animations with @keyframes
+
+**Topic:** `@keyframes`, `animation`, `animation-delay`, `prefers-reduced-motion`
+
+**What to build:** A loading skeleton and a fade-in staggered list.
+
+**HTML:**
+
+
+<div class="skeleton-card">
+    <div class="skeleton skeleton--title"></div>
+    <div class="skeleton skeleton--line"></div>
+    <div class="skeleton skeleton--line skeleton--short"></div>
+</div>
+
+<ul class="stagger-list">
+    <li class="stagger-list__item">Ethiopia Yirgacheffe</li>
+    <li class="stagger-list__item">Colombia Huila</li>
+    <li class="stagger-list__item">Guatemala Antigua</li>
+    <li class="stagger-list__item">Kenya AA</li>
+</ul>
+
+**CSS requirements:**
+
+ - Define `@keyframes shimmer` that animates `background-position` from `-200px 0` to `calc(200px + 100%) 0`
+ - Define `@keyframes fadeInUp` that animates from `opacity: 0; transform: translateY(16px)` to`opacity: 1; transform: translateY(0)`
+ - `.skeleton`:
+     - `background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)`
+     - `background-size: 400px 100%`
+     - `animation: shimmer 1.4s infinite linear`
+     - `border-radius: 2px`, `margin-bottom: 12px`, `height: 16px`
+ - `.skeleton--title`: `height: 28px`, `width: 60%`
+ - `.skeleton--line`: `width: 100%`
+ - `.skeleton--short`: `width: 40%`
+ - `.stagger-list`: `list-style: none`, `padding: 40px`
+ - `.stagger-list__item`: `animation: fadeInUp 400ms ease both`
+
+ - Each item gets an increasing delay using `nth-child`: 0ms, 100ms, 200ms, 300ms
+ - At the bottom, add: `@media (prefers-reduced-motion: reduce)` — inside it, set `animation: none` on both `.skeleton`
+and `.stagger-list__item`
+
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>CSS Animations</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: #ffffff;
+        }
+
+        @keyframes shimmer {
+            from {
+                background-position: -200px 0;
+            }
+            to {
+                background-position: calc(200px + 100%) 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .skeleton-card {
+            padding: 40px;
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 400px 100%;
+            animation: shimmer 1.4s infinite linear;
+            border-radius: 2px;
+            margin-bottom: 12px;
+            height: 16px;
+        }
+
+        .skeleton--title {
+            height: 28px;
+            width: 60%;
+        }
+
+        .skeleton--line {
+            width: 100%;
+        }
+
+        .skeleton--short {
+            width: 40%;
+        }
+
+        .stagger-list {
+            list-style: none;
+            padding: 40px;
+        }
+
+        .stagger-list__item {
+            animation: fadeInUp 400ms ease both;
+        }
+
+        .stagger-list__item:nth-child(1) {
+            animation-delay: 0ms;
+        }
+
+        .stagger-list__item:nth-child(2) {
+            animation-delay: 100ms;
+        }
+
+        .stagger-list__item:nth-child(3) {
+            animation-delay: 200ms;
+        }
+
+        .stagger-list__item:nth-child(4) {
+            animation-delay: 300ms;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .skeleton {
+                animation: none;
+            }
+
+            .stagger-list__item {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="skeleton-card">
+    <div class="skeleton skeleton--title"></div>
+    <div class="skeleton skeleton--line"></div>
+    <div class="skeleton skeleton--line skeleton--short"></div>
+</div>
+
+<ul class="stagger-list">
+    <li class="stagger-list__item">Ethiopia Yirgacheffe</li>
+    <li class="stagger-list__item">Colombia Huila</li>
+    <li class="stagger-list__item">Guatemala Antigua</li>
+    <li class="stagger-list__item">Kenya AA</li>
+</ul>
+
+</body>
+</html>

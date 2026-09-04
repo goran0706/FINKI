@@ -1,0 +1,119 @@
+<!--
+### Exercise 5.1 — CSS Transitions
+
+**Topic:** `transition`, easing, `transform`
+
+**What to build:** An interactive button and card with hover transitions.
+
+**HTML:**
+
+<div class="demo-area">
+    <a href="#" class="cta-button">Subscribe Now</a>
+
+    <div class="hover-card">
+        <h3 class="hover-card__title">Kenya AA</h3>
+        <p class="hover-card__text">Blackcurrant · Tomato · Citrus</p>
+    </div>
+</div>
+
+**CSS requirements:**
+
+- `.demo-area`: `display: flex`, `gap: 40px`, `padding: 60px`, `align-items: flex-start`
+- `.cta-button`:
+- Base: `display: inline-block`, `padding: 14px 36px`, `background: #1a1a1a`, `color: #fff`,
+`text-decoration: none`, `font-size: 1rem`, `letter-spacing: 0.05em`
+- `transition: background-color 200ms ease, transform 150ms ease`
+- Hover: `background-color: #c8a96e`, `transform: translateY(-2px)`
+- `.hover-card`:
+- Base: `padding: 28px`, `border: 1px solid #e0e0e0`, `width: 240px`
+- `transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease`
+- Hover: `border-color: #1a1a1a`, `box-shadow: 4px 4px 0 #1a1a1a`, `transform: translate(-2px, -2px)`
+- `.hover-card__title`: `margin: 0 0 8px`
+- `.hover-card__text`: `color: #888`, `font-size: 0.875rem`, `margin: 0`
+
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>CSS Transitions</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: #ffffff;
+        }
+
+        .demo-area {
+            display: flex;
+            gap: 40px;
+            padding: 60px;
+            align-items: flex-start;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 14px 36px;
+            background: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            transition: background-color 200ms ease, transform 150ms ease;
+        }
+
+        .cta-button:hover {
+            background-color: #c8a96e;
+            transform: translateY(-2px);
+        }
+
+        /* Hover Card */
+        .hover-card {
+            padding: 28px;
+            border: 1px solid #e0e0e0;
+            width: 240px;
+
+            transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+        }
+
+        .hover-card:hover {
+            border-color: #1a1a1a;
+            box-shadow: 4px 4px 0 #1a1a1a;
+            transform: translate(-2px, -2px);
+            background-color: red;
+        }
+
+        .hover-card__title {
+            margin: 0 0 8px;
+            font-size: 1rem;
+            color: #1a1a1a;
+        }
+
+        .hover-card__text {
+            color: #888;
+            font-size: 0.875rem;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="demo-area">
+    <a class="cta-button" href="#">Subscribe Now</a>
+
+    <div class="hover-card">
+        <h3 class="hover-card__title">Kenya AA</h3>
+        <p class="hover-card__text">Blackcurrant · Tomato · Citrus</p>
+    </div>
+</div>
+
+</body>
+</html>

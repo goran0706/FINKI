@@ -1,0 +1,33 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="password">Enter Password</label>
+    <input type="password" id="password" placeholder="Your password" />
+    <script>
+      // "abcABC9!" valid
+      // "abc" invalid
+      const passwordInput = document.querySelector("input");
+
+      passwordInput.onchange = function (e) {
+        const password = event.target.value;
+        const oneLowerCaseLetter = /(?=.+[a-z])/;
+        const oneUpperCaseLetter = /(?=.+[A-Z])/;
+        const oneDigit = /(?=.+[0-9])/;
+        const oneSpecialCharacter = /(?=.+[!@#$%^&*])/;
+        const minimumEightCharacters = /(?=.{8,})/;
+        const isValid =
+          oneLowerCaseLetter.test(password) &&
+          oneUpperCaseLetter.test(password) &&
+          oneDigit.test(password) &&
+          oneSpecialCharacter.test(password) &&
+          minimumEightCharacters.test(password);
+
+        alert(isValid ? "Your password is valid" : "Your password is invalid");
+      };
+    </script>
+  </body>
+</html>

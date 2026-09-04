@@ -1,0 +1,35 @@
+.AppContainer {
+  width: 100vw;
+  height: 100vh;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.header,
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: white;
+  background-color: royalblue;
+  padding: 1rem;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  > a {
+    color: white;
+    &:hover {
+      color: blue;
+    }
+  }
+}

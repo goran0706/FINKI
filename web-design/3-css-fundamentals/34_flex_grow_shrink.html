@@ -1,0 +1,75 @@
+<!--
+#### Exercise 7.6: Flex Grow and Shrink
+
+Create a three-column layout:
+
+- Left sidebar: fixed 200px width (doesn't grow or shrink)
+- Main content: grows to fill space
+- Right sidebar: fixed 150px width (doesn't grow or shrink)
+
+Use `flex-grow` and `flex-shrink`.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #d3d3d3;
+            border-radius: 15px;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .sidebar-left {
+            flex: 0 0 200px;
+            color: white;
+            background-color: dodgerblue;
+            text-align: center;
+            align-content: center;
+        }
+
+        .main-content {
+            flex: 1 0 auto;
+            background-color: white;
+            text-align: center;
+            align-content: center;
+        }
+
+        .sidebar-right {
+            flex: 0 0 150px;
+            color: white;
+            background-color: dodgerblue;
+            text-align: center;
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="flex-container">
+    <div class="sidebar-left">Left Sidebar</div>
+    <div class="main-content">Main Content</div>
+    <div class="sidebar-right">Right Sidebar</div>
+</div>
+
+</body>
+</html>

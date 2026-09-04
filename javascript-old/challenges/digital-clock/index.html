@@ -1,0 +1,86 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #070707;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      #clock {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .split {
+        color: #223c34;
+        font-size: 2rem;
+      }
+
+      .numbers {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 2px solid #223c34;
+        border-radius: 10px;
+        color: whitesmoke;
+        background-color: #212423;
+        font-size: 2rem;
+        font-weight: bold;
+        width: 5rem;
+        height: 5rem;
+      }
+
+      .numbers span:last-child {
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="clock"></div>
+    <script>
+      function tick() {
+        const clock = document.querySelector("#clock");
+        return setInterval(() => {
+          const date = new Date();
+          const h = date.getHours().toLocaleString();
+          const m = date.getMinutes().toLocaleString();
+          const s = date.getSeconds().toLocaleString();
+          const html = `
+            <div class="numbers">
+              <span>${h}</span>
+              <span>HOURS</span>
+            </div>
+            <span class="split">:</span>
+              <div class="numbers">
+              <span>${m}</span>
+              <span>MINS</span>
+            </div>
+              <span class="split">:</span>
+            <div class="numbers">
+              <span>${s}</span>
+              <span>SECS</span>
+            </div>
+          `;
+          clock.innerHTML = html;
+        }, 1000);
+      }
+      tick();
+    </script>
+  </body>
+</html>

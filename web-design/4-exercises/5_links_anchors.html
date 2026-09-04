@@ -1,0 +1,73 @@
+<!--
+### Exercise 1.5 — Links and Anchors
+
+**Topic:** `<a>`, `href`, `target`, `rel`, fragment links, `download`
+
+**What to build:** A navigation section and a multisection page with internal links.
+
+**Exact requirements:**
+
+- Create a page with `<h1>`: `Roast & Co. — Resources`
+- At the top, add a `<nav>` containing a `<ul>` with three internal fragment links:
+- `Our Story` → links to `#story`
+- `Brewing Guides` → links to `#brewing`
+- `Contact` → links to `#contact`
+- Create three `<section>` elements each with matching `id` attributes (`story`, `brewing`, `contact`)
+- Each section should have an `<h2>` and one `<p>` of placeholder text (use any single sentence)
+- In the `#brewing` section add an external link to `https://sca.coffee` that:
+- Opens in a new tab
+- Has `rel="noopener noreferrer"`
+- Link text: `Visit the Specialty Coffee Association`
+- In the `#contact` section add a `mailto:` link: `hello@roastandco.com`
+- At the bottom of the page add a link with `download` attribute pointing to `brew-guide.pdf` with link text:
+`Download our Brew Guide (PDF)`
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<h1>Roast & Co. — Resources</h1>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#brewing">Brewing Guides</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section id="story">
+        <h2>Our Story</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, explicabo!</p>
+        <a href="https://sca.coffee" rel="noopener noreferrer" target="_blank">Visit the Specialty Coffee
+            Association</a>
+    </section>
+
+    <section id="brewing">
+        <h2>Brewing Guides</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, explicabo!</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, explicabo!</p>
+        <a href="mailto:hello@roastandco.com">Email</a>
+    </section>
+</main>
+
+
+<footer>
+    <a download="brew-guide.pdf" href="#">Download our Brew Guide (PDF)</a>
+</footer>
+
+</body>
+</html>

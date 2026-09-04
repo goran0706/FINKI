@@ -1,0 +1,44 @@
+<!--
+#### Exercise 2.6: :has() Selector
+
+Use `:has()` to:
+
+1. Select cards that contain an image
+2. Select forms that have invalid inputs
+3. Select paragraphs that are followed by an image
+4. Select labels whose checkbox is checked
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        /* 1. Select cards that contain an image */
+        .card:has(img) {
+            border: 2px solid #007bff;
+        }
+
+        /* 2. Select forms that have invalid inputs */
+        form:has(input:invalid) {
+            background-color: #fff0f0;
+        }
+
+        /* 3. Select paragraphs that are followed by an image */
+        p:has(+ img) {
+            margin-bottom: 0;
+        }
+
+        /* 4. Select labels whose checkbox is checked */
+        label:has(input:checked) {
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>

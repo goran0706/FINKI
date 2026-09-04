@@ -1,0 +1,56 @@
+<!--
+#### Exercise 4.4: Display Properties
+
+Create examples demonstrating:
+
+1. `display: block` (element starts on new line, full width)
+2. `display: inline` (element sits in text flow, no width/height)
+3. `display: inline-block` (inline but accepts width/height)
+4. `display: none` (element removed from flow)
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        .box {
+            background-color: dodgerblue;
+            text-align: center;
+
+            /* works with block elements */
+            width: 100px;
+            height: 100px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .box-1 {
+            display: block;
+        }
+
+        .box-2 {
+            display: inline;
+        }
+
+        .box-3 {
+            display: inline-block;
+        }
+
+        .box-4 {
+            display: none
+        }
+    </style>
+</head>
+<body>
+
+<div class="box box-1">BOX 1</div>
+<div class="box box-2">BOX 2</div>
+<div class="box box-3">BOX 3</div>
+<div class="box box-4">BOX 4</div>
+
+</body>
+</html>

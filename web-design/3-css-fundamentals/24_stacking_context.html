@@ -1,0 +1,68 @@
+<!--
+#### Exercise 5.5: Stacking Context
+
+Create a stacking context scenario:
+
+- Parent div with `position: relative; z-index: 1;`
+- Child div with `position: relative; z-index: 9999;`
+- Sibling div (outside parent) with `position: relative; z-index: 2;`
+
+Demonstrate that the child cannot appear above the sibling despite higher z-index.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            color: white;
+            text-align: center;
+            align-content: center;
+            border-radius: 10px;
+        }
+
+        .parent {
+            position: relative;
+            z-index: 1;
+        }
+
+        .child {
+            background-color: crimson;
+            position: relative;
+            z-index: 9999;
+        }
+
+        .sibling {
+            background-color: dodgerblue;
+            position: relative;
+            z-index: 2;
+            top: -40px;
+            left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Parent has z-index of 1 -->
+<div class="parent">
+    <!-- Child has z-index of 9999 -->
+    <div class="child box">Child</div>
+</div>
+
+<!-- Sibling has z-index of 2 -->
+<div class="sibling box">Sibling</div>
+
+<!--
+    - the sibling div element has higher z-index than parent.
+    - appears above child because the child is nested in an element with lower z-index.
+ -->
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!--
+    #### Exercise 9.3: Accessible Table
+
+    Take the Product Inventory table from Exercise 9.1 and add:
+
+    - Explicit `scope` attributes on all header cells
+    - `<caption>` element
+    - Summary row in `<tfoot>` showing totals
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<!--
+    ✓ <caption> for table title
+    ✓ <thead> with headers
+    ✓ <tbody> for data rows
+    ✓ <tfoot> for summary/totals
+    ✓ scope attributes for accessibility
+-->
+
+<table>
+    <!-- TABLE TITLE -->
+    <caption>Product Inventory - March 2026</caption>
+
+    <!-- TABLE HEADER -->
+    <thead>
+    <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">In Stock</th>
+    </tr>
+    </thead>
+
+    <!-- TABLE BODY -->
+    <tbody>
+    <tr>
+        <td>Widget</td>
+        <td>$10</td>
+        <td>5</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Gadget</td>
+        <td>$15</td>
+        <td>3</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Doohickey</td>
+        <td>$8</td>
+        <td>0</td>
+        <td>No</td>
+    </tr>
+    </tbody>
+
+    <!-- TABLE FOOTER (TOTALS) -->
+    <tfoot>
+    <tr>
+        <th scope="row">Totals</th>
+        <td>$33</td>
+        <td>8</td>
+        <td></td>
+    </tr>
+    </tfoot>
+</table>
+
+</body>
+</html>

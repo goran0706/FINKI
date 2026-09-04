@@ -1,0 +1,1050 @@
+<!--
+    Tables
+
+    HTML tables arrange data into rows and columns.
+    A table consists of <table>, with content organized via <tr> (rows), <th> (header cells), and <td> (data cells).
+
+    ════════════════════════════════════════════════════════════
+    HTML TABLE TAGS
+    ════════════════════════════════════════════════════════════
+
+    Tag             Description
+    ─────────────────────────────────────────────────────────────────────────────────
+    <table>         Root element. All other table elements must be descendants of it.
+    <caption>       Table title. Must be the FIRST child of <table>. Displayed above
+                    the table by default (override with caption-side: bottom in CSS).
+    <colgroup>      Container for <col> elements. Must appear BEFORE <thead>/<tbody>/
+                    <tfoot> (but AFTER <caption>). Used to apply styles to whole columns.
+    <col>           Defines per-column properties inside <colgroup>.
+                    Use the span attribute to apply the same style to N consecutive columns.
+                    ⚠ Only width, visibility, background, and border are supported.
+    <thead>         Groups header rows. Repeated on each page when printing long tables.
+    <tbody>         Groups body rows. A table can have multiple <tbody> elements to
+                    create logical row groups.
+    <tfoot>         Groups footer rows. Place it BEFORE <tbody> in source order —
+                    browsers render it last, and it prints on every page of long tables.
+    <tr>            Defines a row. Valid inside <thead>, <tbody>, or <tfoot>.
+    <th>            Header cell. Bold + centred by default. Always add scope="col"
+                    (column header) or scope="row" (row header) for accessibility.
+    <td>            Data cell. Use colspan="N" to span N columns, rowspan="N" to span
+                    N rows. Cells "consumed" by the span must be omitted from markup.
+        =============================================================───────────────────────
+
+    ════════════════════════════════════════════════════════════
+    BORDERS
+    ════════════════════════════════════════════════════════════
+
+    - Basic border
+        Apply the CSS border property to table, th, and td.
+        Without border-collapse, adjacent cells produce a visible double border.
+
+    - Collapsed borders (most common)
+        Setting border-collapse to collapse on the table merges adjacent cell borders
+        into a single line, eliminating the double-border effect.
+
+    - Invisible / styled border
+        Set the border color to match the page background, then color the cells
+        themselves. Creates the visual impression of borderless cells with spacing.
+
+    - Rounded borders
+        Apply border-radius to th and td to round cell corners.
+        Omit border-radius from the table selector to skip rounding the outer edge.
+
+    - Dotted / dashed borders
+        The border-style property controls line appearance.
+        Values: solid | dotted | dashed | double | groove | ridge | inset | outset.
+
+    - Border color
+        border-color sets only the color, leaving width and style intact.
+
+    ════════════════════════════════════════════════════════════
+    SIZING
+    ════════════════════════════════════════════════════════════
+
+    - Table width
+        Set the width property on the <table> element.
+
+    - Column width
+        Set width on a <th> or <td>. For consistent results across all rows,
+        use table-layout: fixed on the table and set widths on the first row only.
+
+    - Row height
+        Set the height property on a <tr> element.
+
+    ════════════════════════════════════════════════════════════
+    HEADERS
+    ════════════════════════════════════════════════════════════
+
+    - Caption (table heading)
+        <caption> must be the first child of <table>.
+        Its position can be overridden with the CSS caption-side property.
+
+    - Horizontal headers (column headers)
+        Place <th scope="col"> elements inside a <thead><tr>.
+
+    - Vertical headers (row headers)
+        Use <th scope="row"> as the first cell of each <tbody> row;
+        remaining cells in that row use <td>.
+
+    - Header alignment
+        Headers default to bold and centred. Override with text-align on th.
+
+    - Header spanning multiple columns
+        Use the colspan attribute on a <th> to make it label multiple columns.
+        Combine with rowspan on adjacent <th> elements to build multi-level headers.
+
+    ════════════════════════════════════════════════════════════
+    PADDING & SPACING
+    ════════════════════════════════════════════════════════════
+
+    - Cell padding (space between cell edge and content)
+        Default is 0. Apply the CSS padding property to th and td.
+
+    - Cell spacing (space between cells)
+        Controlled by border-spacing on the table element.
+        Requires border-collapse: separate (the default).
+        Has no effect when border-collapse: collapse is set.
+
+    ════════════════════════════════════════════════════════════
+    COLSPAN & ROWSPAN
+    ════════════════════════════════════════════════════════════
+
+    - colspan
+        Makes a cell span N columns horizontally.
+        The N-1 cells that would normally follow in the same row must be omitted.
+
+    - rowspan
+        Makes a cell span N rows vertically.
+        The corresponding cells in the next N-1 rows must be omitted.
+
+    ════════════════════════════════════════════════════════════
+    STYLING
+    ════════════════════════════════════════════════════════════
+
+    - Horizontal zebra stripes
+        Alternate row background using the :nth-child(even) or :nth-child(odd) selector
+        on tbody tr.
+
+    - Vertical zebra stripes
+        Alternate column background using :nth-child on both th and td so that
+        header cells match data cells.
+
+    - Combined zebra stripes
+        Layer horizontal and vertical zebra using rgba() colors with low opacity
+        so the overlapping cells blend transparently rather than clashing.
+
+    - Horizontal dividers only
+        Remove all borders and apply only border-bottom to td and th for a clean,
+        minimal divider-style table.
+
+    - Hoverable rows
+        Use the :hover pseudo-class on tbody tr. Pair with cursor: pointer if rows
+        are interactive.
+
+    ════════════════════════════════════════════════════════════
+    COLGROUP
+    ════════════════════════════════════════════════════════════
+
+    - Basic usage
+        <colgroup> wraps one or more <col> elements and must appear before any
+        <thead>, <tbody>, <tfoot>, or <tr> — but after <caption> if one is present.
+
+    - span attribute
+        The span attribute on <col> applies that column's style to N consecutive
+        columns, avoiding the need to write a separate <col> for each one.
+
+    - Empty <col> (skipping columns)
+        Insert an unstyled <col> with no attributes to "skip" over columns that
+        should not be styled before reaching the target column.
+
+    - Hiding a column
+        Setting visibility: collapse on a <col> removes the column from layout
+        without removing it from the DOM. colspan calculations still include it.
+
+    - Legal CSS properties for <col> and <colgroup>
+        Only four categories are supported — all others are silently ignored:
+            width
+            visibility
+            background  (background-color, background-image, etc.)
+            border      (only effective when border-collapse: collapse is on the table)
+
+    ════════════════════════════════════════════════════════════
+    ACCESSIBILITY NOTES
+    ════════════════════════════════════════════════════════════
+
+    - Always use <th> (not <td>) for header cells.
+    - Always add scope="col" or scope="row" to every <th>.
+    - Use <caption> to give the table a programmatic title screen readers can announce.
+    - For complex tables with multi-level headers, use the headers attribute on <td>
+      referencing the ids of the relevant <th> elements instead of relying on scope.
+    - Never use tables for page layout — use CSS Grid or Flexbox instead.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>HTML Tables – Complete Reference</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+            color: #222;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin: 2rem 0 0.5rem;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 4px;
+        }
+
+        p.desc {
+            font-size: 0.9rem;
+            color: #555;
+            margin: 0 0 0.75rem;
+        }
+
+        /* ── Shared base ─────────────────────────────────────── */
+        table {
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        caption {
+            font-weight: bold;
+            margin-bottom: 0.4rem;
+            caption-side: top;
+        }
+
+        /* ── 1. Basic border ─────────────────────────────────── */
+        .t-basic, .t-basic th, .t-basic td {
+            border: 1px solid black;
+        }
+
+        .t-basic th, .t-basic td {
+            padding: 8px 12px;
+        }
+
+        /* ── 2. Collapsed border ─────────────────────────────── */
+        .t-collapse, .t-collapse th, .t-collapse td {
+            border: 1px solid #333;
+        }
+
+        .t-collapse th, .t-collapse td {
+            padding: 8px 12px;
+        }
+
+        /* ── 3. Styled (invisible) border ───────────────────── */
+        .t-styled, .t-styled th, .t-styled td {
+            border: 1px solid white;
+        }
+
+        .t-styled th, .t-styled td {
+            background-color: #96D4D4;
+            padding: 8px 12px;
+        }
+
+        /* ── 4. Rounded borders ─────────────────────────────── */
+        .t-rounded, .t-rounded th, .t-rounded td {
+            border: 1px solid #555;
+            border-radius: 8px;
+            padding: 8px 12px;
+        }
+
+        /* ── 5. Dotted borders ──────────────────────────────── */
+        .t-dotted th, .t-dotted td {
+            border-style: dotted;
+            border-width: 2px;
+            border-color: #333;
+            padding: 8px 12px;
+        }
+
+        /* ── 6. Border color ───────────────────────────────── */
+        .t-colored, .t-colored th, .t-colored td {
+            border: 2px solid #96D4D4;
+            padding: 8px 12px;
+        }
+
+        /* ── 7. Table width & column/row sizing ─────────────── */
+        .t-sizing {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .t-sizing, .t-sizing th, .t-sizing td {
+            border: 1px solid #aaa;
+            padding: 8px 12px;
+        }
+
+        .t-sizing .col-id {
+            width: 60px;
+        }
+
+        .t-sizing .col-name {
+            width: 200px;
+        }
+
+        .t-sizing .row-tall {
+            height: 60px;
+        }
+
+        /* ── 8. Header alignment ─────────────────────────────── */
+        .t-align, .t-align th, .t-align td {
+            border: 1px solid #aaa;
+            padding: 8px 12px;
+        }
+
+        .t-align th {
+            text-align: left;
+        }
+
+        /* ── 9. Multi-column header (colspan on <th>) ─────────── */
+        .t-span, .t-span th, .t-span td {
+            border: 1px solid #aaa;
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        /* ── 10. Cell padding & spacing ─────────────────────── */
+        .t-padding {
+            border-spacing: 6px;
+            border-collapse: separate;
+        }
+
+        .t-padding th, .t-padding td {
+            border: 1px solid #aaa;
+            padding: 14px 20px;
+        }
+
+        /* ── 11. Vertical table headers ─────────────────────── */
+        .t-vertical, .t-vertical th, .t-vertical td {
+            border: 1px solid #aaa;
+            padding: 8px 12px;
+        }
+
+        .t-vertical th {
+            text-align: left;
+            background: #f0f0f0;
+        }
+
+        /* ── 12. Zebra stripes – horizontal ─────────────────── */
+        .t-zebra, .t-zebra th, .t-zebra td {
+            border: 1px solid #ddd;
+            padding: 8px 14px;
+        }
+
+        .t-zebra thead tr {
+            background: #4a90d9;
+            color: white;
+        }
+
+        .t-zebra tbody tr:nth-child(even) {
+            background: #e8f0fb;
+        }
+
+        /* ── 13. Zebra stripes – vertical ───────────────────── */
+        .t-vzebra, .t-vzebra th, .t-vzebra td {
+            border: 1px solid #ddd;
+            padding: 8px 14px;
+        }
+
+        .t-vzebra thead tr {
+            background: #4a90d9;
+            color: white;
+        }
+
+        .t-vzebra th:nth-child(even), .t-vzebra td:nth-child(even) {
+            background: #e8f0fb;
+        }
+
+        /* ── 14. Combined zebra ──────────────────────────────── */
+        .t-combo, .t-combo th, .t-combo td {
+            border: 1px solid #ddd;
+            padding: 8px 14px;
+        }
+
+        .t-combo thead tr {
+            background: #4a90d9;
+            color: white;
+        }
+
+        .t-combo tbody tr:nth-child(even) {
+            background: rgba(74, 144, 217, 0.1);
+        }
+
+        .t-combo th:nth-child(odd), .t-combo td:nth-child(odd) {
+            background: rgba(200, 220, 240, 0.15);
+        }
+
+        /* ── 15. Horizontal dividers only ───────────────────── */
+        .t-dividers td, .t-dividers th {
+            border: none;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 14px;
+        }
+
+        .t-dividers thead th {
+            font-weight: 600;
+        }
+
+        /* ── 16. Hoverable rows ──────────────────────────────── */
+        .t-hover, .t-hover th, .t-hover td {
+            border: 1px solid #ddd;
+            padding: 8px 14px;
+        }
+
+        .t-hover thead tr {
+            background: #555;
+            color: white;
+        }
+
+        .t-hover tbody tr:hover {
+            background: #fff3cd;
+            cursor: pointer;
+        }
+
+        /* ── 17. colspan / rowspan ───────────────────────────── */
+        .t-spanrc, .t-spanrc th, .t-spanrc td {
+            border: 1px solid #aaa;
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        .t-spanrc .span-header {
+            background: #cfe2ff;
+        }
+
+        .t-spanrc .span-cell {
+            background: #d1e7dd;
+        }
+
+        /* ── 18. colgroup ────────────────────────────────────── */
+        .t-colgroup, .t-colgroup th, .t-colgroup td {
+            border: 1px solid #aaa;
+            padding: 8px 12px;
+        }
+
+        /* ── 19. tfoot ───────────────────────────────────────── */
+        .t-tfoot, .t-tfoot th, .t-tfoot td {
+            border: 1px solid #aaa;
+            padding: 8px 14px;
+        }
+
+        .t-tfoot tfoot td {
+            font-weight: 600;
+            background: #f8f9fa;
+            border-top: 2px solid #555;
+        }
+    </style>
+</head>
+<body>
+
+<h1>HTML Tables – Complete Reference</h1>
+
+<!-- ── 1. Basic border ──────────────────────────────────── -->
+<h2>1. Basic border</h2>
+<p class="desc">Apply <code>border</code> to <code>table</code>, <code>th</code>, and <code>td</code> — note the
+    double borders between cells.</p>
+<table class="t-basic">
+    <caption>Products</caption>
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Book</td>
+        <td>$10</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Milk</td>
+        <td>$4</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 2. Collapsed borders ─────────────────────────────── -->
+<h2>2. Collapsed borders</h2>
+<p class="desc"><code>border-collapse: collapse</code> merges adjacent borders into one.</p>
+<table class="t-collapse">
+    <caption>Products</caption>
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Book</td>
+        <td>$10</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Milk</td>
+        <td>$4</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 3. Invisible / styled border ─────────────────────── -->
+<h2>3. Invisible (styled) border</h2>
+<p class="desc">White border + colored cell background creates the impression of no border.</p>
+<table class="t-styled">
+    <caption>Products</caption>
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Book</td>
+        <td>$10</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Milk</td>
+        <td>$4</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 4. Rounded borders ────────────────────────────────── -->
+<h2>4. Rounded borders</h2>
+<p class="desc"><code>border-radius</code> on <code>th</code>/<code>td</code> gives rounded cell corners. Omit
+    it from <code>table</code> to skip the outer border radius.</p>
+<table class="t-rounded">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Book</td>
+        <td>$10</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Milk</td>
+        <td>$4</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 5. Dotted borders ─────────────────────────────────── -->
+<h2>5. Dotted borders</h2>
+<p class="desc"><code>border-style: dotted</code> — other values: <code>dashed</code>, <code>solid</code>,
+    <code>double</code>, <code>groove</code>, <code>ridge</code>.</p>
+<table class="t-dotted">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Book</td>
+        <td>$10</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Milk</td>
+        <td>$4</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 6. Border color ──────────────────────────────────── -->
+<h2>6. Border color</h2>
+<p class="desc">Use <code>border-color</code> to tint borders independently of content.</p>
+<table class="t-colored">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Book</td>
+        <td>$10</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Milk</td>
+        <td>$4</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 7. Column & row sizing ────────────────────────────── -->
+<h2>7. Column width &amp; row height</h2>
+<p class="desc">Set <code>width</code> on <code>th</code>/<code>td</code> for columns; <code>height</code> on
+    <code>tr</code> for rows.</p>
+<table class="t-sizing">
+    <thead>
+    <tr>
+        <th class="col-id" scope="col">ID</th>
+        <th class="col-name" scope="col">Name</th>
+        <th scope="col">Department</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="row-tall">
+        <td>101</td>
+        <td>Alice</td>
+        <td>Engineering</td>
+    </tr>
+    <tr>
+        <td>102</td>
+        <td>Bob</td>
+        <td>Design</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 8. Left-aligned headers ──────────────────────────── -->
+<h2>8. Header alignment</h2>
+<p class="desc">Headers default to centred and bold. Override with <code>text-align: left</code>.</p>
+<table class="t-align">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Role</th>
+        <th scope="col">Start date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Alice</td>
+        <td>Engineer</td>
+        <td>2022-03-15</td>
+    </tr>
+    <tr>
+        <td>Bob</td>
+        <td>Designer</td>
+        <td>2023-07-01</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 9. Multi-column header ────────────────────────────── -->
+<h2>9. Header spanning multiple columns (<code>colspan</code> on <code>&lt;th&gt;</code>)</h2>
+<p class="desc">A <code>&lt;th colspan="2"&gt;</code> groups related columns under one label.</p>
+<table class="t-span">
+    <thead>
+    <tr>
+        <th rowspan="2" scope="col">Name</th>
+        <th colspan="2" scope="colgroup">Scores</th>
+    </tr>
+    <tr>
+        <th scope="col">Theory</th>
+        <th scope="col">Practical</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Alice</td>
+        <td>88</td>
+        <td>92</td>
+    </tr>
+    <tr>
+        <td>Bob</td>
+        <td>75</td>
+        <td>84</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 10. Cell padding & spacing ───────────────────────── -->
+<h2>10. Cell padding &amp; spacing</h2>
+<p class="desc"><code>padding</code> controls inner spacing; <code>border-spacing</code> (requires <code>border-collapse:
+    separate</code>) controls space between cells.</p>
+<table class="t-padding">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Item</th>
+        <th scope="col">Qty</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Notebook</td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Pen</td>
+        <td>12</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 11. Vertical headers ──────────────────────────────── -->
+<h2>11. Vertical table headers</h2>
+<p class="desc">Use <code>&lt;th scope="row"&gt;</code> for the first cell in each row to make it a row header.
+</p>
+<table class="t-vertical">
+    <tbody>
+    <tr>
+        <th scope="row">Name</th>
+        <td>Alice</td>
+        <td>Bob</td>
+    </tr>
+    <tr>
+        <th scope="row">Role</th>
+        <td>Engineer</td>
+        <td>Designer</td>
+    </tr>
+    <tr>
+        <th scope="row">Office</th>
+        <td>New York</td>
+        <td>Berlin</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 12. Horizontal zebra stripes ─────────────────────── -->
+<h2>12. Horizontal zebra stripes</h2>
+<p class="desc"><code>tbody tr:nth-child(even)</code> highlights every other row.</p>
+<table class="t-zebra">
+    <thead>
+    <tr>
+        <th scope="col">Rank</th>
+        <th scope="col">City</th>
+        <th scope="col">Population</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>Tokyo</td>
+        <td>13,960,000</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Delhi</td>
+        <td>11,007,000</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Shanghai</td>
+        <td>24,870,000</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>São Paulo</td>
+        <td>12,325,000</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 13. Vertical zebra stripes ───────────────────────── -->
+<h2>13. Vertical zebra stripes</h2>
+<p class="desc"><code>th:nth-child(even), td:nth-child(even)</code> highlights every other column.</p>
+<table class="t-vzebra">
+    <thead>
+    <tr>
+        <th scope="col">City</th>
+        <th scope="col">Q1</th>
+        <th scope="col">Q2</th>
+        <th scope="col">Q3</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Tokyo</td>
+        <td>320</td>
+        <td>410</td>
+        <td>390</td>
+    </tr>
+    <tr>
+        <td>Delhi</td>
+        <td>180</td>
+        <td>220</td>
+        <td>250</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 14. Combined zebra ─────────────────────────────────── -->
+<h2>14. Combined zebra stripes</h2>
+<p class="desc">Combine horizontal and vertical zebra using <code>rgba()</code> colors so the overlap blends
+    transparently.</p>
+<table class="t-combo">
+    <thead>
+    <tr>
+        <th scope="col">City</th>
+        <th scope="col">Q1</th>
+        <th scope="col">Q2</th>
+        <th scope="col">Q3</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Tokyo</td>
+        <td>320</td>
+        <td>410</td>
+        <td>390</td>
+    </tr>
+    <tr>
+        <td>Delhi</td>
+        <td>180</td>
+        <td>220</td>
+        <td>250</td>
+    </tr>
+    <tr>
+        <td>Paris</td>
+        <td>290</td>
+        <td>310</td>
+        <td>270</td>
+    </tr>
+    <tr>
+        <td>Cairo</td>
+        <td>140</td>
+        <td>165</td>
+        <td>200</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 15. Horizontal dividers ───────────────────────────── -->
+<h2>15. Horizontal dividers</h2>
+<p class="desc">Apply <code>border-bottom</code> only on <code>tr</code> / <code>td</code> for a clean
+    divider-only table.</p>
+<table class="t-dividers" style="width:100%;max-width:500px">
+    <thead>
+    <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Category</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Laptop</td>
+        <td>Electronics</td>
+        <td>$999</td>
+    </tr>
+    <tr>
+        <td>Desk</td>
+        <td>Furniture</td>
+        <td>$350</td>
+    </tr>
+    <tr>
+        <td>Headphones</td>
+        <td>Electronics</td>
+        <td>$120</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 16. Hoverable rows ────────────────────────────────── -->
+<h2>16. Hoverable rows</h2>
+<p class="desc"><code>tbody tr:hover</code> highlights the row under the cursor.</p>
+<table class="t-hover" style="width:100%;max-width:500px">
+    <thead>
+    <tr>
+        <th scope="col">Order ID</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>#1001</td>
+        <td>Alice</td>
+        <td>Shipped</td>
+    </tr>
+    <tr>
+        <td>#1002</td>
+        <td>Bob</td>
+        <td>Processing</td>
+    </tr>
+    <tr>
+        <td>#1003</td>
+        <td>Carol</td>
+        <td>Delivered</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 17. colspan & rowspan ─────────────────────────────── -->
+<h2>17. <code>colspan</code> &amp; <code>rowspan</code></h2>
+<p class="desc"><code>colspan</code> merges cells horizontally; <code>rowspan</code> merges vertically.</p>
+<table class="t-spanrc" style="width:100%;max-width:500px">
+    <caption>School timetable</caption>
+    <thead>
+    <tr>
+        <th scope="col">Period</th>
+        <th scope="col">Monday</th>
+        <th scope="col">Tuesday</th>
+        <th scope="col">Wednesday</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>09:00</td>
+        <td class="span-header" colspan="2">Maths (joint class)</td>
+        <td>History</td>
+    </tr>
+    <tr>
+        <td>10:00</td>
+        <td class="span-cell" rowspan="2">Lab (double)</td>
+        <td>English</td>
+        <td>Physics</td>
+    </tr>
+    <tr>
+        <td>11:00</td>
+        <td>Art</td>
+        <td>PE</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 18. colgroup ──────────────────────────────────────── -->
+<h2>18. <code>&lt;colgroup&gt;</code> &amp; <code>&lt;col&gt;</code></h2>
+<p class="desc">Style whole columns without touching every cell. Only <code>width</code>,
+    <code>visibility</code>, <code>background</code>, and <code>border</code> are supported.</p>
+<table class="t-colgroup" style="width:100%;max-width:500px">
+    <caption>Sales by region</caption>
+    <colgroup>
+        <col style="width: 160px;">                          <!-- Region -->
+        <col span="2" style="background: #fff9c4;">          <!-- Q1 + Q2 highlighted -->
+        <col style="background: #c8e6c9;">                   <!-- Q3 highlighted differently -->
+    </colgroup>
+    <thead>
+    <tr>
+        <th scope="col">Region</th>
+        <th scope="col">Q1</th>
+        <th scope="col">Q2</th>
+        <th scope="col">Q3</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>North</td>
+        <td>$4,200</td>
+        <td>$5,100</td>
+        <td>$6,300</td>
+    </tr>
+    <tr>
+        <td>South</td>
+        <td>$3,800</td>
+        <td>$4,400</td>
+        <td>$5,200</td>
+    </tr>
+    <tr>
+        <td>West</td>
+        <td>$2,900</td>
+        <td>$3,300</td>
+        <td>$4,100</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- hide a column with colgroup -->
+<h2>18b. Hiding a column with <code>visibility: collapse</code></h2>
+<p class="desc">The Q2 column below is hidden via <code>&lt;col style="visibility: collapse"&gt;</code> — it is
+    removed from layout but the DOM structure is intact.</p>
+<table class="t-colgroup" style="width:100%;max-width:500px">
+    <colgroup>
+        <col>                                                <!-- Region -->
+        <col>                                                <!-- Q1 -->
+        <col style="visibility: collapse;">                  <!-- Q2 – hidden -->
+        <col>                                                <!-- Q3 -->
+    </colgroup>
+    <thead>
+    <tr>
+        <th scope="col">Region</th>
+        <th scope="col">Q1</th>
+        <th scope="col">Q2</th>
+        <th scope="col">Q3</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>North</td>
+        <td>$4,200</td>
+        <td>$5,100</td>
+        <td>$6,300</td>
+    </tr>
+    <tr>
+        <td>South</td>
+        <td>$3,800</td>
+        <td>$4,400</td>
+        <td>$5,200</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- ── 19. thead / tbody / tfoot ─────────────────────────── -->
+<h2>19. <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code></h2>
+<p class="desc"><code>&lt;tfoot&gt;</code> should appear <em>before</em> <code>&lt;tbody&gt;</code> in source
+    order per the HTML spec (browsers re-render it at the bottom, and it prints last on multipage tables).</p>
+<table class="t-tfoot" style="width:100%;max-width:400px">
+    <caption>Invoice</caption>
+    <thead>
+    <tr>
+        <th scope="col">Item</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <td colspan="2">Total</td>
+        <td>$42.00</td>
+    </tr>
+    </tfoot>
+    <tbody>
+    <tr>
+        <td>Widget A</td>
+        <td>3</td>
+        <td>$9.00</td>
+    </tr>
+    <tr>
+        <td>Widget B</td>
+        <td>1</td>
+        <td>$15.00</td>
+    </tr>
+    <tr>
+        <td>Widget C</td>
+        <td>2</td>
+        <td>$18.00</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

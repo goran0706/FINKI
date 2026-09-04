@@ -1,0 +1,88 @@
+<!--
+#### Exercise 6.4: Scoped Variables
+
+Create a theme switcher using scoped custom properties:
+
+- Default theme (light mode)
+- Dark theme (overrides colors in a `.dark-theme` class)
+- Use `@media (prefers-color-scheme: dark)` for automatic dark mode
+-->
+
+<!--
+    THEME SWITCHER SUMMARY
+    ======================
+
+    CSS Variables (--bg, --text, etc) store colors once, reuse everywhere.
+
+    THREE WAYS TO CHANGE THEMES:
+
+    1. DEFAULT (Light Mode)
+       :root { --bg: white; --text: black; }
+       - Everything uses these variables
+       - No class needed
+
+    2. AUTO DARK MODE (OS preference)
+       @media (prefers-color-scheme: dark) {
+         :root { --bg: #1a1a1a; --text: #f0f0f0; }
+       }
+       - Detects if user's OS is set to dark mode
+       - Automatically switches colors
+       - No user action needed
+
+    3. MANUAL TOGGLE (Override with class)
+       .dark-theme { --bg: #1a1a1a; --text: #f0f0f0; }
+       <html class="dark-theme">
+       - Add/remove class to switch themes
+       - Overrides OS preference
+       - User controls it with a button
+
+    BEST PRACTICE: Combine 2 + 3
+    - Default respects OS setting
+    - Button lets user override if they want
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Simple Theme Switcher</title>
+    <style>
+        :root {
+            --bg: white;
+            --text: red;
+        }
+
+        /* Auto dark mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1a1a;
+                --text: #f0f0f0;
+            }
+        }
+
+        /* Override with .dark-theme class */
+        .dark-theme {
+            --bg: #1a1a1a;
+            --text: #f0f0f0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Simple Theme Demo</h1>
+<p>Light by default. Dark if your OS prefers dark mode or add class="dark-theme" to html tag.</p>
+
+</body>
+</html>

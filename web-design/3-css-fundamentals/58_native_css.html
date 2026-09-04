@@ -1,0 +1,47 @@
+<!--
+#### Exercise 12.2: Native CSS Nesting
+
+Rewrite this using native CSS nesting:
+
+.card {
+    padding: 16px;
+}
+
+.card .card__title {
+    font-size: 24px;
+}
+
+.card .card__body {
+    margin-top: 8px;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+-->
+
+<style>
+    .card {
+        padding: 16px;
+
+        & .card__title {
+            font-size: 24px;
+        }
+
+        & .card__body {
+            margin-top: 8px;
+        }
+
+        &:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    }
+</style>
+
+<!--
+KEY POINTS:
+- `&` = parent selector (replaces nesting depth)
+- `& .card__title` = `.card .card__title`
+- `&:hover` = `.card:hover`
+- No preprocessor needed (Chrome 120+, Firefox 117+, Safari 17.2+)
+-->

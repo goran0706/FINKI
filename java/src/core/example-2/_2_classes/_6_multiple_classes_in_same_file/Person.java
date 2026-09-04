@@ -1,0 +1,13 @@
+package _2_classes._6_multiple_classes_in_same_file;
+
+public class Person {
+    int x = 10;
+}
+
+class Employee {
+    String company;
+}
+
+class Manager {
+    double salary;
+}

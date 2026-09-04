@@ -1,0 +1,162 @@
+<!--
+### Exercise 2.5 — BEM Convention
+
+**Topic:** BEM naming: Block, Element, Modifier
+
+**What to build:** Style a product listing card strictly following BEM.
+
+**HTML to write:**
+
+<article class="product-card product-card--featured">
+    <div class="product-card__image-wrapper">
+        <img
+                class="product-card__image"
+                src="https://picsum.photos/seed/roast/400/300"
+                alt="A bag of single-origin Ethiopian coffee"
+                width="400"
+                height="300"
+        />
+        <span class="product-card__tag">Best Seller</span>
+    </div>
+    <div class="product-card__body">
+        <h2 class="product-card__title">Ethiopia Yirgacheffe</h2>
+        <p class="product-card__description">
+            Notes of blueberry, jasmine, and dark chocolate.
+        </p>
+        <div class="product-card__footer">
+            <span class="product-card__price">£12.50</span>
+            <a href="#" class="product-card__btn">Add to Bag</a>
+        </div>
+    </div>
+</article>
+
+**CSS requirements:**
+
+ - `.product-card`: `width: 360px`, `border: 1px solid #e0e0e0`, `overflow: hidden`, `margin: 32px auto`
+ - `.product-card--featured`: `border-color: #1a1a1a`, `border-width: 2px`
+ - `.product-card__image-wrapper`: `position: relative`
+ - `.product-card__image`: `display: block`, `width: 100%`, `height: auto`
+ - `.product-card__tag`: `position: absolute`, `top: 12px`, `left: 12px`, `background: #1a1a1a`, `color: #fff`,
+`padding: 4px 10px`, `font-size: 0.75rem`
+ - `.product-card__body`: `padding: 20px`
+ - `.product-card__title`: `font-size: 1.25rem`, `margin: 0 0 8px`
+ - `.product-card__description`: `font-size: 0.875rem`, `color: #666`, `margin: 0 0 20px`
+ - `.product-card__footer`: `display: flex`, `justify-content: space-between`, `align-items: center`
+ - `.product-card__price`: `font-size: 1.125rem`, `font-weight: bold`
+ - `.product-card__btn`: `padding: 8px 20px`, `background: #1a1a1a`, `color: #fff`, `text-decoration: none`,
+`font-size: 0.875rem`
+
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>BEM Product Card</title>
+
+    <style>
+        /* Block */
+        .product-card {
+            width: 360px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            margin: 32px auto;
+        }
+
+        /* Modifier */
+        .product-card--featured {
+            border-color: #1a1a1a;
+            border-width: 2px;
+        }
+
+        /* Element: image wrapper */
+        .product-card__image-wrapper {
+            position: relative;
+        }
+
+        /* Element: image */
+        .product-card__image {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Element: tag badge */
+        .product-card__tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+        }
+
+        /* Element: body container */
+        .product-card__body {
+            padding: 20px;
+        }
+
+        /* Element: title */
+        .product-card__title {
+            font-size: 1.25rem;
+            margin: 0 0 8px;
+        }
+
+        /* Element: description */
+        .product-card__description {
+            font-size: 0.875rem;
+            color: #666;
+            margin: 0 0 20px;
+        }
+
+        /* Element: footer layout */
+        .product-card__footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Element: price */
+        .product-card__price {
+            font-size: 1.125rem;
+            font-weight: bold;
+        }
+
+        /* Element: button */
+        .product-card__btn {
+            padding: 8px 20px;
+            background: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+
+<article class="product-card product-card--featured">
+    <div class="product-card__image-wrapper">
+        <img
+                alt="A bag of single-origin Ethiopian coffee"
+                class="product-card__image"
+                height="300"
+                src="https://picsum.photos/seed/roast/400/300"
+                width="400"
+        />
+        <span class="product-card__tag">Best Seller</span>
+    </div>
+    <div class="product-card__body">
+        <h2 class="product-card__title">Ethiopia Yirgacheffe</h2>
+        <p class="product-card__description">
+            Notes of blueberry, jasmine, and dark chocolate.
+        </p>
+        <div class="product-card__footer">
+            <span class="product-card__price">£12.50</span>
+            <a class="product-card__btn" href="#">Add to Bag</a>
+        </div>
+    </div>
+</article>
+
+</body>
+</html>

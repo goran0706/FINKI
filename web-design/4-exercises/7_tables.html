@@ -1,0 +1,77 @@
+<!--
+### Exercise 1.7 — Tables
+
+**Topic:** `<table>`, `<thead>`, `<tbody>`, `<tfoot>`, `<th>`, `<td>`, `colspan`, `scope`
+**What to build:** A pricing table for coffee subscriptions.
+
+**Exact requirements:**
+Build a table with this exact data:
+
+| Plan                                              | Bag Size | Frequency   | Price/Month |
+|---------------------------------------------------|----------|-------------|-------------|
+| Starter                                           | 250g     | Every 2 wks | £14.00      |
+| Regular                                           | 500g     | Weekly      | £22.00      |
+| Pro                                               | 1kg      | Weekly      | £38.00      |
+| **Total annual revenue per customer** (colspan=3) |          |             |             |
+
+- Use `<thead>` for the header row
+- Use `<tbody>` for the three data rows
+
+- Use `<tfoot>` for a final row that reads: `All plans include free UK shipping` spanning all 4 columns using colspan="4"
+- All `<th>` elements in the header row must have `scope="col"`
+- All `<th>` elements in the first column of `<tbody>` must have `scope="row"`
+- Add a `<caption>`: `Monthly Subscription Plans`
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Coffee Subscription Pricing</title>
+</head>
+<body>
+
+<table>
+    <caption>Monthly Subscription Plans</caption>
+    <thead>
+    <tr>
+        <th scope="col">Plan</th>
+        <th scope="col">Bag Size</th>
+        <th scope="col">Frequency</th>
+        <th scope="col">Price/Month</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">Starter</th>
+        <td>250g</td>
+        <td>Every 2 wks</td>
+        <td>£14.00</td>
+    </tr>
+    <tr>
+        <th scope="row">Regular</th>
+        <td>500g</td>
+        <td>Weekly</td>
+        <td>£22.00</td>
+    </tr>
+    <tr>
+        <th scope="row">Pro</th>
+        <td>1kg</td>
+        <td>Weekly</td>
+        <td>£38.00</td>
+    </tr>
+    <tr>
+        <th scope="row" colspan="3">Total annual revenue per customer</th>
+        <td></td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="4">All plans include free UK shipping</td>
+    </tr>
+    </tfoot>
+</table>
+
+</body>
+</html>

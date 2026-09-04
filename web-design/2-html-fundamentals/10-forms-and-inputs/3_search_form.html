@@ -1,0 +1,71 @@
+<!--
+    #### Exercise 10.3: Search Form
+
+    Create a search form with:
+
+    - Search input with `type="search"`
+    - Datalist with suggestions: "HTML", "CSS", "JavaScript", "Python", "React"
+    - Submit button
+    - Form should use GET method and submit to "/search"
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Search form with autocomplete suggestions" name="description">
+    <title>Search - Find Resources</title>
+</head>
+<body>
+<main>
+    <article class="search-form">
+        <h1 class="search-form__heading">Search</h1>
+        <p class="search-form__subtext">Find resources, tutorials, and documentation</p>
+
+        <form action="/search" class="search-form__container" id="searchForm" method="GET">
+            <div class="form-field search-field">
+                <label class="form-field__label" for="searchInput">
+                    Search Query
+                </label>
+
+                <div class="search-field__wrapper">
+                    <input
+                            aria-describedby="search-hint"
+                            aria-label="Search"
+                            autocomplete="off"
+                            class="form-field__input search-field__input"
+                            id="searchInput"
+                            list="searchSuggestions"
+                            minlength="2"
+                            name="q"
+                            placeholder="Search for topics, languages, frameworks..."
+                            required
+                            type="search"
+                    >
+
+                    <datalist id="searchSuggestions">
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="JavaScript">JavaScript</option>
+                        <option value="Python">Python</option>
+                        <option value="React">React</option>
+                    </datalist>
+
+                    <button
+                            aria-label="Submit search query"
+                            class="button button--primary search-field__button"
+                            type="submit"
+                    >
+                        Search
+                    </button>
+                </div>
+
+                <small class="form-field__hint" id="search-hint">
+                    Enter at least 2 characters to search
+                </small>
+            </div>
+        </form>
+    </article>
+</main>
+</body>
+</html>

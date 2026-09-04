@@ -1,0 +1,202 @@
+<!--
+    #### Exercise 10.2: Contact Form with Validation
+
+    Create a contact form with:
+
+    - Name (text, required, 3-50 characters)
+    - Email (email, required)
+    - Phone (tel, pattern for US phone numbers: XXX-XXX-XXXX)
+    - Subject (dropdown: General Inquiry, Support, Sales)
+    - Message (textarea, required, 10-1000 characters)
+    - Preferred contact method (radio: Email, Phone)
+    - Submit button
+
+    Add appropriate `pattern` attributes and `title` tooltips for validation errors.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Contact form with HTML5 validation and accessibility" name="description">
+    <title>Contact Us - Get in Touch</title>
+</head>
+<body>
+<main>
+    <article class="contact-form">
+        <h1 class="contact-form__heading">Contact Us</h1>
+        <p class="contact-form__subtext">Get in touch with us - we'd love to hear from you</p>
+
+        <form action="/contact" id="contactForm" method="POST" novalidate>
+
+            <!-- ========== Personal Information Section ========== -->
+            <section class="form-section form-section--personal">
+                <h2 class="form-section__heading">Personal Information</h2>
+
+                <div class="form-group form-group--two-columns">
+                    <div class="form-field">
+                        <label class="form-field__label" for="name">
+                            Name
+                            <span aria-label="required" class="form-field__required">*</span>
+                        </label>
+                        <input
+                                aria-describedby="name-hint"
+                                class="form-field__input"
+                                id="name"
+                                maxlength="50"
+                                minlength="3"
+                                name="name"
+                                placeholder="Your full name"
+                                required
+                                title="Please enter your name (3-50 characters)"
+                                type="text"
+                        >
+                        <small class="form-field__hint" id="name-hint">
+                            3 to 50 characters
+                        </small>
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-field__label" for="email">
+                            Email Address
+                            <span aria-label="required" class="form-field__required">*</span>
+                        </label>
+                        <input
+                                aria-describedby="email-hint"
+                                class="form-field__input"
+                                id="email"
+                                name="email"
+                                placeholder="your.email@example.com"
+                                required
+                                title="Please enter a valid email address"
+                                type="email"
+                        >
+                        <small class="form-field__hint" id="email-hint">
+                            We'll respond to this address
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label class="form-field__label" for="phone">
+                        Phone Number
+                    </label>
+                    <input
+                            aria-describedby="phone-hint"
+                            class="form-field__input"
+                            id="phone"
+                            name="phone"
+                            pattern="\d{3}-\d{3}-\d{4}"
+                            placeholder="123-456-7890"
+                            title="Phone number must be in format: 123-456-7890"
+                            type="tel"
+                    >
+                    <small class="form-field__hint" id="phone-hint">
+                        Format: 123-456-7890 (optional)
+                    </small>
+                </div>
+            </section>
+
+            <!-- ========== Message Section ========== -->
+            <section class="form-section form-section--message">
+                <h2 class="form-section__heading">Message Details</h2>
+
+                <div class="form-field">
+                    <label class="form-field__label" for="subject">
+                        Subject
+                    </label>
+                    <select
+                            class="form-field__select"
+                            id="subject"
+                            name="subject"
+                    >
+                        <option value="">Select a subject</option>
+                        <option value="general-inquiry">General Inquiry</option>
+                        <option value="support">Support Request</option>
+                        <option value="sales">Sales Question</option>
+                        <option value="feedback">Feedback</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label class="form-field__label" for="message">
+                        Message
+                        <span aria-label="required" class="form-field__required">*</span>
+                    </label>
+                    <textarea
+                            aria-describedby="message-hint"
+                            class="form-field__textarea"
+                            id="message"
+                            maxlength="1000"
+                            minlength="10"
+                            name="message"
+                            placeholder="Please tell us how we can help..."
+                            required
+                            rows="8"
+                            title="Message must be between 10 and 1000 characters"
+                    ></textarea>
+                    <small class="form-field__hint" id="message-hint">
+                        10 to 1000 characters
+                    </small>
+                </div>
+            </section>
+
+            <!-- ========== Preferences Section ========== -->
+            <section class="form-section form-section--preferences">
+                <h2 class="form-section__heading">Preferences</h2>
+
+                <fieldset class="form-fieldset">
+                    <legend class="form-fieldset__legend">Preferred Contact Method</legend>
+                    <div class="form-options form-options--inline">
+                        <div class="form-option">
+                            <input
+                                    class="form-option__input"
+                                    id="methodEmail"
+                                    name="contactMethod"
+                                    type="radio"
+                                    value="email"
+                            >
+                            <label class="form-option__label" for="methodEmail">
+                                Email
+                            </label>
+                        </div>
+
+                        <div class="form-option">
+                            <input
+                                    class="form-option__input"
+                                    id="methodPhone"
+                                    name="contactMethod"
+                                    type="radio"
+                                    value="phone"
+                            >
+                            <label class="form-option__label" for="methodPhone">
+                                Phone
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+
+            <!-- ========== Form Actions ========== -->
+            <div class="form-actions">
+                <button
+                        aria-label="Clear form fields"
+                        class="button button--secondary"
+                        type="reset"
+                >
+                    Clear
+                </button>
+                <button
+                        aria-label="Submit contact form"
+                        class="button button--primary"
+                        type="submit"
+                >
+                    Send Message
+                </button>
+            </div>
+        </form>
+    </article>
+</main>
+</body>
+</html>

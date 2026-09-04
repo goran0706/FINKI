@@ -1,0 +1,27 @@
+<!--#### Exercise 8.5: Video with Captions-->
+
+<!--Create a video player with:-->
+
+<!-- - Source: video.mp4-->
+<!-- - Poster image: poster.jpg-->
+<!-- - Dimensions: 800px × 450px-->
+<!-- - Controls visible-->
+<!-- - English subtitles track: captions-en.vtt (default)-->
+<!-- - Spanish subtitles track: captions-es.vtt-->
+
+<video
+        controls
+        height="450"
+        poster="images/poster.jpg"
+        width="800"
+>
+    <source src="video/video.mp4" type="video/mp4">
+
+    <!-- English captions (default) -->
+    <track default kind="captions" label="English" src="captions/captions-en.vtt" srclang="en">
+
+    <!-- Spanish captions -->
+    <track kind="captions" label="Español" src="captions/captions-es.vtt" srclang="es">
+
+    Your browser does not support the video tag.
+</video>

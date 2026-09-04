@@ -1,0 +1,75 @@
+<!--
+#### Exercise 4.2: Box Sizing
+
+Create two divs side by side, each taking up 50% width:
+
+1. First attempt without `box-sizing: border-box` (will fail if you add padding)
+2. Second attempt with `box-sizing: border-box` (should work with padding)
+
+Both divs should have 20px padding and 2px border.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        * {
+            /*box-sizing: border-box*/
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem;
+        }
+
+        .box {
+            border: 2px solid black;
+            padding: 20px;
+            border-radius: 10px;
+            background: crimson;
+            color: white;
+            align-content: center;
+            text-align: center;
+            height: 100px;
+            width: 50%;
+        }
+
+        .contentBox {
+            box-sizing: content-box;
+        }
+
+        .borderBox {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="box">1</div>
+    <div class="box">2</div>
+</div>
+
+<div class="container">
+    <div class="box contentBox">content-box</div>
+    <div class="box contentBox">content-box</div>
+</div>
+
+<div class="container">
+    <div class="box borderBox">border-box</div>
+    <div class="box borderBox">border-box</div>
+</div>
+
+<div class="container">
+    <div class="box contentBox">content-box</div>
+    <div class="box borderBox">border-box</div>
+</div>
+
+</body>
+</html>

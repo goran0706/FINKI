@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- import the React and ReactDOM packages -->
+    <script src="https://unpkg.com/react@18.1.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.1.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+
+    <!-- Using React using JSX syntax -->
+    <div id="root"></div>
+
+    <!-- Using babel to transpile the JSX syntax -->
+    <script type="text/babel">
+      // select the root element
+      const root = document.querySelector("#root");
+
+      const className = "container";
+      const children = "Hello World";
+      const props = { className, children };
+
+      // "Interpolation" is defined as "the insertion of something of a different nature into something else."
+      const firstElement = <div className={className} children={children} />;
+      const secondElement = <div {...props} />;
+
+      // create root element and inject the react application
+      ReactDOM.createRoot(root).render(
+        <React.Fragment>
+          {firstElement}
+          {secondElement}
+        </React.Fragment>
+      );
+    </script>
+  </body>
+</html>

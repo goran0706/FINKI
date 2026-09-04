@@ -1,0 +1,90 @@
+<!--
+#### Exercise 11.2: Keyframe Animation
+
+Create a pulsing animation:
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+Apply to an element, infinite loop.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        *, *:before, *:after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .animate {
+            animation-name: pulse;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+        }
+
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            background-color: crimson;
+            border-radius: 50px 50px 0 0;
+            width: 50px;
+            height: 70px;
+        }
+
+        .heart::before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            right: 50px;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="heart animate"></div>
+
+</body>
+</html>

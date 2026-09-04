@@ -1,0 +1,91 @@
+<!--
+#### Exercise 4.5: Overflow
+
+Create a box with fixed dimensions (200px × 100px) containing long content.
+Demonstrate:
+
+1. `overflow: visible` (default, content spills out)
+2. `overflow: hidden` (content clipped)
+3. `overflow: scroll` (always shows scrollbars)
+4. `overflow: auto` (scrollbars only when needed)
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .box {
+            width: 200px;
+            height: 100px;
+            background-color: #007bff;
+            border: 2px solid crimson;
+        }
+
+        .box-1 {
+            overflow: visible
+        }
+
+        .box-2 {
+            overflow: hidden
+        }
+
+        .box-3 {
+            overflow: scroll
+        }
+
+        .box-4 {
+            overflow: auto
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="box box-1">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, autem dignissimos dolore est ex fugiat
+        fugit
+        illum ipsa laudantium minus modi necessitatibus nostrum odio optio quae quaerat reiciendis rem repellat,
+        repellendus
+        saepe suscipit tempora vero voluptates. Debitis itaque nam necessitatibus. Est, laborum, quo. Accusamus aliquam
+        corporis et expedita ipsum maiores.
+    </div>
+
+    <div class="box box-2">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, autem dignissimos dolore est ex fugiat
+        fugit
+        illum ipsa laudantium minus modi necessitatibus nostrum odio optio quae quaerat reiciendis rem repellat,
+        repellendus
+        saepe suscipit tempora vero voluptates. Debitis itaque nam necessitatibus. Est, laborum, quo. Accusamus aliquam
+        corporis et expedita ipsum maiores.
+    </div>
+
+    <div class="box box-3">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, autem dignissimos dolore est ex fugiat
+        fugit
+        illum ipsa laudantium minus modi necessitatibus nostrum odio optio quae quaerat reiciendis rem repellat,
+        repellendus
+        saepe suscipit tempora vero voluptates. Debitis itaque nam necessitatibus. Est, laborum, quo. Accusamus aliquam
+        corporis et expedita ipsum maiores.
+    </div>
+
+    <div class="box box-4">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, autem dignissimos dolore est ex fugiat
+        fugit
+        illum ipsa laudantium minus modi necessitatibus nostrum odio optio quae quaerat reiciendis rem repellat,
+        repellendus
+        saepe suscipit tempora vero voluptates. Debitis itaque nam necessitatibus. Est, laborum, quo. Accusamus aliquam
+        corporis et expedita ipsum maiores.
+    </div>
+</div>
+</body>
+</html>

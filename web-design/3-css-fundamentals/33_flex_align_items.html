@@ -1,0 +1,153 @@
+<!--
+#### Exercise 7.5: Align Items
+
+Create examples showing different `align-items` values:
+
+- `stretch` (default)
+- `flex-start`
+- `flex-end`
+- `center`
+- `baseline`
+
+Use items with different heights to see the effect.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Align Items Demo</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            padding: 1rem;
+            font-family: sans-serif;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            height: 200px; /* needed for stretch */
+            background-color: #d3d3d3;
+            border-radius: 15px;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+        }
+
+        .flex-item {
+            flex: 0 0 50px;
+            color: white;
+            background-color: dodgerblue;
+            border-radius: 15px;
+            font-weight: bold;
+
+            /* proper centering */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Heights for non-stretch examples */
+        .box1 {
+            height: 50px;
+        }
+
+        .box2 {
+            height: 70px;
+        }
+
+        .box3 {
+            height: 90px;
+        }
+
+        .box4 {
+            height: 110px;
+        }
+
+        .box5 {
+            height: 130px;
+        }
+
+        .items-stretch {
+            align-items: stretch;
+        }
+
+        .items-start {
+            align-items: flex-start;
+        }
+
+        .items-end {
+            align-items: flex-end;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .items-baseline {
+            align-items: baseline;
+        }
+    </style>
+</head>
+<body>
+
+<p>Align Items: Stretch (default)</p>
+<div class="flex-container items-stretch">
+    <!-- no fixed heights so stretch is visible -->
+    <div class="flex-item">1</div>
+    <div class="flex-item">2</div>
+    <div class="flex-item">3</div>
+    <div class="flex-item">4</div>
+    <div class="flex-item">5</div>
+</div>
+
+<p>Align Items: Flex Start</p>
+<div class="flex-container items-start">
+    <div class="flex-item box1">1</div>
+    <div class="flex-item box2">2</div>
+    <div class="flex-item box3">3</div>
+    <div class="flex-item box4">4</div>
+    <div class="flex-item box5">5</div>
+</div>
+
+<p>Align Items: Flex End</p>
+<div class="flex-container items-end">
+    <div class="flex-item box1">1</div>
+    <div class="flex-item box2">2</div>
+    <div class="flex-item box3">3</div>
+    <div class="flex-item box4">4</div>
+    <div class="flex-item box5">5</div>
+</div>
+
+<p>Align Items: Center</p>
+<div class="flex-container items-center">
+    <div class="flex-item box1">1</div>
+    <div class="flex-item box2">2</div>
+    <div class="flex-item box3">3</div>
+    <div class="flex-item box4">4</div>
+    <div class="flex-item box5">5</div>
+</div>
+
+<p>Align Items: Baseline</p>
+<div class="flex-container items-baseline">
+    <!-- different font sizes to show baseline alignment -->
+    <div class="flex-item box1" style="font-size: 1rem;">1</div>
+    <div class="flex-item box2" style="font-size: 1.5rem;">2</div>
+    <div class="flex-item box3" style="font-size: 2rem;">3</div>
+    <div class="flex-item box4" style="font-size: 2.5rem;">4</div>
+    <div class="flex-item box5" style="font-size: 3rem;">5</div>
+</div>
+
+</body>
+</html>

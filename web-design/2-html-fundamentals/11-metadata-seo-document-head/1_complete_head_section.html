@@ -1,0 +1,59 @@
+<!--
+    #### Exercise 11.1: Complete Head Section
+
+    Create a complete `<head>` section for a blog post with:
+
+        - UTF-8 charset
+        - Viewport meta tag
+        - Title: "10 Tips for Better Web Design - Design Blog"
+        - Meta description (under 160 characters)
+        - Link to external stylesheet: css/styles.css
+        - Link to favicon: images/favicon.ico
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- ========== Character Encoding & Viewport ========== -->
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- ========== SEO & Meta Information ========== -->
+    <title>10 Tips for Better Web Design - Design Blog</title>
+    <meta content="Learn 10 essential tips to create beautiful, user-friendly websites." name="description">
+    <meta content="#2563eb" name="theme-color">
+    <meta content="index, follow" name="robots">
+
+    <!-- ========== Open Graph (Social Media) ========== -->
+    <meta content="article" property="og:type">
+    <meta content="10 Tips for Better Web Design - Design Blog" property="og:title">
+    <meta content="Learn 10 essential tips to create beautiful, user-friendly websites." property="og:description">
+    <meta content="images/og-image.jpg" property="og:image">
+    <meta content="https://yourdomain.com/blog/web-design-tips" property="og:url">
+
+    <!-- ========== Twitter Card ========== -->
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="10 Tips for Better Web Design - Design Blog" name="twitter:title">
+    <meta content="Learn 10 essential tips to create beautiful, user-friendly websites." name="twitter:description">
+    <meta content="images/twitter-image.jpg" name="twitter:image">
+
+    <!-- ========== Canonical URL ========== -->
+    <link href="https://yourdomain.com/blog/web-design-tips" rel="canonical">
+
+    <!-- ========== Stylesheets ========== -->
+    <link href="css/styles.css" rel="stylesheet">
+
+    <!-- ========== Favicon ========== -->
+    <link href="images/favicon.ico" rel="icon" type="image/x-icon">
+    <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- ========== Preload Critical Resources ========== -->
+    <link as="style" href="css/styles.css" rel="preload">
+    <link as="font" crossorigin href="fonts/inter.woff2" rel="preload" type="font/woff2">
+
+    <!-- ========== DNS Prefetch ========== -->
+    <link href="https://cdn.example.com" rel="dns-prefetch">
+</head>
+<body>
+</body>
+</html>

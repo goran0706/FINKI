@@ -1,0 +1,100 @@
+<!--
+### Exercise 3.4 — CSS Grid: Product Grid with auto-fill
+
+**Topic:** `repeat()`, `auto-fill`, `minmax()`, implicit rows
+
+**What to build:** A responsive grid of 6 product cards using no media queries.
+
+**HTML to use:** Six identical `.product-tile` divs inside a `.tile-grid`:
+
+<div class="tile-grid">
+    <div class="product-tile"><span class="product-tile__name">Ethiopia</span><span
+            class="product-tile__price">£12.50</span></div>
+    <div class="product-tile"><span class="product-tile__name">Colombia</span><span
+            class="product-tile__price">£13.00</span></div>
+    <div class="product-tile"><span class="product-tile__name">Guatemala</span><span
+            class="product-tile__price">£11.50</span></div>
+    <div class="product-tile"><span class="product-tile__name">Kenya</span><span
+            class="product-tile__price">£14.00</span></div>
+    <div class="product-tile"><span class="product-tile__name">Brazil</span><span
+            class="product-tile__price">£10.50</span></div>
+    <div class="product-tile"><span class="product-tile__name">Yemen</span><span
+            class="product-tile__price">£18.00</span></div>
+</div>
+
+**CSS requirements:**
+
+ - `.tile-grid`:
+     - `display: grid`
+     - `grid-template-columns: repeat(auto-fill, minmax(180px, 1fr))`
+     - `gap: 20px`
+     - `padding: 40px`
+ - `.product-tile`:
+     - `display: flex`
+     - `flex-direction: column`
+     - `justify-content: space-between`
+     - `padding: 20px`
+     - `border: 1px solid #e0e0e0`
+     - `min-height: 100px`
+ - `.product-tile__name`: `font-size: 1rem`, `font-weight: bold`
+ - `.product-tile__price`: `font-size: 0.9rem`, `color: #888`, `margin-top: 12px`
+
+Resize the browser — verify cards reflow without any media queries.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        .tile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            /*grid-template-rows: repeat(auto-fit, minmax(180px, 1fr));*/
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .product-tile {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            min-height: 100px;
+        }
+
+        .product-tile__name {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .product-tile__price {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="tile-grid">
+    <div class="product-tile"><span class="product-tile__name">Ethiopia</span><span
+            class="product-tile__price">£12.50</span></div>
+    <div class="product-tile"><span class="product-tile__name">Colombia</span><span
+            class="product-tile__price">£13.00</span></div>
+    <div class="product-tile"><span class="product-tile__name">Guatemala</span><span
+            class="product-tile__price">£11.50</span></div>
+    <div class="product-tile"><span class="product-tile__name">Kenya</span><span
+            class="product-tile__price">£14.00</span></div>
+    <div class="product-tile"><span class="product-tile__name">Brazil</span><span
+            class="product-tile__price">£10.50</span></div>
+    <div class="product-tile"><span class="product-tile__name">Yemen</span><span
+            class="product-tile__price">£18.00</span></div>
+</div>
+
+</body>
+</html>

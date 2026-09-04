@@ -1,0 +1,18 @@
+<!--#### Exercise 8.2: Responsive Images-->
+
+<!--Create a responsive image using `srcset` and `sizes`:-->
+
+<!-- - Small image: photo-400.jpg (400w)-->
+<!-- - Medium image: photo-800.jpg (800w)-->
+<!-- - Large image: photo-1200.jpg (1200w)-->
+
+<!-- - On viewports ≤600px: image is 100% width-->
+<!-- - On viewports ≤1200px: image is 50% width-->
+<!-- - On larger viewports: image is 800px wide-->
+
+<img
+        src="images/photo-400.jpg"
+        alt="Wireless headphones with noise cancellation"
+        srcset="images/photo-400.jpg 400w, images/photo-800.jpg 800w, images/photo-1200.jpg 1200w"
+        sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 800px"
+>

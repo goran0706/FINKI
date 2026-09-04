@@ -1,0 +1,70 @@
+<!-- Forms -->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+<h1>Forms</h1>
+<form action="https://example.com" method="GET">
+    <fieldset>
+        <legend>Personal information</legend>
+        <label for="first_name">First name</label>
+        <input id="first_name" name="first_name" placeholder="John" type="text">
+        <label for="last_name">Last name</label>
+        <input id="last_name" name="last_name" placeholder="Smith" type="text">
+        <label for="email">Email</label>
+        <input id="email" list="emails" type="email">
+        <datalist id="emails">
+            <option value="john.doe@gmail.com">
+            <option value="john.doe@yahoo.com">
+            <option value="janedoe@gmail.com">
+            <option value="jane.doe@gmail.com">
+        </datalist>
+    </fieldset>
+    <hr>
+    <fieldset>
+        <legend>Address</legend>
+        <label for="address">Address</label>
+        <input id="address" name="address" placeholder="123 Main St" type="text">
+        <label for="address2">Address 2</label>
+        <input id="address2" name="address2" placeholder="Apartment, studio, or floor">
+        <label for="city">City</label>
+        <input id="city" name="city" placeholder="San Francisco" type="text">
+        <label for="state">State</label>
+        <select id="state" name="state">
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option>
+        </select>
+    </fieldset>
+    <hr>
+    <fieldset>
+        <legend>Birthday</legend>
+        <label for="bday">Birthday</label>
+        <input id="bday" name="bday" placeholder="mm/dd/yyyy" type="text">
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+    </fieldset>
+    <hr>
+    <fieldset>
+        <legend>Country</legend>
+        <label for="country">Country</label>
+        <select id="country" name="country">
+            <option value="USA">USA</option>
+            <option value="CA">Canada</option>
+        </select>
+    </fieldset>
+    <hr>
+    <input type="button" value="Submit">
+</form>
+</body>
+</html>

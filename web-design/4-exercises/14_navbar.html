@@ -1,0 +1,126 @@
+<!--
+### Exercise 3.1 — Flexbox: Navigation Bar
+
+**Topic:** Flexbox container, `justify-content`, `align-items`, `gap`
+
+**HTML to use:**
+
+<header class="site-header">
+    <div class="site-header__logo">Roast &amp; Co.</div>
+    <nav class="site-header__nav">
+        <ul class="nav-list">
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="site-header__actions">
+        <a class="btn-cart" href="#">Bag (0)</a>
+    </div>
+</header>
+
+**CSS requirements:**
+
+ - `.site-header`:
+ - `display: flex`
+ - `justify-content: space-between`
+ - `align-items: center`
+ - `padding: 0 48px`
+ - `height: 64px`
+ - `background-color: #1a1a1a`
+ - `color: #ffffff`
+ - `.site-header__logo`: `font-size: 1.25rem`, `font-weight: bold`, `letter-spacing: 0.1em`, `color: #c8a96e`
+ - `.nav-list`: `display: flex`, `list-style: none`, `gap: 8px`, `margin: 0`, `padding: 0`
+ - `.nav-list a`: `color: #ffffff`, `text-decoration: none`, `padding: 8px 16px`, `font-size: 0.875rem`
+ - `.nav-list a:hover`: `color: #c8a96e`
+ - `.btn-cart`: `color: #1a1a1a`, `background: #c8a96e`, `padding: 8px 20px`, `text-decoration: none`,
+`font-size: 0.875rem`
+
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Flexbox Navigation Bar</title>
+
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Site header — flex container */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 48px;
+            height: 64px;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+
+        /* Logo */
+        .site-header__logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            color: #c8a96e;
+        }
+
+        /* Navigation list */
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation links */
+        .nav-list a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 16px;
+            font-size: 0.875rem;
+        }
+
+        /* Navigation link hover state */
+        .nav-list a:hover {
+            color: #c8a96e;
+        }
+
+        /* Cart button */
+        .btn-cart {
+            color: #1a1a1a;
+            background: #c8a96e;
+            padding: 8px 20px;
+            text-decoration: none;
+            font-size: 0.875rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="site-header__logo">Roast &amp; Co.</div>
+    <nav class="site-header__nav">
+        <ul class="nav-list">
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="site-header__actions">
+        <a class="btn-cart" href="#">Bag (0)</a>
+    </div>
+</header>
+
+</body>
+</html>

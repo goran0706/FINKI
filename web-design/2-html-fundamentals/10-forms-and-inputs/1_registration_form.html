@@ -1,0 +1,317 @@
+<!--
+#### Exercise 10.1: Registration Form
+
+Create a registration form with these fields:
+
+1. Full name (text input, required, max 100 characters)
+2. Email (email input, required)
+3. Password (password input, required, minimum 8 characters)
+4. Confirm password (password input, required)
+5. Date of birth (date input)
+6. Gender (radio buttons: Male, Female, Other, Prefer not to say)
+7. Newsletter subscription (checkbox, labeled "Subscribe to newsletter")
+8. Country (dropdown with at least 5 countries)
+9. Bio (textarea, max 500 characters, placeholder "Tell us about yourself...")
+10. Submit button labeled "Create Account"
+
+Requirements:
+
+- Form should POST to "/register"
+- Every input must have a properly associated label
+- Group radio buttons in a fieldset with legend "Gender"
+- Use HTML5 validation attributes
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="User registration form with semantic HTML and accessibility" name="description">
+    <title>Create Account - Register</title>
+</head>
+<body>
+<main>
+    <article class="registration-form">
+        <h1 class="registration-form__heading">Create Account</h1>
+        <p class="registration-form__subtext">Join us to get started</p>
+
+        <form action="/register" id="registrationForm" method="POST" novalidate>
+
+            <!-- ========== Personal Information Section ========== -->
+            <section class="form-section form-section--personal-info">
+                <h2 class="form-section__heading">Personal Information</h2>
+
+                <div class="form-group form-group--two-columns">
+                    <div class="form-field">
+                        <label class="form-field__label" for="fullName">
+                            Full Name
+                            <span aria-label="required" class="form-field__required">*</span>
+                        </label>
+                        <input
+                                aria-describedby="fullName-hint"
+                                class="form-field__input"
+                                id="fullName"
+                                maxlength="100"
+                                name="fullName"
+                                placeholder="John Doe"
+                                required
+                                type="text"
+                        >
+                        <small class="form-field__hint" id="fullName-hint">
+                            Maximum 100 characters
+                        </small>
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-field__label" for="email">
+                            Email Address
+                            <span aria-label="required" class="form-field__required">*</span>
+                        </label>
+                        <input
+                                aria-describedby="email-hint"
+                                class="form-field__input"
+                                id="email"
+                                name="email"
+                                placeholder="john@example.com"
+                                required
+                                type="email"
+                        >
+                        <small class="form-field__hint" id="email-hint">
+                            We'll never share your email
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label class="form-field__label" for="dateOfBirth">
+                        Date of Birth
+                    </label>
+                    <input
+                            class="form-field__input"
+                            id="dateOfBirth"
+                            name="dateOfBirth"
+                            type="date"
+                    >
+                </div>
+            </section>
+
+            <!-- ========== Security Section ========== -->
+            <section class="form-section form-section--security">
+                <h2 class="form-section__heading">Security</h2>
+
+                <div class="form-group form-group--two-columns">
+                    <div class="form-field">
+                        <label class="form-field__label" for="password">
+                            Password
+                            <span aria-label="required" class="form-field__required">*</span>
+                        </label>
+                        <input
+                                aria-describedby="password-hint"
+                                class="form-field__input"
+                                id="password"
+                                minlength="8"
+                                name="password"
+                                placeholder="Enter password"
+                                required
+                                type="password"
+                        >
+                        <small class="form-field__hint" id="password-hint">
+                            Minimum 8 characters
+                        </small>
+                    </div>
+
+                    <div class="form-field">
+                        <label class="form-field__label" for="confirmPassword">
+                            Confirm Password
+                            <span aria-label="required" class="form-field__required">*</span>
+                        </label>
+                        <input
+                                class="form-field__input"
+                                id="confirmPassword"
+                                minlength="8"
+                                name="confirmPassword"
+                                placeholder="Confirm password"
+                                required
+                                type="password"
+                        >
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== Demographic Information Section ========== -->
+            <section class="form-section form-section--demographics">
+                <h2 class="form-section__heading">Demographic Information</h2>
+
+                <div class="form-field">
+                    <label class="form-field__label" for="country">
+                        Country
+                    </label>
+                    <select
+                            class="form-field__select"
+                            id="country"
+                            name="country"
+                    >
+                        <option value="">Select a country</option>
+                        <option value="usa">United States</option>
+                        <option value="gbr">United Kingdom</option>
+                        <option value="deu">Germany</option>
+                        <option value="fra">France</option>
+                        <option value="can">Canada</option>
+                        <option value="aus">Australia</option>
+                        <option value="jpn">Japan</option>
+                    </select>
+                </div>
+
+                <fieldset class="form-fieldset">
+                    <legend class="form-fieldset__legend">Gender</legend>
+                    <div class="form-options form-options--inline">
+                        <div class="form-option">
+                            <input
+                                    class="form-option__input"
+                                    id="genderMale"
+                                    name="gender"
+                                    type="radio"
+                                    value="male"
+                            >
+                            <label class="form-option__label" for="genderMale">
+                                Male
+                            </label>
+                        </div>
+
+                        <div class="form-option">
+                            <input
+                                    class="form-option__input"
+                                    id="genderFemale"
+                                    name="gender"
+                                    type="radio"
+                                    value="female"
+                            >
+                            <label class="form-option__label" for="genderFemale">
+                                Female
+                            </label>
+                        </div>
+
+                        <div class="form-option">
+                            <input
+                                    class="form-option__input"
+                                    id="genderOther"
+                                    name="gender"
+                                    type="radio"
+                                    value="other"
+                            >
+                            <label class="form-option__label" for="genderOther">
+                                Other
+                            </label>
+                        </div>
+
+                        <div class="form-option">
+                            <input
+                                    class="form-option__input"
+                                    id="genderPrefer"
+                                    name="gender"
+                                    type="radio"
+                                    value="prefer-not-to-say"
+                            >
+                            <label class="form-option__label" for="genderPrefer">
+                                Prefer not to say
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+
+            <!-- ========== Additional Information Section ========== -->
+            <section class="form-section form-section--additional">
+                <h2 class="form-section__heading">Additional Information</h2>
+
+                <div class="form-field">
+                    <label class="form-field__label" for="bio">
+                        Bio
+                    </label>
+                    <br>
+                    <textarea
+                            aria-describedby="bio-hint"
+                            class="form-field__textarea"
+                            id="bio"
+                            maxlength="500"
+                            name="bio"
+                            placeholder="Tell us about yourself..."
+                            rows="6"
+                    ></textarea>
+                    <small class="form-field__hint" id="bio-hint">
+                        Maximum 500 characters
+                    </small>
+                </div>
+
+                <fieldset class="form-fieldset">
+                    <legend class="form-fieldset__legend">Preferences</legend>
+                    <div class="form-options form-options--vertical">
+                        <div class="form-option">
+                            <input
+                                    class="form-option__input"
+                                    id="subscribe"
+                                    name="subscribe"
+                                    type="checkbox"
+                                    value="true"
+                            >
+                            <label class="form-option__label" for="subscribe">
+                                Subscribe to our newsletter for updates and announcements
+                            </label>
+                        </div>
+
+                        <div class="form-option">
+                            <input
+                                    class="form-option__input"
+                                    id="terms"
+                                    name="terms"
+                                    required
+                                    type="checkbox"
+                                    value="accepted"
+                            >
+                            <label class="form-option__label" for="terms">
+                                I agree to the Terms of Service
+                                <span aria-label="required" class="form-field__required">*</span>
+                            </label>
+                        </div>
+
+                        <div class="form-option">
+                            <input
+                                    class="form-option__input"
+                                    id="privacy"
+                                    name="privacy"
+                                    required
+                                    type="checkbox"
+                                    value="accepted"
+                            >
+                            <label class="form-option__label" for="privacy">
+                                I accept the Privacy Policy
+                                <span aria-label="required" class="form-field__required">*</span>
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+
+            <!-- ========== Form Actions ========== -->
+            <div class="form-actions">
+                <button
+                        aria-label="Clear form fields"
+                        class="button button--secondary"
+                        type="reset"
+                >
+                    Clear
+                </button>
+                <button
+                        aria-label="Submit registration form"
+                        class="button button--primary"
+                        type="submit"
+                >
+                    Create Account
+                </button>
+            </div>
+        </form>
+    </article>
+</main>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!--
+
+#### Exercise 3.4: Cascade Layers
+
+Create a cascade layer structure for:
+
+1. Reset layer (lowest priority)
+2. Base layer
+3. Components layer
+4. Utilities layer (highest priority)
+
+Write sample rules in each layer to demonstrate priority.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        /* Define layer order (lowest to highest priority) */
+        @layer reset, base, components, utilities;
+
+        /* 1. Reset layer (lowest priority) */
+        @layer reset {
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+        }
+
+        /* 2. Base layer */
+        @layer base {
+            body {
+                font-family: sans-serif;
+                line-height: 1.6;
+            }
+
+            a {
+                color: blue;
+            }
+        }
+
+        /* 3. Components layer */
+        @layer components {
+            .card {
+                border: 1px solid #ccc;
+                padding: 1rem;
+                border-radius: 8px;
+            }
+        }
+
+        /* 4. Utilities layer (highest priority) */
+        @layer utilities {
+            .text-center {
+                text-align: center;
+            }
+
+            .hidden {
+                display: none;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+</body>
+</html>

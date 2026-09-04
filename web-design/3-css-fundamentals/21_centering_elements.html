@@ -1,0 +1,66 @@
+<!--
+#### Exercise 5.2: Centering Absolutely Positioned Element
+
+Center a div absolutely in the middle of its parent:
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /*
+            move 50% from top
+            move 50% from left
+            move back top 50% of its center (width)
+            move back left 50% of its center (width)
+        */
+        .absolute-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .container {
+            background: #cccccc;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background: dodgerblue;
+            border-radius: 10px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="box flex absolute-box">BOX</div>
+</div>
+
+<div class="container flex">
+    <div class="box flex">BOX</div>
+</div>
+
+</body>
+</html>

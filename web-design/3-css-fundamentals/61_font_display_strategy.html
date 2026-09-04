@@ -1,0 +1,39 @@
+<!--
+#### Exercise 13.2: Font Display Strategy
+
+Add web font with `font-display: swap`:
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('font.woff2') format('woff2');
+    font-display: swap;
+}
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('font.woff2') format('woff2');
+            font-display: swap;
+        }
+    </style>
+</head>
+<body>
+<h1>Lorem ipsum dolor sit amet.</h1>
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab atque doloribus eos error eum ex excepturi, explicabo
+    laudantium nesciunt nobis omnis quaerat quasi saepe sed sunt voluptatum? Adipisci architecto asperiores atque, aut
+    beatae delectus doloremque dolores doloribus, enim et, exercitationem fuga fugit harum incidunt laborum nostrum
+    obcaecati porro praesentium quas quis quod recusandae rem reprehenderit tempora ullam vel velit voluptatum. Animi
+    aspernatur aut blanditiis dolorem enim ipsa, laborum magni, modi nesciunt, officia placeat quae temporibus unde? A
+    aspernatur doloremque ducimus enim, ipsa labore natus neque, quas quasi repellendus sequi, tempore voluptatibus?
+    Blanditiis dicta ducimus iste libero repellendus reprehenderit voluptate.
+</p>
+</body>
+</html>

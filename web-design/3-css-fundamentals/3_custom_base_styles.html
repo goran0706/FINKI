@@ -1,0 +1,62 @@
+<!--
+#### Exercise 1.3: Custom Base Styles
+
+Create a minimal custom reset/base stylesheet that:
+
+- Sets `box-sizing: border-box` on all elements
+- Removes default margin on body
+- Sets a default font family and line height on body
+- Removes list styling from ul/ol
+- Makes images responsive (max-width: 100%)
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+    <style>
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.6;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        @media (max-width: 680px) {
+            img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<ul>
+    <li>Lorem ipsum dolor.</li>
+    <li>Dolorum, ea, voluptate!</li>
+    <li>Harum, ipsam, nulla?</li>
+    <li>Exercitationem, illo, nesciunt.</li>
+    <li>Ipsa ipsum, voluptatibus.</li>
+</ul>
+
+<ol>
+    <li>Lorem ipsum dolor.</li>
+    <li>Debitis, natus, quam?</li>
+    <li>Eos itaque, veritatis?</li>
+    <li>Assumenda, sint voluptatem.</li>
+    <li>Deserunt nulla, sequi.</li>
+</ol>
+
+<img src="https://picsum.photos/seed/picsum/200/300" alt="random image" width="200" height="300">
+
+</body>
+</html>

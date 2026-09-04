@@ -1,0 +1,58 @@
+<!--
+#### Exercise 1.2: CSS Reset vs Normalize
+
+Compare browser defaults:
+
+1. Create a page with `<h1>`, `<p>`, `<ul>`, `<button>` elements
+2. View it with no CSS (browser defaults)
+3. Apply a CSS reset (remove all margins, padding, set box-sizing)
+4. Document what changed
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        *, *:before, *:after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Lorem ipsum dolor sit amet.</h1>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam cumque optio vero.</p>
+
+<ul>
+    <li>Lorem ipsum dolor sit amet.</li>
+    <li>Ab architecto distinctio nesciunt quae?</li>
+    <li>Autem fugiat iste placeat ullam?</li>
+    <li>Ad facere id nobis. Nulla.</li>
+    <li>Accusantium commodi dicta dolor molestiae.</li>
+</ul>
+
+<button>Confirm</button>
+
+</body>
+</html>

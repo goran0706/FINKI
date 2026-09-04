@@ -1,0 +1,83 @@
+/*
+    Oд стандарден влез се внесува цел број N (N<=100), а потоа се внесуваат N текстуални низи (реченици)
+    со максимална должина од 100 знаци, секоја зададена во нов ред.
+
+    За секоја од внесените реченици треба да се изброи колку вкупно пати последователно се појавуваат самогласки.
+    На крај да се генерира извештај во кој ќе се наведе колку вкупно реченици имаат 0, 1, 2, …
+    односно n појaвувања на последователни самогласки.
+    Во овој случај n е максималниот број на последователни појавувања на самогласки во некоја од речениците.
+
+    Излезот треба да биде во форматот како што е даден во примерот.
+    Забелешка: Броењето на последователни појавувања на самогласки во реченицата  да се направи во посебна функција.
+
+    Кај излезот првиот број ги значува последователните појавувања на самогласките (0 до n),
+    а вториот број означува кај колку реченици од влезот е соодветниот број на последователни повторувања на самогласки.
+
+    На пример во реченицата:
+
+    Uste edna nоvaaa goooodina ni dojdeeee.
+
+    бројот на последователно појавување самогласки е: 3 (обележани со задебелени букви).
+
+    Input:
+    4
+    Srekjna Nova Godina!
+    2024 e novata godina koja ni pretstoi, Da bide ispolneta so radost i srekja.
+    Uste edna novaaa gooooodina ni dojdeeeee.
+    2024taaaaaa
+
+    Output:
+    0: 1
+    1: 2
+    2: 0
+    3: 1
+*/
+#include <iostream>
+using namespace std;
+
+bool is_vowel(char c) {
+    c = tolower(c);
+    return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u';
+}
+
+int count_vowels(char str[]) {
+    int total_count = 0;
+    int current_count = 0;
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (is_vowel(str[i])) {
+            current_count++;
+        } else {
+            if (current_count > 1) {
+                total_count++;
+            }
+            current_count = 0;
+        }
+    }
+
+    if (current_count > 1) {
+        total_count++;
+    }
+
+    return total_count;
+}
+
+int main() {
+    int n;
+    if (!(cin >> n)) return 0;
+    cin.ignore();
+
+    int frequency[100] = {0};
+
+    for (int i = 0; i < n; i++) {
+        char str[100];
+        cin.getline(str, 100);
+        frequency[i] = count_vowels(str);
+    }
+
+    for (int i = 0; i < n; i++) {
+        cout << i << ": " << frequency[i] << endl;
+    }
+
+    return 0;
+}

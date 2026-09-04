@@ -1,0 +1,189 @@
+// Read words from SI. No words are longer than 20 characters.
+// Write a program that on the SO will print all the words from the file that are unsigned hexadecimal numbers (one word per line in uppercase digits).
+// At the end also print the total number of such numbers found in the file.
+//
+// The hexadecimal numbers can contain both upper and lowercase letters a-f and A-F, but when printing them convert them all to uppercase.
+// The possible leading zeroes are also treated as part of the number and should also be printed.
+// Since the numbers are unsigned whole numbers no sign or decimal point is considered as part of the number.
+//
+// Input:
+// The_sum_is
+// 64
+// and_the_minimum_is
+// def
+// ined_as
+// a
+// 035
+// where_signs_like
+// +12AB
+// are_not_considered
+// as_well_as
+// decimal_point_like
+// 12.f5a
+// also_not
+// this1
+// or
+// 2one
+//
+// the program should print:
+//
+// 64
+// DEF
+// A
+// 035
+// Total: 4
+//
+// For example:
+// Input
+//
+// Since
+// being
+// founded
+// in
+// 1992
+// with
+// funding
+// from
+// DARPA,
+// robotics
+// company
+// Boston
+// Dynamics
+// has
+// unveiled
+// one
+// nightmarish
+// robotic
+// creation
+// after
+// another.
+// But
+// the
+// company
+// outdid
+// itself
+// this
+// week
+// when
+// it
+// introduced
+// the
+// latest
+// iteration
+// of
+// its
+// ‘Atlas’
+// robot.
+//
+// The
+// company
+// caused
+// a
+// stir
+// after
+// publishing
+// a
+// video
+// on
+// YouTube
+// showing
+// the
+// hulking
+// humanoid
+// robot
+// jumping
+// across
+// platforms
+// of
+// varying
+// heights
+// and
+// even
+// perform
+// backflips
+// on
+// command
+// -
+// some
+// of
+// the
+// most
+// advanced
+// capabilities
+// demonstrated
+// by
+// any
+// bipedal
+// robot.
+// If
+// you’re
+// wondering
+// how
+// this
+// seemingly
+// trivial
+// ability
+// portends
+// imminent
+// warfare
+// between
+// mankind
+// and
+// the
+// machines,
+// then
+// you
+// need
+// to
+// ask
+// yourself:
+// When
+// was
+// the
+// last
+// time
+// you
+// did
+// a
+// standing
+// backflip?
+// Unless
+// you’re
+// a
+// gymnast
+// or
+// a
+// football
+// player
+// with
+// over
+// the
+// top
+// celebrations,
+// the
+// answer
+// is
+// probably
+// never.
+// Unsurprisingly,long
+// the
+// video
+// inspired
+// a
+// cascade
+// of
+// commentary
+// about
+// humanity’s
+// impending
+// obsolescence.
+//
+// Result
+// 1992
+// A
+// A
+// A
+// A
+// A
+// A
+// Total: 7

@@ -1,0 +1,83 @@
+<!--
+#### Exercise 2.2: Attribute Selectors
+
+Write selectors for:
+
+1. All links with `target="_blank"`
+2. All inputs with `type="email"`
+3. All links where href starts with "https://"
+4. All links where href ends with ".pdf"
+5. All images where src contains "thumbnail"
+6. All images where alt contains whole word "thumbnail"
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        a[target="_blank"] {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        a[href^="https://"] {
+            color: green;
+            font-weight: bold;
+        }
+
+        a[href$=".pdf"] {
+            color: red;
+            background-color: yellow;
+        }
+
+        input[type="email"] {
+            border: 2px solid #28a745;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        img[src*="thumbnail"] {
+            border: 1px dashed gray;
+            opacity: 0.8;
+        }
+
+        img[alt~="thumbnail"] {
+            filter: grayscale(50%);
+        }
+    </style>
+</head>
+<body>
+
+<ul>
+    <li>
+        <a href="http://example.com" target="_blank">New Tab</a>
+    </li>
+    <li>
+        <a href="https://example.com" target="_blank" rel="noreferrer noopener">New Secure Tab</a>
+    </li>
+    <li>
+        <a href="https://example.com/mydoc.pdf" target="_blank">New Secure Tab</a>
+    </li>
+</ul>
+
+<form>
+    <label for="email">Email</label>
+    <input id="email" placeholder="Enter your email" type="email">
+</form>
+
+<figure>
+    <figcaption>Thumbnail 1</figcaption>
+    <img alt="random thumbnail image" src="https://picsum.photos/seed/picsum/200/300?thumbnail">
+</figure>
+
+<figure>
+    <figcaption>Thumbnail 2</figcaption>
+    <img alt="random thumbnail image" src="https://picsum.photos/seed/picsum/200/300">
+</figure>
+
+</body>
+</html>

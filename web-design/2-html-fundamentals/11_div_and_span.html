@@ -1,0 +1,72 @@
+<!--
+    Divisions and Spans
+
+    Both div and span are generic elements used to organize the structure and not meant to be used as they were before.
+    An entire document built with div elements and CSS classes. HTML5 introduces the semantic meaning to elements.
+
+    Block elements:
+        - take the entire width until the end of the line
+        - can set their width and height - respect the width and height
+        - can set the vertical spacing
+
+    Inline elements:
+        - their width is based on the content they contain
+        - do not respect the width and height
+        - do not respect the vertical spacing (margin)
+
+    Inline-block elements:
+        - Best of both worlds
+        - Acts as inline elements
+        - Respects width and height
+
+    Div vs. Span
+
+    The <div> element is used as a container for other HTML elements.
+    The <div> element is by default a block element, meaning that it takes all available width, and comes with line breaks before and after.
+    The <div> element is often used as a container for other HTML elements.
+    The <div> element has no required attributes, but style, class and id are common.
+    When used together with CSS, the <div> element can be used to style blocks of content.
+
+    The <span> element is an inline container used to mark up a part of a text, or a part of a document.
+    The <span> element has no required attributes, but style, class and id are common.
+    When used together with CSS, the <span> element can be used to style parts of the text.
+
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        .block {
+            width: 200px;
+            height: 200px;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            background-color: purple;
+        }
+
+        .inline {
+            width: 200px !important;
+            height: 200px !important;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+
+<!-- div - BLOCK ELEMENTS -->
+<div>This is a div - block element</div>
+<div class="block">This is a div - block element</div>
+
+<!-- span - INLINE ELEMENT -->
+<span>This is a span - inline element</span>
+<span class="inline">This is a span - inline element</span>
+
+</body>
+</html>

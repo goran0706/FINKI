@@ -1,0 +1,87 @@
+<!--
+#### Exercise 13.1: Composite-Only Animations
+
+Create two animations:
+
+1. BAD: Animate `width` from 100px to 200px
+2. GOOD: Animate `transform: scaleX()` from 1 to 2
+
+Compare performance in DevTools.
+-->
+
+<!--
+BAD:  width: 100px → 200px
+      Triggers: Layout → Paint → Composite (EXPENSIVE)
+      Result: Janky, drops frames
+
+GOOD: transform: scaleX(1) → scaleX(2)
+      Triggers: Composite only (GPU-accelerated, CHEAP)
+      Result: Smooth 60fps
+
+WHY: transform skips layout recalc and repaint.
+     Only the GPU applies the matrix math to an already-rasterized layer.
+
+RULE: Animate transform/opacity only. Never animate width/height/position.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+        }
+
+        .bad {
+            background-color: crimson;
+            animation: bad-animation 1s linear infinite;
+        }
+
+        .good {
+            background-color: greenyellow;
+            animation: good-animation 1s linear infinite;
+        }
+
+        @keyframes bad-animation {
+            from {
+                width: 100px;
+            }
+            to {
+                width: 200px;
+            }
+        }
+
+        @keyframes good-animation {
+            from {
+                transform: scaleX(1);
+            }
+            to {
+                transform: scaleX(2);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="box bad"></div>
+<div class="box good"></div>
+
+</body>
+</html>

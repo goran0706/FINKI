@@ -1,0 +1,273 @@
+<!--
+
+### Exercise 6.1 — Multi-Section HTML Page (No CSS)
+
+**Topic:** Full semantic HTML document — all element types
+
+**What to build:** A complete, valid, fully semantic HTML page for `Roast & Co.` — the fictional coffee brand used
+throughout. No CSS.
+
+**Exact structure required:**
+
+<header> — logo text + <nav> with 5 links
+<main>
+<section id="hero"> — h1, p, one anchor link styled as a call to action
+<section id="origins"> — h2, intro paragraph, then a <table> of 4 origins (Name | Country | Flavour Notes | Price)
+<section id="brew-guide"> — h2, intro p, ordered list of 6 steps, one nested unordered list inside step 4
+<section id="about"> — h2, two paragraphs, one <blockquote> with <cite>
+<section id="subscribe"> — h2, the full subscription form from Exercise 1.8
+<section id="media"> — h2, three <figure> elements each with <img> (use picsum.photos) and <figcaption>
+<footer> — copyright p, second nav with 4 links, address using <address>
+
+**Additional requirements:**
+
+- Every section must have a matching fragment link in the header `<nav>`
+- Use `<article>` inside `#origins` to wrap the table and its intro
+- The blockquote must have a `cite` attribute with a fake URL
+- All images must have descriptive `alt` text
+- The page must pass W3C validation with zero errors
+
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Roast & Co.</title>
+</head>
+<body>
+
+<div class="page-layout">
+    <header class="page-layout__header">
+        <div class="logo">Roast & Co.</div>
+        <nav class="main-nav">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link nav__link-active" href="#">Home</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#origins">Origins</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#brew-guide">Brew Guide</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#about">About</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#subscribe">Subscribe</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#media">Media</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-layout__main">
+        <section class="hero" id="hero">
+            <h1 class="hero__title">Premium Single-Origin Coffee</h1>
+            <p class="hero__description">Discover the finest specialty coffee sourced directly from sustainable farms
+                around the world. Handpicked, expertly roasted, delivered fresh to your door.</p>
+            <a class="hero__cta" href="#subscribe">Start Brewing</a>
+        </section>
+
+        <section class="origins" id="origins">
+            <article>
+                <h2 class="origins__title">Origins</h2>
+                <p class="origins__text">We source our beans from four distinct regions, each offering unique flavor
+                    profiles and characteristics. Every origin tells a story of craftsmanship and dedication to
+                    quality.</p>
+                <table class="origins__table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Flavor Notes</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Ethiopian Yirgacheffe</td>
+                        <td>Ethiopia</td>
+                        <td>Floral, Berry, Acidic</td>
+                        <td>$16.50</td>
+                    </tr>
+                    <tr>
+                        <td>Brazilian Cerrado</td>
+                        <td>Brazil</td>
+                        <td>Nutty, Chocolate, Smooth</td>
+                        <td>$14.00</td>
+                    </tr>
+                    <tr>
+                        <td>Colombian Geisha</td>
+                        <td>Colombia</td>
+                        <td>Tropical, Jasmine, Complex</td>
+                        <td>$18.75</td>
+                    </tr>
+                    <tr>
+                        <td>Kenyan AA</td>
+                        <td>Kenya</td>
+                        <td>Blackcurrant, Wine, Bold</td>
+                        <td>$17.25</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+
+        <section class="brew-guide" id="brew-guide">
+            <h2 class="brew-guide__title">Brew Guide</h2>
+            <p class="brew-guide__text">Follow our step-by-step guide to brew the perfect cup. Precision and timing are
+                key to extracting the full flavor potential of our beans.</p>
+            <ol class="brew-guide__list">
+                <li class="brew-guide__list-item">Heat water to 195–205°F (90–96°C) using a gooseneck kettle for better
+                    control
+                </li>
+                <li class="brew-guide__list-item">Grind your beans to a medium-coarse consistency, similar to sea salt
+                </li>
+                <li class="brew-guide__list-item">Add ground coffee to your filter, using a 1:16 coffee-to-water ratio
+                    by weight
+                </li>
+                <li class="brew-guide__list-item">Pour water slowly and deliberately:
+                    <ul>
+                        <li class="brew-guide__list-item">First, bloom with 2x the weight of water for 30 seconds</li>
+                        <li class="brew-guide__list-item">Pour in circular motions, keeping the water level consistent
+                        </li>
+                        <li class="brew-guide__list-item">Complete pouring within 3–4 minutes total</li>
+                        <li class="brew-guide__list-item">Allow final drips to finish before removing the filter</li>
+                    </ul>
+                </li>
+                <li class="brew-guide__list-item">Wait 1–2 minutes for the coffee to cool slightly to optimal drinking
+                    temperature
+                </li>
+                <li class="brew-guide__list-item">Pour into your favorite cup and savor the complex flavors</li>
+            </ol>
+        </section>
+
+        <section class="about" id="about">
+            <h2 class="about__title">About</h2>
+            <p class="about__text">Roast & Co. was founded in 2015 with a simple mission: to bring exceptional specialty
+                coffee to coffee lovers everywhere. We believe in direct relationships with farmers, sustainable
+                practices, and meticulous roasting that honors each bean's unique character.</p>
+            <p class="about__text">Every bag we roast is crafted with intention. We roast in small batches to ensure
+                freshness, quality, and consistency. Our commitment to excellence extends from farm to cup.</p>
+            <blockquote cite="https://www.specialtycoffeenews.com/coffee-culture">
+                <p>The greatest care should be taken in the buying, roasting, and grinding of coffee, for upon this
+                    trinity depends the absolute perfection of the beverage.</p>
+                <p><cite>— The Specialty Coffee Association</cite></p>
+            </blockquote>
+        </section>
+
+        <section class="subscribe" id="subscribe">
+            <h2 class="subscribe__title">Subscribe</h2>
+            <form action="#" method="post">
+                <h3>Start Your Subscription</h3>
+                <fieldset>
+                    <legend>Your Details</legend>
+                    <div>
+                        <label for="name">Name</label>
+                        <input id="name" placeholder="Jane Smith" required type="text">
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input id="email" placeholder="jane@example.com" required type="email">
+                    </div>
+                    <div>
+                        <label for="phone">Phone</label>
+                        <input id="phone" placeholder="+44 7700 000000" type="tel">
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Your Subscription</legend>
+                    <div>
+                        <label for="plan">Plan</label>
+                        <select id="plan" required>
+                            <option disabled value="">Select a plan...</option>
+                            <option value="starter">Starter — 250g every 2 weeks</option>
+                            <option value="regular">Regular — 500g weekly</option>
+                            <option value="pro">Pro — 1kg weekly</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="grind">Grind</label>
+                        <select id="grind" required>
+                            <option disabled value="">Select a grind...</option>
+                            <option value="whole">Whole Bean</option>
+                            <option value="filter">Filter</option>
+                            <option value="espresso">Espresso</option>
+                            <option value="cafetiere">Cafetiere</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="notes">Special Notes</label>
+                        <textarea id="notes" name="notes" placeholder="Any allergy or preference notes..."
+                                  rows="4"></textarea>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Confirmation</legend>
+                    <div>
+                        <label for="terms">I agree to the terms and conditions</label>
+                        <input id="terms" required type="checkbox">
+                    </div>
+                    <div>
+                        <label for="marketing">I am happy to receive email updates</label>
+                        <input id="marketing" type="checkbox">
+                    </div>
+                </fieldset>
+                <button type="submit">Start My Subscription</button>
+            </form>
+        </section>
+
+        <section class="media" id="media">
+            <h2 class="media__title">Media</h2>
+            <figure class="media__figure">
+                <img alt="Fresh roasted coffee beans in a wooden scoop" class="media__img"
+                     src="https://picsum.photos/400/300?random=1">
+                <figcaption class="media__caption">Hand-roasted beans, fresh and aromatic</figcaption>
+            </figure>
+            <figure class="media__figure">
+                <img alt="Pouring water over freshly ground coffee in a pour-over dripper" class="media__img"
+                     src="https://picsum.photos/400/300?random=2">
+                <figcaption class="media__caption">The perfect pour-over technique</figcaption>
+            </figure>
+            <figure class="media__figure">
+                <img alt="A steaming cup of specialty coffee with latte art" class="media__img"
+                     src="https://picsum.photos/400/300?random=3">
+                <figcaption class="media__caption">Specialty coffee crafted with care</figcaption>
+            </figure>
+        </section>
+    </main>
+
+    <footer class="page-layout__footer">
+        <p class="copyright">Roast & Co. &copy; 2026</p>
+        <nav class="secondary-nav">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link" href="#">Privacy</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#">Terms</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#">Conditions</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <address class="location">
+            123 Coffee Street<br>
+            London, EC1A 1BB<br>
+            United Kingdom<br>
+            <a href="mailto:hello@roastandco.com">hello@roastandco.com</a><br>
+            <a href="tel:+442071838750">+44 (0)20 7183 8750</a>
+        </address>
+    </footer>
+</div>
+
+</body>
+</html>

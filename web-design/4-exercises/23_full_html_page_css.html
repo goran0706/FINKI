@@ -1,0 +1,734 @@
+<!--
+### Exercise 6.2 — Fully Styled Page
+
+**Topic:** Combine everything — layout, BEM, variables, flexbox, grid, transitions, responsive
+
+**What to build:** Style the HTML from Exercise 6.1 using everything learned.
+
+**Exact CSS requirements:**
+
+ - Use the CSS custom properties from Exercise 4.2 — all colors and spacing through variables only
+ - Global: reset, `box-sizing`, `font-family`, `line-height`, `color`
+ - `header`: sticky, flex, space-between, full-width, height `64px`, dark background
+ - `nav` links: flex row, hover color transition `200ms`
+ - `#hero`: centred text, `min-height: 80vh`, `display: flex`, `flex-direction: column`, `justify-content: center`, `align-items: center`, dark background, light text
+ - `#origins table`: full-width, `border-collapse: collapse`, alternating row background using `:nth-child(even)` → `#f9f9f9`
+ - `#brew-guide ol`: custom counter using `counter-reset` and `counter-increment`, no default `list-style`
+ - `#about blockquote`: `border-left: 4px solid var(--color-accent)`, `padding-left: 24px`, `font-style: italic`
+ - `#subscribe form`: two-column grid layout using `grid-template-columns: 1fr 1fr` with `fieldset` spanning full width at small sizes
+ - `#media`: CSS Grid, `auto-fill`, `minmax(280px, 1fr)`, `gap: 24px`
+ - `figure img`: `width: 100%`, `height: 220px`, `object-fit: cover`, `display: block`
+ - `footer`: dark background, light text, flex, space-between, `padding: 32px 48px`
+ - One `@keyframes` animation of your choice applied to the hero section
+ - All hover states must use transitions
+ - Fully mobile-responsive using mobile-first media queries at `600px` and `960px`
+ - `@media (prefers-reduced-motion: reduce)` block disabling all animations
+
+**This exercise is intentionally comprehensive. It is the capstone — every concept from every module should appear somewhere in this stylesheet.**
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Roast & Co.</title>
+
+    <style>
+        :root {
+            --color-bg: #ffffff;
+            --color-text: #1a1a1a;
+            --color-text-muted: #666666;
+            --color-border: #e0e0e0;
+            --color-primary: #1a1a1a;
+            --color-accent: #c8a96e;
+            --color-accent-hover: #b8955a;
+            --color-dark-bg: #2d2d2d;
+
+            --font-base: Georgia, 'Times New Roman', serif;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.25rem;
+            --font-size-xl: 1.75rem;
+            --font-size-xxl: 2.5rem;
+
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --spacing-xl: 64px;
+
+            --border-radius: 4px;
+        }
+
+        /* ===== RESET & GLOBAL ===== */
+        *, *:before, *:after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-base), serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+        }
+
+        h1, h2, h3 {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        h2 {
+            font-size: var(--font-size-xl);
+        }
+
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* ===== HEADER ===== */
+        .page-layout__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+            padding: 0 var(--spacing-md);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .logo {
+            font-size: var(--font-size-lg);
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav__list {
+            display: flex;
+            gap: var(--spacing-md);
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav__item {
+            margin: 0;
+        }
+
+        .nav__link {
+            text-decoration: none;
+            color: white;
+            transition: color 200ms ease;
+            cursor: pointer;
+            font-size: var(--font-size-sm);
+        }
+
+        .nav__link:hover {
+            color: var(--color-accent);
+        }
+
+        .nav__link-active {
+            color: var(--color-accent);
+        }
+
+        /* ===== HERO ===== */
+        #hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 80vh;
+            background-color: var(--color-primary);
+            padding: var(--spacing-md);
+        }
+
+        .hero__title {
+            font-size: var(--font-size-xxl);
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-sm);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero__description {
+            font-size: var(--font-size-lg);
+            color: white;
+            margin-bottom: var(--spacing-lg);
+            max-width: 600px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero__cta {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background-color: var(--color-accent);
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid var(--color-accent);
+            border-radius: var(--border-radius);
+            transition: all 200ms ease;
+            cursor: pointer;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero__cta:hover {
+            background-color: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+
+        @media (min-width: 600px) {
+            section {
+                padding: var(--spacing-xl) var(--spacing-lg);
+            }
+        }
+
+        section h2 {
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-md);
+        }
+
+        section > p {
+            max-width: 800px;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* ===== ORIGINS TABLE ===== */
+        .origins__table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--spacing-lg);
+        }
+
+        .origins__table thead {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .origins__table th,
+        .origins__table td {
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .origins__table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .origins__table tbody tr:hover {
+            background-color: #f0f0f0;
+            transition: background-color 200ms ease;
+        }
+
+        /* ===== BREW GUIDE ===== */
+        .brew-guide__list {
+            counter-reset: step-counter;
+            list-style: none;
+            margin-top: var(--spacing-lg);
+        }
+
+        .brew-guide__list-item {
+            counter-increment: step-counter;
+            padding-left: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+        }
+
+        .brew-guide__list-item::before {
+            content: counter(step-counter) ".";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: var(--color-accent);
+            min-width: var(--spacing-lg);
+        }
+
+        .brew-guide__list ul {
+            margin-top: var(--spacing-md);
+            padding-left: var(--spacing-lg);
+        }
+
+        .brew-guide__list ul .brew-guide__list-item {
+            counter-increment: none;
+            padding-left: var(--spacing-lg);
+            list-style-type: disc;
+        }
+
+        .brew-guide__list ul .brew-guide__list-item::before {
+            content: "";
+            position: static;
+            display: none;
+        }
+
+        /* ===== ABOUT BLOCKQUOTE ===== */
+        #about blockquote {
+            border-left: 4px solid var(--color-accent);
+            padding-left: var(--spacing-lg);
+            font-style: italic;
+            margin: var(--spacing-lg) 0;
+            color: var(--color-text-muted);
+        }
+
+        #about blockquote p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        #about cite {
+            font-style: normal;
+            color: var(--color-text);
+        }
+
+        /* ===== SUBSCRIBE FORM ===== */
+        #subscribe form {
+            display: grid;
+            gap: var(--spacing-lg);
+            grid-template-columns: 1fr;
+            max-width: 800px;
+            margin-top: var(--spacing-lg);
+        }
+
+        @media (min-width: 960px) {
+            #subscribe form {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        #subscribe fieldset {
+            border: 1px solid var(--color-border);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+        }
+
+        @media (min-width: 960px) {
+            #subscribe fieldset:last-of-type {
+                grid-column: 1 / -1;
+            }
+        }
+
+        #subscribe legend {
+            font-weight: bold;
+            padding: 0 var(--spacing-sm);
+            color: var(--color-accent);
+        }
+
+        #subscribe div {
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+        }
+
+        #subscribe label {
+            margin-bottom: var(--spacing-xs);
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        #subscribe input[type="text"],
+        #subscribe input[type="email"],
+        #subscribe input[type="tel"],
+        #subscribe select,
+        #subscribe textarea {
+            padding: var(--spacing-sm);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            font-family: var(--font-base), serif;
+            font-size: var(--font-size-base);
+            transition: border-color 200ms ease;
+        }
+
+        #subscribe input[type="text"]:focus,
+        #subscribe input[type="email"]:focus,
+        #subscribe input[type="tel"]:focus,
+        #subscribe select:focus,
+        #subscribe textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 2px rgba(200, 169, 110, 0.1);
+        }
+
+        #subscribe input[type="checkbox"] {
+            width: auto;
+            margin-right: var(--spacing-sm);
+            cursor: pointer;
+        }
+
+        #subscribe .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        #subscribe button {
+            grid-column: 1 / -1;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background-color: var(--color-accent);
+            color: var(--color-text);
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 200ms ease;
+            font-size: var(--font-size-base);
+        }
+
+        #subscribe button:hover {
+            background-color: var(--color-accent-hover);
+        }
+
+        /* ===== MEDIA GRID ===== */
+        .media__article {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        @media (min-width: 600px) {
+            .media__article {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        .media__figure {
+            margin: 0;
+        }
+
+        .media__img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            border-radius: var(--border-radius);
+        }
+
+        .media__caption {
+            padding: var(--spacing-sm) 0;
+            color: var(--color-text-muted);
+            font-size: var(--font-size-sm);
+        }
+
+        /* ===== FOOTER ===== */
+        .page-layout__footer {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+            background-color: var(--color-primary);
+            color: var(--color-accent);
+            padding: var(--spacing-lg) var(--spacing-md);
+        }
+
+        @media (min-width: 960px) {
+            .page-layout__footer {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+        }
+
+        .copyright {
+            margin: 0;
+        }
+
+        .location {
+            font-style: normal;
+            line-height: 1.8;
+        }
+
+        .location a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: color 200ms ease;
+        }
+
+        .location a:hover {
+            color: var(--color-accent-hover);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== REDUCED MOTION ===== */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-layout">
+    <header class="page-layout__header">
+        <div class="logo">Roast & Co.</div>
+        <nav class="main-nav">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link nav__link-active" href="#">Home</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#origins">Origins</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#brew-guide">Brew Guide</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#about">About</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#subscribe">Subscribe</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#media">Media</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-layout__main">
+        <section class="hero" id="hero">
+            <h1 class="hero__title">Premium Single-Origin Coffee</h1>
+            <p class="hero__description">Discover the finest specialty coffee sourced directly from sustainable farms
+                around the world. Handpicked, expertly roasted, delivered fresh to your door.</p>
+            <a class="hero__cta" href="#subscribe">Start Brewing</a>
+        </section>
+
+        <section class="origins" id="origins">
+            <h2>Origins</h2>
+            <p>We source our beans from four distinct regions, each offering unique flavor profiles and characteristics.
+                Every origin tells a story of craftsmanship and dedication to quality.</p>
+            <article>
+                <table class="origins__table">
+                    <caption>Our 4 Origins</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Flavor Notes</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Ethiopian Yirgacheffe</td>
+                        <td>Ethiopia</td>
+                        <td>Floral, Berry, Acidic</td>
+                        <td>$16.50</td>
+                    </tr>
+                    <tr>
+                        <td>Brazilian Cerrado</td>
+                        <td>Brazil</td>
+                        <td>Nutty, Chocolate, Smooth</td>
+                        <td>$14.00</td>
+                    </tr>
+                    <tr>
+                        <td>Colombian Geisha</td>
+                        <td>Colombia</td>
+                        <td>Tropical, Jasmine, Complex</td>
+                        <td>$18.75</td>
+                    </tr>
+                    <tr>
+                        <td>Kenyan AA</td>
+                        <td>Kenya</td>
+                        <td>Blackcurrant, Wine, Bold</td>
+                        <td>$17.25</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+
+        <section class="brew-guide" id="brew-guide">
+            <h2>Brew Guide</h2>
+            <p>Follow our step-by-step guide to brew the perfect cup. Precision and timing are key to extracting the
+                full flavor potential of our beans.</p>
+            <ol class="brew-guide__list">
+                <li class="brew-guide__list-item">Heat water to 195–205°F (90–96°C) using a gooseneck kettle for better
+                    control
+                </li>
+                <li class="brew-guide__list-item">Grind your beans to a medium-coarse consistency, similar to sea salt
+                </li>
+                <li class="brew-guide__list-item">Add ground coffee to your filter, using a 1:16 coffee-to-water ratio
+                    by weight
+                </li>
+                <li class="brew-guide__list-item">Pour water slowly and deliberately:
+                    <ul class="brew-guide__list">
+                        <li class="brew-guide__list-item">First, bloom with 2x the weight of water for 30 seconds</li>
+                        <li class="brew-guide__list-item">Pour in circular motions, keeping the water level consistent
+                        </li>
+                        <li class="brew-guide__list-item">Complete pouring within 3–4 minutes total</li>
+                        <li class="brew-guide__list-item">Allow final drips to finish before removing the filter</li>
+                    </ul>
+                </li>
+                <li class="brew-guide__list-item">Wait 1–2 minutes for the coffee to cool slightly to optimal drinking
+                    temperature
+                </li>
+                <li class="brew-guide__list-item">Pour into your favorite cup and savor the complex flavors</li>
+            </ol>
+        </section>
+
+        <section class="about" id="about">
+            <h2>About</h2>
+            <p>Roast & Co. was founded in 2015 with a simple mission: to bring exceptional specialty coffee to coffee
+                lovers everywhere. We believe in direct relationships with farmers, sustainable practices, and
+                meticulous roasting that honors each bean's unique character.</p>
+            <p>Every bag we roast is crafted with intention. We roast in small batches to ensure freshness, quality, and
+                consistency. Our commitment to excellence extends from farm to cup.</p>
+            <blockquote cite="https://www.specialtycoffeenews.com/coffee-culture">
+                <p>The greatest care should be taken in the buying, roasting, and grinding of coffee, for upon this
+                    trinity depends on the absolute perfection of the beverage.</p>
+                <p><cite>— The Specialty Coffee Association</cite></p>
+            </blockquote>
+        </section>
+
+        <section class="subscribe" id="subscribe">
+            <h2>Subscribe</h2>
+            <h3>Start Your Subscription</h3>
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Your Details</legend>
+                    <div>
+                        <label for="name">Name</label>
+                        <input id="name" placeholder="Jane Smith" required type="text">
+                    </div>
+                    <div>
+                        <label for="email">Email</label>
+                        <input id="email" placeholder="jane@example.com" required type="email">
+                    </div>
+                    <div>
+                        <label for="phone">Phone</label>
+                        <input id="phone" placeholder="+44 7700 000000" type="tel">
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Your Subscription</legend>
+                    <div>
+                        <label for="plan">Plan</label>
+                        <select id="plan" required>
+                            <option disabled value="">Select a plan...</option>
+                            <option value="starter">Starter — 250g every 2 weeks</option>
+                            <option value="regular">Regular — 500g weekly</option>
+                            <option value="pro">Pro — 1kg weekly</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="grind">Grind</label>
+                        <select id="grind" required>
+                            <option disabled value="">Select a grind...</option>
+                            <option value="whole">Whole Bean</option>
+                            <option value="filter">Filter</option>
+                            <option value="espresso">Espresso</option>
+                            <option value="cafetiere">Cafetiere</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="notes">Special Notes</label>
+                        <textarea id="notes" name="notes" placeholder="Any allergy or preference notes..."
+                                  rows="4"></textarea>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Confirmation</legend>
+                    <div class="checkbox-wrapper">
+                        <input id="terms" required type="checkbox">
+                        <label for="terms" style="margin-bottom: 0;">I agree to the terms and conditions</label>
+                    </div>
+                    <div class="checkbox-wrapper">
+                        <input id="marketing" type="checkbox">
+                        <label for="marketing" style="margin-bottom: 0;">I am happy to receive email updates</label>
+                    </div>
+                </fieldset>
+
+                <button type="submit">Start My Subscription</button>
+            </form>
+        </section>
+
+        <section class="media" id="media">
+            <h2>Media</h2>
+            <article class="media__article">
+                <figure class="media__figure">
+                    <img alt="Fresh roasted coffee beans in a wooden scoop" class="media__img"
+                         src="https://picsum.photos/400/300?random=1">
+                    <figcaption class="media__caption">Hand-roasted beans, fresh and aromatic</figcaption>
+                </figure>
+                <figure class="media__figure">
+                    <img alt="Pouring water over freshly ground coffee in a pour-over dripper" class="media__img"
+                         src="https://picsum.photos/400/300?random=2">
+                    <figcaption class="media__caption">The perfect pour-over technique</figcaption>
+                </figure>
+                <figure class="media__figure">
+                    <img alt="A steaming cup of specialty coffee with latte art" class="media__img"
+                         src="https://picsum.photos/400/300?random=3">
+                    <figcaption class="media__caption">Specialty coffee crafted with care</figcaption>
+                </figure>
+            </article>
+        </section>
+    </main>
+
+    <footer class="page-layout__footer">
+        <div class="copyright">Roast & Co. &copy; 2026</div>
+        <nav class="secondary-nav">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a class="nav__link" href="#">Privacy</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#">Terms</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#">Conditions</a>
+                </li>
+                <li class="nav__item">
+                    <a class="nav__link" href="#">Contact</a>
+                </li>
+            </ul>
+        </nav>
+        <address class="location">
+            123 Coffee Street<br>
+            London, EC1A 1BB<br>
+            United Kingdom<br>
+            <a href="mailto:hello@roastandco.com">hello@roastandco.com</a><br>
+            <a href="tel:+442071838750">+44 (0)20 7183 8750</a>
+        </address>
+    </footer>
+</div>
+
+</body>
+</html>

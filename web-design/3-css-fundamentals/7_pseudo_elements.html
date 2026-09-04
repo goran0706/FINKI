@@ -1,0 +1,55 @@
+<!--
+#### Exercise 2.4: Pseudo-Elements
+
+Use pseudo-elements to:
+
+1. Add an arrow (→) before all external links
+2. Add quotation marks around blockquote content using ::before and ::after
+3. Style placeholder text in inputs (color: gray, italic)
+4. Make the first letter of paragraphs 2em and bold
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+    <style>
+        a[target="_blank"]::before {
+            content: "→";
+            color: orange;
+        }
+
+        blockquote::before,
+        blockquote::after {
+            content: '?';
+            color: orange;
+        }
+
+        input::placeholder {
+            color: gray;
+            font-style: italic;
+        }
+
+        p::first-letter {
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<a href="https://example.com" rel="noreferrer noopener" target="_blank">External Link</a>
+
+<blockquote cite="https://example.com">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit, nam!</p>
+    <p><cite>Lorem ipsum dolor.</cite></p>
+</blockquote>
+
+<div>
+    <label for="username">Username</label>
+    <input id="username" placeholder="Enter your username" type="text">
+</div>
+
+</body>
+</html>

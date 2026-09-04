@@ -1,0 +1,123 @@
+<!--
+#### Exercise 6.3: CSS Custom Properties
+
+Create a design system using CSS variables:
+
+:root {
+    /* Colors */
+    --color-primary: ?
+    --color-secondary: ?
+    --color-text: ?
+    --color-background: ? /* Spacing */
+    --space-xs: ?
+    --space-sm: ?
+    --space-md: ?
+    --space-lg: ? /* Typography */
+    --font-size-sm: ?
+    --font-size-base: ?
+    --font-size-lg: ?
+}
+
+Use these variables to style a card component.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        :root {
+            /* Colors */
+            --color-primary: #0ea5a4;
+            --color-secondary: #2563eb;
+            --color-text: #0f172a;
+            --color-background: #000000;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 32px;
+
+            /* Typography */
+            --font-family-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+
+            /* Utility (optional) */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --shadow-sm: 0 1px 2px rgba(2, 6, 23, 0.06);
+        }
+
+        .product-card {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            padding: var(--space-md);
+            font-family: var(--font-family-sans), serif;
+            font-size: var(--font-size-base);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            width: 280px;
+        }
+
+        .product-card--featured::before {
+            content: "Featured";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .product-card__image {
+            width: 100%;
+            height: 200px;
+            color: white;
+        }
+
+        .product-card__title {
+            color: var(--color-primary);
+        }
+
+        .product-card__price {
+            color: var(--color-text);
+        }
+
+        .product-card__price--discount {
+            color: var(--color-secondary);
+        }
+
+        .product-card__button {
+            padding: var(--space-sm);
+            margin: var(--space-xs);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--font-size-base);
+            outline: none;
+            border: none;
+            box-shadow: var(--shadow-sm);
+            transition: all 200ms ease-in-out;
+        }
+
+        .product-card__button--primary {
+            background-color: var(--color-primary);
+            color: var(--color-text);
+        }
+    </style>
+</head>
+<body>
+
+<div class="product-card product-card--featured">
+    <img alt="Product Image" class="product-card__image" src="product.jpg">
+    <h3 class="product-card__title">Product Name</h3>
+    <p class="product-card__price product-card__price--discount">$29.99</p>
+    <button class="product-card__button product-card__button--primary">Add to Cart</button>
+</div>
+
+</body>
+</html>

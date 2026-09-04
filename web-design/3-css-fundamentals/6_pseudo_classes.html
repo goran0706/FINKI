@@ -1,0 +1,118 @@
+<!--
+#### Exercise 2.3: Pseudo-Classes
+
+Write CSS rules for:
+
+1. Links on hover (change color to red)
+2. Inputs when focused (add blue outline)
+3. Odd list items (background color #f0f0f0)
+4. Every third paragraph (font-weight: bold)
+5. First child of a container (margin-top: 0)
+6. All buttons except ones with class "primary"
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        a:hover {
+            color: red;
+        }
+
+        input:focus {
+            outline: 2px solid blue;
+        }
+
+        li:nth-child(odd) {
+            background-color: #f0f0f0;
+        }
+
+        /* third paragraph only */
+        /*
+        p:nth-of-type(3) {
+            font-weight: bold;
+        }
+        */
+        p:nth-of-type(3n) {
+            font-weight: bold;
+        }
+
+        /* only applies if the .container is the first child of its parent. */
+        /*
+        .container:first-child {
+            margin-top: 0;
+        }
+        */
+        .container > :first-child {
+            margin-top: 0;
+        }
+
+        /* if the entire class attribute is "primary". */
+        /*
+        button:not([type="primary"]) {
+            background-color: dodgerblue;
+            color: white;
+        }
+        */
+        button:not(.primary) {
+            background-color: dodgerblue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<a href="https://example.com" rel="noreferrer noopener" target="_blank">External Link</a>
+
+<div>
+    <label for="username">Username</label>
+    <input id="username" type="text">
+</div>
+
+<ul>
+    <li>Lorem ipsum dolor sit amet.</li>
+    <li>Aperiam ipsum minus pariatur ullam?</li>
+    <li>Dicta impedit necessitatibus optio similique!</li>
+    <li>Consequatur molestiae quas sapiente soluta!</li>
+    <li>Distinctio in non tempora velit.</li>
+    <li>Asperiores aut ducimus necessitatibus praesentium.</li>
+    <li>Alias animi enim quam quasi?</li>
+    <li>Dolore enim ipsa magni qui!</li>
+    <li>Doloremque non nulla odit quo.</li>
+    <li>Delectus facere quos velit veniam.</li>
+    <li>Cum iste pariatur possimus rerum.</li>
+    <li>Consequuntur libero sed sit vero?</li>
+    <li>Autem magnam non quod suscipit.</li>
+    <li>Dolorem facere numquam possimus repudiandae.</li>
+    <li>Laborum modi nihil ut voluptatem.</li>
+</ul>
+
+<div>
+    <p>Lorem ipsum dolor sit amet.</p>
+    <p>Commodi dolor ipsam odit quas!</p>
+    <p>Facilis id itaque quidem tempore?</p>
+    <p>Accusamus consequuntur dicta impedit natus!</p>
+    <p>Adipisci ducimus eius optio similique.</p>
+    <p>Dignissimos est quod sunt vero.</p>
+    <p>Commodi nemo non placeat porro.</p>
+    <p>Commodi itaque molestias rerum voluptatem!</p>
+    <p>Cumque cupiditate eum nisi omnis.</p>
+</div>
+
+<div class="container">
+    <h1>Lorem ipsum dolor.</h1>
+    <h1>Lorem ipsum dolor.</h1>
+    <h1>Lorem ipsum dolor.</h1>
+</div>
+
+<div>
+    <button>X</button>
+    <button>Cancel</button>
+    <button class="primary">Confirm</button>
+</div>
+</body>
+</html>

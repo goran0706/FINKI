@@ -1,0 +1,68 @@
+<!--
+#### Exercise 6.2: Multiple Class Composition
+
+Create a button system using composition:
+
+- Base `.button` class (padding, border-radius, cursor)
+- `.button--primary` (blue background)
+- `.button--secondary` (gray background)
+- `.button--large` (bigger padding, larger font)
+- `.button--small` (smaller padding, smaller font)
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+    <style>
+        .button {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            outline: none;
+            border: none;
+            box-shadow: 2px 2px 2px #888888;
+            margin: 2px 4px;
+            transition: all 200ms ease-in-out;
+        }
+
+        .button:hover {
+            box-shadow: none;
+            transform: translateY(2px);
+        }
+
+        .button--primary {
+            background-color: blue;
+            color: white;
+        }
+
+        .button--secondary {
+            background-color: gray;
+            color: white;
+        }
+
+        .button--large {
+            padding: 16px 32px;
+            font-size: 2rem;
+        }
+
+        .button--small {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<button class="button">Button</button>
+<button class="button button--primary">Primary</button>
+<button class="button button--secondary">Secondary</button>
+<button class="button button--large">Large</button>
+<button class="button button--small">Small</button>
+
+</body>
+</html>

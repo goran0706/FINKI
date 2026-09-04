@@ -1,0 +1,48 @@
+<!--
+#### Exercise 9.2: rem vs em
+
+Compare `rem` and `em`:
+
+<div class="parent" style="font-size: 20px;">
+    <div class="child" style="font-size: 1.5em;">
+        <div class="grandchild" style="font-size: 1.5em;">
+            Text
+        </div>
+    </div>
+</div>
+
+1. What's the font size of each element with `em`?
+2. What would it be if using `rem` instead?
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<!-- font-size defines the size of text. It accepts multiple unit types: -->
+<!-- em is relative to the font-size of the element’s parent. -->
+<!-- em compounds through nesting. -->
+<!-- em in non-font properties - 👉 em is relative to the element’s own font-size, not the parent. -->
+
+<!--
+    Fixed vs. Relative Units:
+
+    - px → fixed
+    - em → relative chain (can compound)
+    - rem → root-based (stable)
+-->
+<div class="parent" style="font-size: 20px;">
+    <div class="child" style="font-size: 1.5em;">
+        <div class="grandchild" style="font-size: 1.5em;">
+            Text
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

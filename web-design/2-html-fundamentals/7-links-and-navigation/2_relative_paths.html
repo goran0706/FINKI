@@ -1,0 +1,36 @@
+<!--#### Exercise 7.2: Relative Paths-->
+
+<!--Given this directory structure:-->
+
+<!--```-->
+<!--site/-->
+<!--├── index.html-->
+<!--├── about.html-->
+<!--├── css/-->
+<!--│   └── styles.css-->
+<!--├── images/-->
+<!--│   └── logo.png-->
+<!--└── pages/-->
+<!--├── contact.html-->
+<!--└── blog/-->
+<!--└── post-1.html-->
+<!--```-->
+
+<!--Write the correct relative path for:-->
+
+<!--1. From `index.html` → link to `about.html`-->
+<!--2. From `index.html` → link to `pages/contact.html`-->
+<!--3. From `pages/contact.html` → link back to `index.html`-->
+<!--4. From `pages/blog/post-1.html` → link to `about.html`-->
+<!--5. From `pages/blog/post-1.html` → image src to `images/logo.png`-->
+
+<!-- FROM HOME PAGE TO -->
+<a href="about.html">About</a>
+<a href="pages/contact.html">Contact</a>
+
+<!-- FROM CONTACT PAGE BACK TO HOME -->
+<a href="../index.html">Home</a>
+<a href="../about.html">About</a>
+
+<!-- FROM BLOG PAGE TO IMAGES -->
+<img alt="" src="../../images/logo.png">

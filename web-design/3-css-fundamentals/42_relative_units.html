@@ -1,0 +1,86 @@
+<!--
+#### Exercise 9.1: Relative Units
+
+Create a component where all spacing scales based on font size:
+
+- Use `em` for padding and margin
+- Change font size and watch spacing scale proportionally
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+    <style>
+        *, *:before, *:after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-size: 16px;
+        }
+
+        .card {
+            background-color: #e0e0e0;
+            border-radius: 1em;
+            max-width: 480px;
+            width: fit-content;
+            padding: 1em;
+            margin: 0.5em;
+            position: relative;
+        }
+
+        .card__badge {
+            position: absolute;
+            top: 0.4em;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: greenyellow;
+            border-radius: 1em;
+            padding: 0.2em 0.8em;
+            font-weight: bold;
+        }
+
+        .card__title {
+            font-size: 1.5em;
+            margin: 0.5em 0 0.5em 0;
+        }
+
+        .card__text {
+            font-size: 1em;
+            margin: 1em 0;
+        }
+
+        .card__button {
+            background-color: #e0e0e0;
+            border-radius: 1em;
+            border: none;
+            color: white;
+            cursor: pointer;
+            outline: none;
+            padding: 0.5em 2em;
+            font-weight: bold;
+        }
+
+        .card__button--primary {
+            background-color: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <span class="card__badge">Popular</span>
+    <h2 class="card__title">lorem3</h2>
+    <p class="card__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus animi, deserunt doloribus
+        ex facilis illo ipsam modi optio qui reprehenderit.
+    </p>
+    <button class="card__button card__button--primary">Select</button>
+</div>
+
+</body>
+</html>

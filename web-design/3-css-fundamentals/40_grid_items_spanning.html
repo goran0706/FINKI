@@ -1,0 +1,74 @@
+<!--
+#### Exercise 8.5: Spanning Grid Items
+
+Create a magazine-style layout:
+
+- Hero image spans 2 columns and 2 rows
+- Other items in single cells
+- Use `grid-column: span 2` and `grid-row: span 2`
+
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Basic Grid</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-rows: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+
+            height: 100vh;
+            width: 100%;
+            background-color: #e0e0e0;
+            padding: 1rem;
+            border-radius: 16px;
+        }
+
+        .grid-item {
+            border-radius: 16px;
+            background-color: dodgerblue;
+            color: white;
+
+            /* proper centering */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+        .hero {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+    </style>
+</head>
+<body>
+
+<header class="grid-container">
+    <div class="grid-item hero">
+    </div>
+    <h1 class="grid-item">Title</h1>
+    <p class="grid-item">Text</p>
+    <aside class="grid-item">Box 1</aside>
+    <aside class="grid-item">Box 2</aside>
+</header>
+
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!--
+#### Exercise 7.4: Justify Content
+
+Create examples of all `justify-content` values:
+
+- `flex-start`
+- `flex-end`
+- `center`
+- `space-between`
+- `space-around`
+- `space-evenly`
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            padding: 1rem;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background-color: #d3d3d3;
+            border-radius: 15px;
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+        }
+
+        .flex-item {
+            flex: 0 0 50px;
+            height: 50px;
+            color: white;
+            background-color: dodgerblue;
+            border-radius: 15px;
+            text-align: center;
+            align-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .justify-start {
+            justify-content: flex-start;
+        }
+
+        .justify-end {
+            justify-content: flex-end;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-around {
+            justify-content: space-around;
+        }
+
+        .justify-evenly {
+            justify-content: space-evenly;
+        }
+    </style>
+</head>
+<body>
+
+<p>Justify Start</p>
+<div class="flex-container justify-start">
+    <div class="flex-item">1</div>
+    <div class="flex-item">2</div>
+    <div class="flex-item">3</div>
+    <div class="flex-item">4</div>
+    <div class="flex-item">5</div>
+</div>
+
+<p>Justify End</p>
+<div class="flex-container justify-end">
+    <div class="flex-item">1</div>
+    <div class="flex-item">2</div>
+    <div class="flex-item">3</div>
+    <div class="flex-item">4</div>
+    <div class="flex-item">5</div>
+</div>
+
+<p>Justify Center</p>
+<div class="flex-container justify-center">
+    <div class="flex-item">1</div>
+    <div class="flex-item">2</div>
+    <div class="flex-item">3</div>
+    <div class="flex-item">4</div>
+    <div class="flex-item">5</div>
+</div>
+
+<p>Justify Space Between</p>
+<div class="flex-container justify-between">
+    <div class="flex-item">1</div>
+    <div class="flex-item">2</div>
+    <div class="flex-item">3</div>
+    <div class="flex-item">4</div>
+    <div class="flex-item">5</div>
+</div>
+
+<p>Justify Space Around</p>
+<div class="flex-container justify-around">
+    <div class="flex-item">1</div>
+    <div class="flex-item">2</div>
+    <div class="flex-item">3</div>
+    <div class="flex-item">4</div>
+    <div class="flex-item">5</div>
+</div>
+
+<p>Justify Space Evenly</p>
+<div class="flex-container justify-evenly">
+    <div class="flex-item">1</div>
+    <div class="flex-item">2</div>
+    <div class="flex-item">3</div>
+    <div class="flex-item">4</div>
+    <div class="flex-item">5</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!--#### Exercise 9.1: Basic Table-->
+
+<!--Create a table showing product inventory:-->
+
+<!--| Product   | Price | Quantity | In Stock |-->
+<!--|-----------|----|----------|----------|-->
+<!--| Widget    | $10   | 5        | Yes      |-->
+<!--| Gadget    | $15   | 3        | Yes      |-->
+<!--| Doohickey | $8    | 0        | No       |-->
+
+<!--Include:-->
+
+<!-- - Proper thead, tbody structure-->
+<!-- - Header cells with `scope` attributes-->
+<!-- - Table caption: "Product Inventory - March 2026"-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<!--
+    ✓ <caption> for table title
+    ✓ <thead> with headers
+    ✓ <tbody> for data rows
+    ✓ scope attributes for accessibility
+-->
+
+<table>
+    <!-- TABLE TITLE -->
+    <caption>Product Inventory - March 2026</caption>
+    <!-- TABLE HEADER -->
+    <thead>
+    <tr>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">In Stock</th>
+    </tr>
+    </thead>
+    <!-- TABLE BODY -->
+    <tbody>
+    <tr>
+        <td>Widget</td>
+        <td>$10</td>
+        <td>5</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Gadget</td>
+        <td>$15</td>
+        <td>3</td>
+        <td>Yes</td>
+    </tr>
+    <tr>
+        <td>Doohickey</td>
+        <td>$8</td>
+        <td>0</td>
+        <td>No</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

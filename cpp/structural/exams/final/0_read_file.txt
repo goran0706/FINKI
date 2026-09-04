@@ -1,0 +1,5 @@
+The project started back in 2019 with only 3 developers on the team.
+By the time we reached phase 2.5 in mid-2022, that number grew to 14.
+We processed roughly 1042.5 gigabytes of data every single day.
+If you look at error log 404, you will notice that 12 attempts failed out of 500 total requests.
+The final build took 84.3 seconds to compile successfully.

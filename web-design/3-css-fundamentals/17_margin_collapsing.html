@@ -1,0 +1,30 @@
+<!--
+#### Exercise 4.3: Margin Collapsing
+
+Predict the spacing in these scenarios:
+
+.box1 {
+    margin-bottom: 30px;
+}
+
+.box2 {
+    margin-top: 20px;
+}
+
+1. What's the space between box1 and box2?
+2. What if box2 is inside a parent with `overflow: hidden`?
+3. What if box2 is inside a parent with `padding-top: 1px`?
+-->
+
+Margin collapsing rules:
+
+- Margins collapse only between adjacent block-level elements with no BFC
+- Things that prevent collapsing: overflow (not visible), padding, border, display: flex/grid, floats, positioned elements
+- Larger margin wins when they do collapse
+
+BFC (Block Formatting Context)
+- BFC prevents margin collapsing
+
+1. 30px
+2. 50px
+3. 5px

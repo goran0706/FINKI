@@ -1,0 +1,94 @@
+<!--
+#### Exercise 5.1: Position Types
+
+Create examples of each position type:
+
+1. `static` (default, normal flow)
+2. `relative` (offset from normal position)
+3. `absolute` (positioned relative to nearest positioned ancestor)
+4. `fixed` (positioned relative to viewport)
+5. `sticky` (relative until threshold, then fixed)
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        body {
+            padding: 8rem 2rem;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            background-color: lightgray;
+            height: 400vh;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            border-radius: 10px;
+            width: 100px;
+            height: 100px;
+        }
+
+        .box1 {
+            position: static;
+            background-color: dodgerblue;
+            top: 0;
+            left: 0;
+        }
+
+        .box2 {
+            position: relative;
+            background-color: purple;
+            top: 0;
+            left: 100px;
+        }
+
+        .box3 {
+            position: absolute;
+            background-color: orange;
+            top: 0;
+            left: 200px;
+        }
+
+        .box4 {
+            position: fixed;
+            background-color: crimson;
+            top: 0;
+            left: 300px;
+        }
+
+        .box5 {
+            position: sticky;
+            background-color: chocolate;
+            top: 0;
+            left: 400px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="box box1">Static</div>
+    <div class="box box2">Relative</div>
+    <div class="box box3">Absolute</div>
+    <div class="box box4">Fixed</div>
+    <div class="box box5">Sticky</div>
+</div>
+
+</body>
+</html>

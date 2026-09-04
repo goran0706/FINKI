@@ -1,0 +1,69 @@
+<!--
+#### Exercise 12.3: :has() Parent Selector
+
+Use `:has()` to:
+
+1. Style cards differently if they contain an image
+2. Style forms that have invalid inputs
+3. Style a nav item if it contains an active link
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        .card:has(img) {
+            background-color: dodgerblue;
+        }
+
+        form:has(input:invalid) {
+            outline: 4px solid red;
+        }
+
+        li:has(a.active) {
+            color: cyan;
+        }
+    </style>
+</head>
+<body>
+
+<section>
+    <h2>Style Cards</h2>
+    <div class="card">
+        <img alt="Image one" class="card__image" src="image.png">
+    </div>
+
+    <div class="card">
+        No Image Card
+    </div>
+</section>
+
+
+<section>
+    <h2>Style Forms</h2>
+    <form>
+        <label for="name"></label>
+        <input id="name" placeholder="Name" type="text">
+    </form>
+
+    <form>
+        <label for="surname"></label>
+        <input id="surname" minlength="3" pattern="[a-zA-Z0-9]+" placeholder="Surname" required type="text">
+    </form>
+</section>
+
+
+<nav>
+    <ul>
+        <li>
+            <a href="https://example.com" rel="noreferrer noopener" target="_blank">External Link</a>
+        </li>
+    </ul>
+</nav>
+
+</body>
+</html>

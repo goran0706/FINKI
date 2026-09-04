@@ -1,0 +1,42 @@
+<!--#### Exercise 4.2: Multiple Navigation Elements-->
+
+<!--Create a page with two navigation elements:-->
+
+<!-- - Primary navigation (in header) with main site links-->
+<!-- - Footer navigation with legal links (Privacy, Terms, Cookies)-->
+
+<!--Make sure screen readers can distinguish between them using appropriate attributes.-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<header>
+    <!-- aria-label to help screen readers distinguish between navigation components -->
+    <nav aria-label="Primary navigation">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<footer>
+    <!-- aria-label to help screen readers distinguish between navigation components -->
+    <nav aria-label="Footer navigation">
+        <ul>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+    </nav>
+</footer>
+
+</body>
+</html>

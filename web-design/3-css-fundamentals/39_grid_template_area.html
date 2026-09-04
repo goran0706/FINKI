@@ -1,0 +1,96 @@
+<!--
+#### Exercise 8.4: Grid Template Areas
+
+Create a page layout using grid template areas:
+
+[ header header header ]
+[ sidebar content aside ]
+[ footer footer footer ]
+
+- Header: full width
+- Sidebar: 200px
+- Content: flexible
+- Aside: 150px
+- Footer: full width
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Basic Grid</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 280px 1fr 150px;
+            grid-template-rows: 48px 1fr 200px;
+            grid-template-areas:
+                "header header header"
+                "sidebar content aside"
+                "footer footer footer";
+            gap: 16px;
+
+            height: 100vh;
+            width: 100%;
+            background-color: #e0e0e0;
+            padding: 1rem;
+            border-radius: 16px;
+        }
+
+        .grid-item {
+            border-radius: 16px;
+            background-color: dodgerblue;
+            color: white;
+
+            /* proper centering */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+        .header {
+            grid-area: header;
+        }
+
+        .sidebar {
+            grid-area: sidebar;
+        }
+
+        .content {
+            grid-area: content;
+        }
+
+        .aside {
+            grid-area: aside;
+        }
+
+        .footer {
+            grid-area: footer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="grid-container">
+    <header class="grid-item header">Header</header>
+    <aside class="grid-item sidebar">Sidebar</aside>
+    <main class="grid-item content">Content</main>
+    <aside class="grid-item aside">Aside</aside>
+    <footer class="grid-item footer">Footer</footer>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!--
+#### Exercise 2.1: Basic Selectors
+
+Write CSS selectors for:
+
+1. All paragraphs
+2. All elements with class "highlight"
+3. The element with id "header"
+4. All paragraphs with class "intro"
+5. The element with id "main" that also has class "active"
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        #header {
+            background-color: darkblue;
+        }
+
+        .highlight {
+            background-color: greenyellow;
+            color: #1a1a1a;
+        }
+
+        p {
+            font-size: 1rem;
+            color: white;
+            padding: 0.5rem;
+        }
+
+        p.intro {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #main.active {
+            background-color: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+
+<header id="header">
+    <p class="intro">Lorem ipsum dolor sit amet.</p>
+    <p>Lorem ipsum dolor sit amet.</p>
+</header>
+
+<main class="active" id="main">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non, tempore!</p>
+    <p>Lorem ipsum dolor sit amet, <span>consectetur adipisicing elit.</span></p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem doloribus ducimus eaque eos, eum libero, magnam
+        minima pariatur perspiciatis quam quas quia quod repellat, suscipit voluptates? Cum ea exercitationem magni
+        nihil non? <span class="highlight">Ad consequatur consequuntur earum explicabo impedit ipsa iste libero </span>
+        necessitatibus nostrum perferendis praesentium quis reprehenderit sed similique tempora unde vel, velit
+        voluptatem, voluptates?
+    </p>
+</main>
+
+</body>
+</html>

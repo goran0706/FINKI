@@ -1,0 +1,12 @@
+.accordion .qa-item {
+  margin-bottom: 10px;
+}
+
+.accordion .question {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.accordion .answer {
+  display: none;
+}

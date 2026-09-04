@@ -1,0 +1,99 @@
+<!--
+## Exercise 2.3 — Selectors and Specificity
+
+**Topic:** Type, class, ID selectors, combinators, pseudo-classes, specificity
+
+**HTML to use:**
+
+<nav id="main-nav">
+    <ul class="nav__list">
+        <li class="nav__item"><a href="#" class="nav__link">Home</a></li>
+        <li class="nav__item"><a href="#" class="nav__link">Menu</a></li>
+        <li class="nav__item"><a href="#" class="nav__link nav__link--active">Shop</a></li>
+        <li class="nav__item"><a href="#" class="nav__link">About</a></li>
+        <li class="nav__item"><a href="#" class="nav__link">Contact</a></li>
+    </ul>
+</nav>
+
+**CSS requirements (write each rule separately to practise selector syntax):**
+
+ - `#main-nav`: `background-color: #1a1a1a`, `padding: 0 24px`
+ - `.nav__list`: `list-style: none`, `margin: 0`, `padding: 0`, `display: flex` (just this for now)
+ - `.nav__item`: `margin: 0`
+ - `.nav__link`: `display: block`, `padding: 16px 20px`, `color: #ffffff`, `text-decoration: none`, `font-size: 0.9rem`
+ - `.nav__link:hover`: `color: #c8a96e` (using pseudo-class)
+ - `.nav__link--active`: `color: #c8a96e`, `border-bottom: 2px solid #c8a96e`
+ - Using a **descendant combinator**: `#main-nav a` → `letter-spacing: 0.05em`
+
+Write a comment above each rule stating its **specificity score** in the format `/* Specificity: 0,1,0 */`
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        /* Specificity: (IDs, Classes, Elements) */
+        
+        /* Specificity: (1, 0, 0) */
+        #main-nav {
+            background-color: #1a1a1a;
+            padding: 0 24px;
+        }
+
+        /* Specificity: (0, 1, 0) */
+        .nav__list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        /* Specificity: (0, 1, 0) */
+        .nav__item {
+            margin: 0;
+        }
+
+        /* Specificity: (0, 1, 0) */
+        .nav__link {
+            display: block;
+            padding: 16px 20px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        /* Specificity: (0, 2, 0) — class + pseudo-class */
+        .nav__link:hover {
+            color: #c8a96e;
+        }
+
+        /* Specificity: (0, 2, 0) — two classes */
+        .nav__link--active {
+            color: #c8a96e;
+            border-bottom: 2px solid #c8a96e;
+        }
+
+        /* Specificity: (1, 0, 1) — ID + element */
+        #main-nav a {
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+<nav id="main-nav">
+    <ul class="nav__list">
+        <li class="nav__item"><a class="nav__link" href="#">Home</a></li>
+        <li class="nav__item"><a class="nav__link" href="#">Menu</a></li>
+        <li class="nav__item"><a class="nav__link nav__link--active" href="#">Shop</a></li>
+        <li class="nav__item"><a class="nav__link" href="#">About</a></li>
+        <li class="nav__item"><a class="nav__link" href="#">Contact</a></li>
+    </ul>
+</nav>
+
+</body>
+</html>

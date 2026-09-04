@@ -1,0 +1,66 @@
+<!--#### Exercise 12.2: Form Accessibility-->
+
+<!--Make this form accessible:-->
+
+<!--```html-->
+
+<!--<form>-->
+<!--    <input type="text" id="username">-->
+<!--    <span>Username must be 3-20 characters</span>-->
+
+<!--    <input type="password" id="password">-->
+<!--    <span>Password must be at least 8 characters</span>-->
+
+<!--    <button>Submit</button>-->
+<!--</form>-->
+<!--```-->
+
+<!--Add:-->
+
+<!-- - Proper labels-->
+<!-- - `aria-describedby` for hint text-->
+<!-- - Required attributes-->
+<!-- - Fieldset/legend if appropriate-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Form</title>
+</head>
+<body>
+<form>
+    <fieldset>
+        <legend>Login</legend>
+
+        <div>
+            <label for="username">Username</label>
+            <input
+                    aria-describedby="username-hint"
+                    id="username"
+                    maxlength="20"
+                    minlength="3"
+                    required
+                    type="text"
+            >
+            <span id="username-hint">Username must be 3-20 characters</span>
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+            <input
+                    aria-describedby="password-hint"
+                    id="password"
+                    minlength="8"
+                    required
+                    type="password"
+            >
+            <span id="password-hint">Password must be at least 8 characters</span>
+        </div>
+
+        <button type="submit">Submit</button>
+    </fieldset>
+</form>
+</body>
+</html>

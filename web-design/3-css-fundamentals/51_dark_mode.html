@@ -1,0 +1,44 @@
+<!--
+
+#### Exercise 10.5: Dark Mode
+
+Implement dark mode using:
+
+@media (prefers-color-scheme: dark) {
+    /* Dark theme styles */
+}
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        :root {
+            --bg-color: #fff;
+            --text-color: #1a1a1a;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a1a;
+                --text-color: #fff;
+            }
+        }
+
+        .theme {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body class="theme">
+
+<header>HEADER</header>
+<main>Main Content</main>
+<footer>Footer</footer>
+
+</body>
+</html>

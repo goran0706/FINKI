@@ -1,0 +1,47 @@
+<!--
+#### Exercise 3.2: Cascade Conflicts
+
+Given this CSS, what color will the paragraph be?
+
+p {
+    color: blue;
+}
+
+.text {
+    color: red;
+}
+
+#intro {
+    color: green;
+}
+
+<p class="text" id="intro">What color am I?</p>
+
+-->
+
+<!-- GREEN because Cascade -->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+    <style>
+        p {
+            color: blue;
+        }
+
+        .text {
+            color: red;
+        }
+
+        #intro {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<p class="text" id="intro">What color am I?</p>
+</body>
+</html>

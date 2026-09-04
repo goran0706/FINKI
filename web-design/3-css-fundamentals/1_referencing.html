@@ -1,0 +1,40 @@
+<!--
+#### Exercise 1.1: CSS Methods
+
+Create three versions of a simple page that displays "Hello World" in blue:
+
+1. Using inline CSS
+2. Using internal CSS (in `<style>` tag)
+3. Using external CSS (create separate styles.css file)
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <!-- Using external CSS -->
+    <link href="styles.css" rel="stylesheet" type="text/css">
+
+    <!-- Using internal CSS -->
+    <style>
+        .internalCss {
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Using external CSS -->
+<h1>Hello World</h1>
+
+<!-- Using internal CSS -->
+<h1 class="internalCss">Hello World</h1>
+
+<!-- Using inline CSS -->
+<h1 style="color:mediumvioletred">Hello World</h1>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!--
+    #### Exercise 9.2: Spanning Cells
+
+    Create a weekly class schedule table:
+
+    ```
+               Monday    Tuesday   Wednesday  Thursday  Friday
+    9-10am     Math      Math      Math       Math      Math
+    10-11am    Chemistry           Chemistry            Chemistry
+    11-12pm    Physics   Physics   Physics    Physics   Physics
+    12-1pm                       Lunch Break
+    1-2pm      English   English   English    English   English
+    ```
+
+    Requirements:
+
+    - Chemistry spans 2 columns on Tuesday and Thursday
+    - Lunch Break spans all 5 columns
+    - Use appropriate `colspan` and `rowspan`
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>9-10am</td>
+        <td>Math</td>
+        <td>Math</td>
+        <td>Math</td>
+        <td>Math</td>
+        <td>Math</td>
+    </tr>
+    <tr>
+        <td>10-11am</td>
+        <td colspan="2">Chemistry</td>
+        <td colspan="2">Chemistry</td>
+        <td>Chemistry</td>
+    </tr>
+    <tr>
+        <td>11-12pm</td>
+        <td>Physics</td>
+        <td>Physics</td>
+        <td>Physics</td>
+        <td>Physics</td>
+        <td>Physics</td>
+    </tr>
+    <tr>
+        <td>12-1pm</td>
+        <td colspan="5">Lunch Break</td>
+    </tr>
+    <tr>
+        <td>1-2pm</td>
+        <td>English</td>
+        <td>English</td>
+        <td>English</td>
+        <td>English</td>
+        <td>English</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

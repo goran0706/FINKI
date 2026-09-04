@@ -1,0 +1,32 @@
+<!--
+#### Exercise 6.1: BEM Naming
+
+Convert this markup to use BEM naming:
+
+<div class="product-card">
+    <img src="product.jpg">
+    <h3>Product Name</h3>
+    <p class="price">$29.99</p>
+    <button class="primary">Add to Cart</button>
+</div>
+
+Apply BEM for:
+
+- Block: product-card
+- Elements: image, title, price, button
+- Modifiers: featured card, discounted price
+-->
+
+<div class="product-card product-card--featured">
+    <img class="product-card__image" src="product.jpg" alt="Product Image">
+    <h3 class="product-card__title">Product Name</h3>
+    <p class="product-card__price product-card__price--discount">$29.99</p>
+    <button class="product-card__button product-card__button--primary">Add to Cart</button>
+</div>
+
+<div class="product-card product-card--featured">
+    <img class="product__image" src="product.jpg" alt="Product Image">
+    <h3 class="product__title">Product Name</h3>
+    <p class="product__price product__price--discount">$29.99</p>
+    <button class="product__button product__button--primary">Add to Cart</button>
+</div>

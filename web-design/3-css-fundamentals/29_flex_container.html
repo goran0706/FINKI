@@ -1,0 +1,50 @@
+<!--
+#### Exercise 7.1: Basic Flex Container
+
+Create a flex container with 3 items:
+
+- Items should sit side by side
+- Equal spacing between items
+- Items centered vertically
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+    <style>
+        .flex-container {
+            background-color: #007bff;
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+
+            /*width: 100;*/
+            height: 200px;
+        }
+
+        .box {
+            background-color: crimson;
+            border-radius: 0.5rem;
+            color: white;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="flex-container">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <div class="box">4</div>
+    <div class="box">5</div>
+</div>
+
+</body>
+</html>

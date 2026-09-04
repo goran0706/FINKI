@@ -1,0 +1,28 @@
+<!--#### Exercise 12.1: ARIA Labels-->
+
+<!--Add appropriate ARIA attributes to this navigation:-->
+
+<!--```html-->
+<!--<button>☰</button> &lt;!&ndash; Mobile menu toggle &ndash;&gt;-->
+<!--<div style="display: none;">-->
+<!--    <ul>-->
+<!--        <li><a href="/">Home</a></li>-->
+<!--        <li><a href="/about">About</a></li>-->
+<!--    </ul>-->
+<!--</div>-->
+<!--```-->
+
+<!--Requirements:-->
+
+<!-- - Button needs aria-label-->
+<!-- - Button needs aria-expanded attribute-->
+<!-- - Navigation needs appropriate role (if not using <nav>)-->
+
+<button aria-expanded="false" aria-label="Toggle mobile menu">☰</button>
+
+<div aria-label="Mobile navigation" role="navigation">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+    </ul>
+</div>

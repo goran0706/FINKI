@@ -1,0 +1,106 @@
+<!--
+### Exercise 1.8 — Forms
+
+**Topic:** `<form>`, `<input>` types, `<label>`, `<fieldset>`, `<legend>`, `<select>`, `<textarea>`, validation attributes
+
+**What to build:** A coffee subscription sign-up form.
+
+**Exact requirements:**
+ - `<form>` with `action="#"` and `method="post"`
+ - `<h2>`: `Start Your Subscription`
+
+**Fieldset 1** — `<legend>`: `Your Details`
+ - Name field: `<input type="text">`, `id="name"`, `required`, `placeholder="Jane Smith"`
+ - Email field: `<input type="email">`, `id="email"`, `required`, `placeholder="jane@example.com"`
+ - Phone field: `<input type="tel">`, `id="phone"`, `placeholder="+44 7700 000000"` (not required)
+
+**Fieldset 2** — `<legend>`: `Your Subscription`
+ - A `<select>` with `id="plan"` and `required`, containing four `<option>` elements:
+    - First option: `value=""`, text `Select a plan...` (disabled, selected by default)
+    - `value="starter"` → `Starter — 250g every 2 weeks`
+    - `value="regular"` → `Regular — 500g weekly`
+    - `value="pro"` → `Pro — 1kg weekly`
+ - A `<select>` for grind with `id="grind"`, options: `Whole Bean`, `Filter`, `Espresso`, `Cafetiere`
+ - A `<textarea>` with `id="notes"`, `rows="4"`, `placeholder="Any allergy or preference notes..."`
+
+**Fieldset 3** — `<legend>`: `Confirmation`
+ - A checkbox: `id="terms"`, `required`, label text: `I agree to the terms and conditions`
+ - A checkbox: `id="marketing"`, label text: `I am happy to receive email updates`
+
+ - Submit button: `<button type="submit">` with text `Start My Subscription`
+ - Every `<input>`, `<select>`, and `<textarea>` must have a corresponding `<label>` using `for` + `id`
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<form action="#" method="post">
+    <h2>Start Your Subscription</h2>
+
+    <fieldset>
+        <legend>Your Details</legend>
+        <div>
+            <label for="name">Name</label>
+            <input id="name" placeholder="Jane Smith" required type="text">
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input id="email" placeholder="jane@example.com" required type="email">
+
+        </div>
+        <div>
+            <label for="phone">Phone</label>
+            <input id="phone" placeholder="+44 7700 000000" type="tel">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Your Subscription</legend>
+        <div>
+            <label for="plan">Plan</label>
+            <select id="plan" required>
+                <option disabled value="">Select a plan...</option>
+                <option value="starter">Starter — 250g every 2 weeks</option>
+                <option value="regular">Regular — 500g weekly</option>
+                <option value="pro">Pro — 1kg weekly</option>
+            </select>
+        </div>
+        <div>
+            <label for="grind">Grind</label>
+            <select id="grind" required>
+                <option disabled value="">Select a grind...</option>
+                <option value="1">Whole Bean</option>
+                <option value="2">Filter</option>
+                <option value="3">Espresso</option>
+                <option value="4">Cafetiere</option>
+            </select>
+        </div>
+        <div>
+            <label for="notes">Grind</label>
+            <textarea id="notes" name="notes" placeholder="Any allergy or preference notes..." rows="4"></textarea>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Confirmation</legend>
+        <div>
+            <label for="terms">I agree to the terms and conditions</label>
+            <input id="terms" required type="checkbox">
+        </div>
+        <div>
+            <label for="marketing">I am happy to receive email updates</label>
+            <input id="marketing" type="checkbox">
+        </div>
+    </fieldset>
+
+    <button type="submit">Start My Subscription</button>
+</form>
+
+</body>
+</html>

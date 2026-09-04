@@ -1,0 +1,130 @@
+<!--
+
+    Working with text
+
+    Text Markup:
+
+    - Structural markup
+    - Semantic markup
+
+    HTML contains several elements for defining text with a special meaning.
+
+    Formatting elements were designed to display special types of text:
+    <b> - Bold text
+    <i> - Italic text
+    <s> - Strikethrough text
+    <strong> - Important text
+    <em> - Emphasized text
+    <mark> - Marked text
+    <small> - Smaller text
+    <del> - Deleted text
+    <ins> - Inserted text
+    <sub> - Subscript text
+    <sup> - Superscript text
+
+    The HTML <b> element defines bold text, without any extra importance.
+
+    The HTML <strong> element defines text with strong importance. The content inside is typically displayed in bold.
+
+    The HTML <i> element defines a part of text in an alternate voice or mood. The content inside is typically displayed in italic.
+
+    The HTML <em> element defines emphasized text. The content inside is typically displayed in italic.
+
+    The HTML <small> element defines smaller text.
+
+    The HTML <mark> element defines text that should be marked or highlighted.
+
+    The HTML <del> element defines text that has been deleted from a document.
+        Browsers will usually strike a line through deleted text
+
+    The HTML <ins> element defines a text that has been inserted into a document.
+        Browsers will usually underline inserted text.
+
+    The HTML <sub> element defines subscript text.
+        Subscript text appears half a character below the normal line, and is sometimes rendered in a smaller font.
+        Subscript text can be used for chemical formulas, like H2O
+
+    The HTML <sup> element defines superscript text.
+        Superscript text appears half a character above the normal line, and is sometimes rendered in a smaller font.
+        Superscript text can be used for footnotes, like WWW[1]
+
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+<p><b>This text is bold</b></p>
+<p><i>This text is italic</i></p>
+<p>This is<sub> subscript</sub> and <sup>superscript</sup></p>
+
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad alias animi architecto consequatur debitis dolorem ea
+    eaque est et fuga, hic iste, iusto labore minus modi non obcaecati officiis optio quaerat quam repellendus sit
+    tempora vitae. A accusamus accusantium, amet, cupiditate esse impedit, ipsa maxime numquam optio perferendis quia
+    veniam!
+</p>
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aperiam debitis distinctio dolorem expedita harum
+    illo inventore, iste iure minus, nam nobis, nulla optio sunt voluptatibus. Aspernatur deserunt dolorum ipsam iure
+    non odit quas quasi repudiandae! Ab cum deserunt ducimus id ipsa libero nemo quisquam quo quod saepe, sequi ut,
+    veritatis vero! Aperiam architecto aspernatur dolorem dolorum ex explicabo incidunt ipsam iste iusto laborum magnam
+    maxime, molestiae nemo, neque placeat quas quisquam repellat repellendus reprehenderit repudiandae sapiente
+    similique totam ullam.
+</p>
+<p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus assumenda blanditiis deleniti dignissimos
+    dolores eaque enim harum laboriosam minus <strong>mollitia</strong> nam nemo odit pariatur <em>perferendis</em>
+    quasi quia quisquam quos,
+    ratione reiciendis repudiandae sunt temporibus totam, ullam velit. A accusamus at debitis, delectus dignissimos
+    ducimus,<b>eius ex facere</b> iste<i>molestiae nulla</i> numquam praesentium, rem sit tenetur. Accusantium animi
+    architecto
+    aspernatur atque autem blanditiis delectus deleniti dignissimos doloremque expedita, facilis fugit illo ipsam labore
+    modi natus porro quae quis, quod rem temporibus ut veritatis vitae.
+    <mark>Aliquam beatae consequuntur labore quas.</mark>
+    Distinctio fuga maxime perspiciatis? Accusamus autem doloremque eius eos error facilis id illum inventore ipsam iure
+    laborum laudantium maxime necessitatibus nobis porro possimus praesentium provident quaerat qui ratione reiciendis
+    saepe sapiente sit, tempore vel veniam veritatis voluptatibus. Accusamus adipisci, aliquid, asperiores autem
+    consectetur consequuntur <sub>cum</sub> <sup>dolores</sup> error fugiat ipsum labore libero magnam nam nemo nulla
+    odit provident quam
+    quidem quisquam repudiandae sint tempora temporibus velit? Dignissimos in, suscipit? <abbr
+        title="HyperText Markup Language">HTML</abbr>Doloremque explicabo saepe
+    sequi veniam! <cite>Alias aliquid consequuntur dolore,</cite> exercitationem explicabo facilis hic id, illo
+    inventore ipsum iste
+    laudantium magnam mollitia omnis optio quas qui quis quo quod rerum, sapiente unde veritatis vitae. Aliquid dolores
+    dolorum fugiat, iure pariatur saepe similique voluptate voluptates?
+    <dfn title="HyperText Markup Language is not a programming language">HTML</dfn>
+</p>
+
+<blockquote>
+    <q>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias architecto aut dignissimos inventore nisi, odit
+        provident quisquam quos rem veritatis. At commodi, culpa dolores enim minus nihil odio omnis, provident qui sit
+        totam velit voluptates? Ad architecto aspernatur debitis dicta esse ex laboriosam laudantium necessitatibus
+        obcaecati optio, qui quis quod saepe sequi sit unde veritatis. Corporis dolorem harum unde voluptas.
+    </q>
+</blockquote>
+
+<hr>
+<p><strong>strong: semantic meaning</strong></p>
+<p><b>just bolded: no semantic meaning</b></p>
+<hr>
+<p><em>emphasized: semantic meaning</em></p>
+<p><i>just italic: no semantic meaning</i></p>
+<hr>
+<blockquote cite="https://wikipedia.org">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, tenetur.</p>
+    <p><cite>~Wikipedia</cite></p>
+</blockquote>
+<hr>
+<pre><code>const name = "John Doe";</code></pre>
+<hr>
+<p>H<sub>2</sub>O + H<sub>2</sub>O</p>
+<p><sup>Superscript</sup></p>
+<p><sub>Subscript</sub></p>
+
+</body>
+</html>

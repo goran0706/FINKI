@@ -1,0 +1,62 @@
+<!--
+#### Exercise 9.3: Viewport Units
+
+Create:
+
+1. Full-height hero section using `100vh`
+2. Full-width section using `100vw`
+3. Text that scales with viewport: `font-size: 5vw`
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: #e0e0e0;
+            font-size: 16px;
+        }
+
+        .hero {
+            height: 100vh;
+            background-color: dodgerblue;
+            color: white;
+            text-align: center;
+            align-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        section {
+            width: 100vw;
+            background-color: #0ea5a4;
+        }
+
+        .text {
+            font-size: 5vw
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">Header</header>
+
+<section>
+    <h1>Section</h1>
+    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur eveniet recusandae tempora.
+        Accusantium consequatur cumque cupiditate dolorem dolorum eos incidunt maxime pariatur possimus quas quibusdam
+        ratione, repellat repudiandae tempora voluptatem!
+    </p>
+</section>
+
+</body>
+</html>

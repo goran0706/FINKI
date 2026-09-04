@@ -1,0 +1,38 @@
+<!--#### Exercise 8.4: Audio Element-->
+
+<!--Create an audio player with:-->
+
+<!-- - Multiple source formats: song.mp3, song.ogg-->
+<!-- - Visible controls-->
+<!-- - Fallback text: "Your browser doesn't support audio playback."-->
+
+<!--#### Exercise 8.4: Audio Element - Complete with All Formats & Attributes-->
+
+<audio
+        autoplay
+        controls
+        crossorigin="anonymous"
+        loop
+        muted
+        preload="metadata"
+>
+    <!-- MP3: Widest support -->
+    <source src="audio/song.mp3" type="audio/mpeg">
+
+    <!-- OGG: Fallback for Firefox, Opera -->
+    <source src="audio/song.ogg" type="audio/ogg">
+
+    <!-- WAV: Uncompressed, high quality -->
+    <source src="audio/song.wav" type="audio/wav">
+
+    <!-- WebM: Modern, efficient -->
+    <source src="audio/song.webm" type="audio/webm">
+
+    <!-- FLAC: Lossless compression -->
+    <source src="audio/song.flac" type="audio/flac">
+
+    <!-- AAC: Apple/Safari preferred -->
+    <source src="audio/song.m4a" type="audio/mp4">
+
+    Your browser doesn't support audio playback.
+</audio>

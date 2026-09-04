@@ -1,0 +1,45 @@
+<!--
+### Exercise 1.3 — Semantic Inline Text Markup
+
+**Topic:** `<strong>`, `<em>`, `<abbr>`, `<mark>`, `<code>`, `<time>`
+**What to build:** A single article paragraph using all six inline elements.
+
+**Exact requirements:**
+Use this exact paragraph content, wrapping the specified words with the correct element:
+
+"The **World Barista Championship** *(wrap in `<strong>`)* — commonly known as the *WBC* *(wrap
+in `<abbr title="World Barista Championship">`)* — takes place every year. The *most important* *(wrap in `<em>`)* skill
+tested is extraction time, where the target is *25 seconds* *(wrap in `<mark>`)* per shot. Competitors submit their
+ scores using the format *`score: 98.4`* *(wrap in `<code>`)* before the deadline of *<time datetime="2024-06-15">15 June
+2024</time>*."
+
+- Place this inside an `<article>` element
+- Add an `<h2>` above it: `Competition Standards`
+- No CSS
+
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<article>
+    <h2>Competition Standards</h2>
+    <p>
+        The <strong>World Barista Championship</strong> — commonly known as the
+        <abbr title="World Barista Championship">WBC</abbr> — takes place every year. The <em>most important</em>
+        skill tested is extraction time, where the target is
+        <mark>25 seconds</mark>
+        per shot.
+        Competitors submit their scores using the format <code>score: 98.4</code> before the deadline of
+        <time datetime="2024-06-15">15 June 2024</time>
+        .
+    </p>
+</article>
+
+</body>
+</html>

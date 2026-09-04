@@ -1,0 +1,38 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p class="text"></p>
+      <button class="toggle">Render text</button>
+    </div>
+    <script>
+      const button = document.querySelector('button');
+      const paragraph = document.querySelector('.text');
+
+      let isExpanded = false;
+
+      function renderExpandableText(text, maxChars) {
+        if (text.length > maxChars) {
+          text = isExpanded ? text : text.substring(0, maxChars) + '...';
+          paragraph.textContent = text;
+        }
+        paragraph.textContent = text;
+      }
+
+      button.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+        button.textContent = isExpanded ? 'less' : 'more';
+        renderExpandableText(
+          `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus perferendis, tempore placeat
+        laboriosam quam temporibus eligendi explicabo quo recusandae ab, inventore, laborum vitae fuga at
+        architecto cum maiores aspernatur? Vero?`,
+          50
+        );
+      });
+    </script>
+  </body>
+</html>

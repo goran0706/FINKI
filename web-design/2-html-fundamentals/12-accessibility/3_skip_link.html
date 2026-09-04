@@ -1,0 +1,57 @@
+<!--#### Exercise 12.3: Skip Link-->
+
+<!--Add a skip link to this page structure:-->
+
+<!--```html-->
+
+<!--<body>-->
+<!--<header>-->
+<!--    <nav>-->
+<!--        &lt;!&ndash; 20+ navigation links &ndash;&gt;-->
+<!--    </nav>-->
+<!--</header>-->
+<!--<main>-->
+<!--    <h1>Article Title</h1>-->
+<!--    &lt;!&ndash; Main content &ndash;&gt;-->
+<!--</main>-->
+<!--</body>-->
+<!--```-->
+
+<!--The skip link should:-->
+
+<!-- - Be the first focusable element-->
+<!-- - Link to main content-->
+<!-- - Be visually hidden until focused-->
+<!-- - Have text "Skip to main content"-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Page with Skip Link</title>
+</head>
+<body>
+
+<!-- ========== Skip Link ========== -->
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header>
+    <nav>
+        <!-- 20+ navigation links -->
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main id="main">
+    <h1>Article Title</h1>
+    <!-- Main content -->
+</main>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!--
+
+#### Exercise 7.7: Flex Gap
+
+Create a navigation menu:
+
+- Items in a row
+- 16px gap between items
+- No margin workarounds needed
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .site-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            background-color: dodgerblue;
+            padding: 0 16px;
+            height: 48px;
+            width: 100%;
+        }
+
+        .site-nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1rem;
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="logo">Logo</div>
+    <nav>
+        <ul class="site-nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+</body>
+</html>

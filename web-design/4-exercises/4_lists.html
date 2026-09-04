@@ -1,0 +1,91 @@
+<!--
+### Exercise 1.4 — Lists
+
+**Topic:** `<ul>`, `<ol>`, `<dl>`, nested lists
+
+**What to build:** A coffee shop menu and brewing guide using three list types.
+
+**Exact requirements:**
+
+**Part A — Unordered list:**
+
+- `<h2>`: `Our Menu`
+- `<ul>` with exactly five `<li>` items:
+- `Espresso`
+- `Americano`
+- `Flat White`
+- `Pour Over`
+- `Cold Brew`
+
+**Part B — Ordered list with nesting:**
+
+- `<h2>`: `How to Brew a Pour Over`
+- `<ol>` with these steps:
+1. `Boil water to 93°C`
+2. `Grind 20g of coffee to a medium-coarse setting`
+3. `Place filter in dripper and rinse with hot water`
+4. `Add coffee grounds and start timer`
+5. `Pour in three stages:`
+- `0:00 — 50ml bloom pour`
+- `0:45 — 150ml second pour`
+- `1:30 — 150ml final pour`
+6. `Total brew time should be 3 minutes`
+
+**Part C — Description list:**
+
+- `<h2>`: `Glossary`
+- `<dl>` with these three term/definition pairs:
+- `Extraction` / `The process of dissolving soluble compounds from coffee grounds into water.`
+- `Bloom` / `The initial small pour of water that releases CO2 from fresh coffee grounds.`
+- `TDS` / `Total Dissolved Solids — a measure of the strength and concentration of brewed coffee.`
+
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<h2>Our Menu</h2>
+<ul>
+    <li>Espresso</li>
+    <li>Americano</li>
+    <li>Flat White</li>
+    <li>Pour Over</li>
+    <li>Cold Brew</li>
+</ul>
+
+
+<h2>How to Brew a Pour Over</h2>
+<ol>
+    <li>Boil water to 93°C</li>
+    <li>Grind 20g of coffee to a medium-coarse setting</li>
+    <li>Place filter in dripper and rinse with hot water</li>
+    <li>Add coffee grounds and start timer</li>
+    <li>Pour in three stages:
+        <ul>
+            <li>0:00 — 50ml bloom pour</li>
+            <li>0:45 — 150ml second pour</li>
+            <li>1:30 — 150ml final pour</li>
+        </ul>
+    </li>
+    <li>Total brew time should be 3 minutes</li>
+</ol>
+
+<h2>Glossary</h2>
+<dl>
+    <dt>Extraction</dt>
+    <dd>The process of dissolving soluble compounds from coffee grounds into water.</dd>
+
+    <dt>Bloom</dt>
+    <dd>The initial small pour of water that releases CO2 from fresh coffee grounds.</dd>
+
+    <dt>TDS</dt>
+    <dd>Total Dissolved Solids — a measure of the strength and concentration of brewed coffee.</dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!--#### Exercise 8.1: Basic Image-->
+
+<!--Add an image with these requirements:-->
+
+<!-- - Source: images/product.jpg-->
+<!-- - Alt text: "Wireless headphones with noise cancellation"-->
+<!-- - Dimensions: 600px wide, 400px tall-->
+<!-- - Lazy loading enabled-->
+
+<img
+        src="images/product.jpg"
+        alt="Wireless headphones with noise cancellation"
+        width="600px"
+        height="400px"
+        loading="lazy"
+>
+
+<!-- Loading eager - start loading immediately (default) -->
+<img alt="Hero banner" loading="eager" src="hero.jpg">
+
+<!-- Loading lazy - delay loading until near viewport -->
+<img alt="Below fold content" loading="lazy" src="below-fold.jpg">

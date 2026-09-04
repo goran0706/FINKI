@@ -1,0 +1,145 @@
+<!--
+
+### Exercise 3.2 — Flexbox: Card Row
+
+**Topic:** `flex-wrap`, `flex-basis`, `flex-grow`, `gap`
+
+**HTML to use:**
+
+<section class="product-grid">
+    <h2 class="product-grid__title">This Month's Roasts</h2>
+    <div class="product-grid__row">
+        <div class="product-card">
+            <h3 class="product-card__name">Ethiopia Yirgacheffe</h3>
+            <p class="product-card__notes">Blueberry · Jasmine · Dark Chocolate</p>
+            <p class="product-card__price">£12.50</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Colombia Huila</h3>
+            <p class="product-card__notes">Caramel · Red Apple · Brown Sugar</p>
+            <p class="product-card__price">£13.00</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Guatemala Antigua</h3>
+            <p class="product-card__notes">Cocoa · Almond · Toffee</p>
+            <p class="product-card__price">£11.50</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Kenya AA</h3>
+            <p class="product-card__notes">Blackcurrant · Tomato · Citrus</p>
+            <p class="product-card__price">£14.00</p>
+        </div>
+    </div>
+</section>
+
+**CSS requirements:**
+
+- `.product-grid`: `padding: 48px`
+- `.product-grid__title`: `font-size: 1.75rem`, `margin-bottom: 32px`
+- `.product-grid__row`: `display: flex`, `flex-wrap: wrap`, `gap: 24px`
+- `.product-card`: `flex: 1 1 200px` (grow, shrink, basis) `padding: 24px` `border: 1px solid #e0e0e0`
+- `.product-card__name`: `font-size: 1rem`, `margin: 0 0 8px`
+- `.product-card__notes`: `font-size: 0.8rem`, `color: #888`, `margin: 0 0 16px`
+- `.product-card__price`: `font-size: 1.125rem`, `font-weight: bold`, `margin: 0`
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Flexbox Card Row</title>
+
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* Section container */
+        .product-grid {
+            padding: 48px;
+        }
+
+        /* Section title */
+        .product-grid__title {
+            font-size: 1.75rem;
+            margin-bottom: 32px;
+        }
+
+        /* Flex row container */
+        .product-grid__row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        /* Card item */
+        .product-card {
+            /*flex: 1 1 200px;*/
+            /*
+              flex-grow: 1       — Card expands to fill available space
+              flex-shrink: 1     — Card shrinks if needed (default)
+              flex-basis: 200px  — Minimum width before growing/shrinking
+            */
+            flex: 1 1 200px;
+            padding: 24px;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Card name */
+        .product-card__name {
+            font-size: 1rem;
+            margin: 0 0 8px;
+        }
+
+        /* Card tasting notes */
+        .product-card__notes {
+            font-size: 0.8rem;
+            color: #888;
+            margin: 0 0 16px;
+        }
+
+        /* Card price */
+        .product-card__price {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<section class="product-grid">
+    <h2 class="product-grid__title">This Month's Roasts</h2>
+    <div class="product-grid__row">
+        <div class="product-card">
+            <h3 class="product-card__name">Ethiopia Yirgacheffe</h3>
+            <p class="product-card__notes">Blueberry · Jasmine · Dark Chocolate</p>
+            <p class="product-card__price">£12.50</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Colombia Huila</h3>
+            <p class="product-card__notes">Caramel · Red Apple · Brown Sugar</p>
+            <p class="product-card__price">£13.00</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Guatemala Antigua</h3>
+            <p class="product-card__notes">Cocoa · Almond · Toffee</p>
+            <p class="product-card__price">£11.50</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Kenya AA</h3>
+            <p class="product-card__notes">Blackcurrant · Tomato · Citrus</p>
+            <p class="product-card__price">£14.00</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

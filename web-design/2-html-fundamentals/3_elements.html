@@ -1,0 +1,65 @@
+<!--
+    An HTML element is a structural component that defines a piece of content and its purpose.
+
+    Elements consist of tags and content.
+
+    Elements can be categorized in two groups:
+        - container elements
+        - self-closing (void) elements
+
+    Container elements consist of opening tag + content + closing tag.
+    Self-closing elements do not have content, and closing tag. Also, the slash can be omitted.
+
+    Another categorization can be done based on their semantic meaning:
+        - Non-semantic structural elements - pure structural elements for organizing the document structure
+        - Semantic structural elements - structural elements that have semantic meaning and purpose used for organizing structure
+        - Semantic content elements - elements used to wrap content and provide semantic meaning and purpose.
+
+    div and span are generic elements.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<!-- GENERIC CONTAINER ELEMENTS -->
+
+<!-- div is a generic block container providing no semantic meaning besides grouping and organizing content -->
+<div>Block element</div>
+
+<!-- span is an inline container element providing no semantic meaning besides grouping and organizing content -->
+<span>Inline element</span>
+
+<!-- Self Closing (void) or Empty elements -->
+<br>
+<hr>
+<img alt="alternative text for image" src="image.png">
+
+<!-- SEMANTIC STRUCTURAL ELEMENTS -->
+<header>
+    <nav>
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    Main Content
+    <!-- SEMANTIC MEANING -->
+    <p>Lorem ipsum dolor sit amet, <strong>consectetur</strong> adipisicing <b>elit</b>. Adipisci <em>consequatur</em>
+        deserunt <i>excepturi</i> hic ipsam laborum minima, mollitia nisi odio omnis, pariatur, recusandae velit
+        veritatis! Ad distinctio expedita mollitia obcaecati sit?</p>
+</main>
+
+<footer>@copyright 2026</footer>
+
+</body>
+</html>

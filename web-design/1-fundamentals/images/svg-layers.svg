@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 600 430"
+     style="background: #ffffff; border: 1px solid #ddd; border-radius: 8px;">
+    <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#E3F2FD" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#BBDEFB" stop-opacity="1"/>
+        </linearGradient>
+        <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#FFF3E0" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#FFE0B2" stop-opacity="1"/>
+        </linearGradient>
+        <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#E8F5E9" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#C8E6C9" stop-opacity="1"/>
+        </linearGradient>
+    </defs>
+
+    <text x="300" y="30" font-size="18" font-weight="bold" font-family="sans-serif" fill="#2c2c2a" text-anchor="middle">
+        Three-Layer Web Architecture
+    </text>
+
+    <!-- Layer 1: HTML -->
+    <rect x="50" y="60" width="500" height="110" rx="6" fill="url(#grad3)" stroke="#00796B" stroke-width="2"/>
+    <text x="300" y="95" font-size="16" font-weight="bold" font-family="sans-serif" fill="#004D40"
+          text-anchor="middle">STRUCTURE LAYER (HTML)
+    </text>
+    <text x="300" y="125" font-size="12" font-family="sans-serif" fill="#00695C" text-anchor="middle">Content, Semantic
+        Meaning, Document Structure
+    </text>
+
+    <text x="70" y="155" font-size="11" font-family="sans-serif" fill="#00695C">• Defines what content is • Semantic
+        elements • Accessibility foundation
+    </text>
+
+    <!-- Layer 2: CSS -->
+    <rect x="50" y="180" width="500" height="110" rx="6" fill="url(#grad2)" stroke="#F57C00" stroke-width="2"/>
+    <text x="300" y="215" font-size="16" font-weight="bold" font-family="sans-serif" fill="#E65100"
+          text-anchor="middle">PRESENTATION LAYER (CSS)
+    </text>
+    <text x="300" y="245" font-size="12" font-family="sans-serif" fill="#EF6C00" text-anchor="middle">Visual Styling,
+        Layout, Responsive Design, Animations
+    </text>
+
+    <text x="70" y="275" font-size="11" font-family="sans-serif" fill="#EF6C00">• Controls appearance • Layout (Flexbox,
+        Grid) • Colors, fonts, spacing
+    </text>
+
+    <!-- Layer 3: JavaScript -->
+    <rect x="50" y="300" width="500" height="110" rx="6" fill="url(#grad1)" stroke="#1976D2" stroke-width="2"/>
+    <text x="300" y="335" font-size="16" font-weight="bold" font-family="sans-serif" fill="#0D47A1"
+          text-anchor="middle">
+        BEHAVIOR LAYER (JavaScript)
+    </text>
+    <text x="300" y="365" font-size="12" font-family="sans-serif" fill="#1565C0" text-anchor="middle">Interactivity,
+        Events, Dynamic Updates, DOM Manipulation
+    </text>
+
+    <text x="70" y="395" font-size="11" font-family="sans-serif" fill="#1565C0">• Responds to user actions • Fetches
+        data asynchronously • Manages application state
+    </text>
+</svg>

@@ -1,0 +1,149 @@
+<!--
+### Exercise 3.3 — CSS Grid: Page Layout
+
+**Topic:** `grid-template-columns`, `grid-template-areas`, `grid-column`, named areas
+
+**What to build:** A full page layout using named grid areas.
+
+**HTML to use:**
+
+<div class="page-layout">
+    <header class="page-layout__header">Header</header>
+    <nav class="page-layout__sidebar">Sidebar Nav</nav>
+    <main class="page-layout__main">Main Content</main>
+    <aside class="page-layout__aside">Related</aside>
+    <footer class="page-layout__footer">Footer</footer>
+</div>
+
+**CSS requirements:**
+
+ - `.page-layout`:
+     - `display: grid`
+     - `grid-template-columns: 220px 1fr 200px`
+     - `grid-template-rows: 64px 1fr 60px`
+     - `grid-template-areas`:
+        ```
+        "header  header  header"
+        "sidebar main    aside"
+        "footer  footer  footer"
+        ```
+     - `min-height: 100vh`
+     - `gap: 0`
+ - Assign each child to its area using `grid-area`
+ - Give each region a distinct background:
+ - header: `#1a1a1a` / text `#fff`
+ - sidebar: `#f5f5f5`
+ - main: `#ffffff`
+ - aside: `#fafafa`
+ - footer: `#1a1a1a` / text `#fff`
+ - Add `padding: 24px` to `main` and `aside`
+ - Add `padding: 16px` to `sidebar`
+
+ **Grid structure breakdown:**
+```
+┌─────────────────────────────────┐
+│         Header (64px)           │  ← spans all 3 columns
+├──────┬─────────────┬────────────┤
+│      │             │            │
+│Sidebar   Main (1fr)  Aside      │  ← 220px | flexible | 200px
+│(220px)   Content    (200px)     │
+│      │             │            │
+├──────┴─────────────┴────────────┤
+│        Footer (60px)            │  ← spans all 3 columns
+└─────────────────────────────────┘
+
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>CSS Grid Page Layout</title>
+
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        /* Grid container */
+        .page-layout {
+            display: grid;
+            grid-template-columns: 220px 1fr 200px;
+            grid-template-rows: 64px 1fr 60px;
+            grid-template-areas:
+                "header  header  header"
+                "sidebar main    aside"
+                "footer  footer  footer";
+            min-height: 100vh;
+            gap: 0;
+        }
+
+        /* Header */
+        .page-layout__header {
+            grid-area: header;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            font-weight: bold;
+        }
+
+        /* Sidebar */
+        .page-layout__sidebar {
+            grid-area: sidebar;
+            background-color: #f5f5f5;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        /* Main content */
+        .page-layout__main {
+            grid-area: main;
+            background-color: #ffffff;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        /* Aside */
+        .page-layout__aside {
+            grid-area: aside;
+            background-color: #fafafa;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        /* Footer */
+        .page-layout__footer {
+            grid-area: footer;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="page-layout">
+    <header class="page-layout__header">Header</header>
+    <nav class="page-layout__sidebar">Sidebar Nav</nav>
+    <main class="page-layout__main">Main Content</main>
+    <aside class="page-layout__aside">Related</aside>
+    <footer class="page-layout__footer">Footer</footer>
+</div>
+
+</body>
+</html>
+```
+

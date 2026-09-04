@@ -1,0 +1,113 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+
+      .container {
+        background-color: #111;
+        color: yellow;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      .count {
+        font-size: 4rem;
+        font-weight: bold;
+      }
+
+      .action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      button {
+        background-color: navy;
+        border-radius: 8px;
+        border: none;
+        color: yellow;
+        cursor: pointer;
+        font-size: 1rem;
+        margin: 0 4px;
+        padding: 8px 16px;
+      }
+
+      .red {
+        color: red;
+      }
+
+      .green {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Simple Counter</h1>
+      <h2 class="count">0</h2>
+      <div class="actions">
+        <button value="Decrease">Decrease</button>
+        <button value="Reset">Reset</button>
+        <button value="Increase">Increase</button>
+      </div>
+    </div>
+    <script>
+      const actions = document.querySelector(".actions");
+      const countEl = document.querySelector(".count");
+
+      let count = 0;
+
+      const updateCount = (element, count) => (element.textContent = count);
+
+      const updateCountColor = (element, count) => {
+        if (count > 0) {
+          element.classList.add("green");
+          element.classList.remove("red");
+        }
+        if (count < 0) {
+          element.classList.add("red");
+          element.classList.remove("green");
+        }
+        if (count === 0 && element.classList.contains("green")) {
+          element.classList.remove("green");
+        }
+        if (count === 0 && element.classList.contains("red")) {
+          element.classList.remove("red");
+        }
+      };
+
+      //   const handleClick = () => {
+      //     const action = event.target.value;
+      //     if (action === "Increase") count++;
+      //     if (action === "Decrease") count--;
+      //     if (action === "Reset") count = 0;
+      //     updateCount(countEl, count);
+      //     updateCountColor(countEl, count);
+      //   };
+
+      class Button {
+        handleEvent() {
+          const action = event.target.value;
+          if (action === "Increase") count++;
+          if (action === "Decrease") count--;
+          if (action === "Reset") count = 0;
+          updateCount(countEl, count);
+          updateCountColor(countEl, count);
+        }
+      }
+
+      actions.addEventListener("click", new Button());
+    </script>
+  </body>
+</html>

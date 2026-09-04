@@ -1,0 +1,86 @@
+<!--
+    HTML Images Syntax
+
+    The HTML <img> tag is used to embed an image in a web page.
+    Images are not technically inserted into a web page; images are linked to web pages.
+    The <img> tag creates a holding space for the referenced image.
+    The <img> tag is empty, it contains attributes only, and does not have a closing tag.
+    The <img> tag has two required attributes:
+        src - Specifies the path to the image
+        alt - Specifies an alternate text for the image
+
+    The src Attribute
+
+    When a web page loads, it is the browser, at that moment, that gets the image from a web server and inserts it into the page.
+    Therefore, make sure that the image actually stays in the same spot in relation to the web page,
+    otherwise your visitors will get a broken link icon.
+    The broken link icon and the alt text are shown if the browser cannot find the image.
+
+    The alt Attribute
+
+    The required alt attribute provides an alternate text for an image, if the user for some reason cannot view it
+    (because of slow connection, an error in the src attribute, or if the user uses a screen reader).
+    The value of the alt attribute should describe the image.
+    A screen reader is a software program that reads the HTML code, and allows the user to "listen" to the content.
+    Screen readers are useful for people who are visually impaired or learning disabled.
+
+    Image Size - Width and Height
+    The width and height attributes always define the width and height of the image in pixels.
+    Always specify the width and height of an image.
+    If width and height are not specified, the web page might flicker while the image loads.
+    The width, height, and style attributes are all valid in HTML.
+    Use the style attribute. It prevents styles sheets from changing the size of images:
+
+
+    Image Floating
+    Use the CSS float property to let the image float to the right or to the left of a text.
+-->
+<img alt="alternatetext" src="url">
+
+<p>
+    <img alt="Smiley face" src="smiley.gif" style="float:right;width:42px;height:42px;">
+    The image will float to the right of the text.
+</p>
+
+<p>
+    <img alt="Smiley face" src="smiley.gif" style="float:left;width:42px;height:42px;">
+    The image will float to the left of the text.
+</p>
+
+<img alt="This is a image element" height="100" src="#" width="100">
+
+<img
+        alt="This is an image element"
+        sizes="(max-width: 800px) 100vw, 800px"
+        src="img-800w.png"
+        srcset="img-400w.png 400w, img-600w.png 600w, img-800w.png 800w"
+>
+
+<figure>
+    <figcaption>This is a figure element</figcaption>
+    <img alt="This is a image element" height="100" src="#" width="100">
+</figure>
+
+<picture>
+    <source media="(min-width: 400px)" srcset="#">
+    <source media="(min-width: 200px)" srcset="#">
+    <source media="(min-width: 100px)" srcset="#">
+    <img alt="This is a image element" height="100" src="#" width="100">
+</picture>
+
+
+<div>
+    <img alt="images are inline elements" src="image.png">
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusantium autem consequatur molestiae quod sint
+        voluptates. Adipisci culpa eius excepturi hic illo laborum minus nulla quos ratione repellendus? Asperiores
+        corporis error vitae? Cupiditate, ut, voluptatem? Accusantium aliquid consequatur, cupiditate ea exercitationem
+        facere illum ipsum nisi omnis repellendus similique voluptatem?
+        <img alt="images are inline elements" float="left" src="image.png">
+        Ad assumenda, aut dignissimos ea earum error eveniet magnam nisi odit perferendis, provident quaerat veritatis!
+        Aspernatur cupiditate, delectus. Amet consectetur deleniti deserunt dicta error facere hic id itaque, minus
+        molestiae praesentium quaerat quibusdam recusandae, reprehenderit repudiandae sed ullam!
+        <img alt="images are inline elements" float="right" src="image.png">
+        Animi culpa dolorem minus quisquam quos repudiandae rerum. Ad eos exercitationem fugiat officia.
+    </p>
+</div>

@@ -1,0 +1,150 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        background-color: rgb(230, 230, 230);
+      }
+      section {
+        margin: 2rem;
+      }
+      .animated-numbers {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        grid-template-rows: repeat(auto-fill, minmax(1fr, 1fr));
+      }
+      .article {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+        background-color: white;
+        border-radius: 6px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.2);
+        padding: 1rem;
+        width: 100%;
+      }
+      .article:nth-child(1) {
+        border-bottom: 4px solid red;
+      }
+      .article:nth-child(2) {
+        border-bottom: 4px solid yellow;
+      }
+      .article:nth-child(3) {
+        border-bottom: 4px solid green;
+      }
+      .article:nth-child(4) {
+        border-bottom: 4px solid blue;
+      }
+      .count {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+      .label {
+        font-size: 1rem;
+        font-weight: bold;
+        margin: 10px 0;
+      }
+      /* Animated CSS variables */
+      @property --num {
+        syntax: "<integer>";
+        initial-value: 0;
+        inherits: false;
+      }
+      .animated-css-count {
+        animation: counter 2s infinite alternate ease-in-out;
+        counter-set: num var(--num);
+        font: 800 40px system-ui;
+      }
+      .animated-css-count::after {
+        content: counter(num);
+      }
+      @keyframes counter {
+        from {
+          --num: 0;
+        }
+        to {
+          --num: 100;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="animated-numbers">
+      <article class="article">
+        <span class="count">$221,317,892,780</span>
+        <p class="label">Total Value Locked</p>
+      </article>
+      <article class="article">
+        <span class="count">$221,317,892,780</span>
+        <p class="label">Market Cap</p>
+      </article>
+      <article class="article">
+        <span class="count">$8,629,498,886</span>
+        <p class="label">Volume</p>
+      </article>
+      <article class="article">
+        <span class="count">120,231,504 ETH</span>
+        <p class="label">Circulating Supply</p>
+      </article>
+    </section>
+    <section>
+      <article class="article">
+        <span class="animated-css-count"></span>
+        <p class="label">Circulating Supply</p>
+      </article>
+    </section>
+    <script>
+      let initialCount = 0;
+      let tvlCount = 221317892780;
+      let marketCount = 221317892780;
+      let volumeCount = 8629498886;
+      let supplyCount = 120231504;
+      let updateInterval = 2000; // ms
+      let counters = document.querySelectorAll(".count");
+      let [tvl, marketCap, volume, supply] = counters;
+
+      function animateCount(element, start, end, interval) {
+        const intervalId = setInterval(() => {
+          if (start >= end) clearInterval(intervalId);
+          element.textContent = start;
+          start++;
+        }, interval);
+      }
+      // animateCount(body, start, end, updateInterval);
+
+      function commafy(count, symbol, prefixed = false) {
+        if (prefixed) {
+          return `${symbol}${count.toLocaleString()}`;
+        }
+        return `${count.toLocaleString()} ${symbol}`;
+      }
+
+      function animateValue(element, start, end, duration) {
+        let startTimestamp = null;
+
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          const count = Math.floor(progress * (end - start) + start);
+          element.textContent = commafy(count, "$", true);
+
+          if (progress < 1) window.requestAnimationFrame(step);
+        };
+
+        window.requestAnimationFrame(step);
+      }
+
+      animateValue(tvl, initialCount, tvlCount, updateInterval);
+      animateValue(marketCap, initialCount, marketCount, updateInterval);
+      animateValue(volume, initialCount, volumeCount, updateInterval);
+      animateValue(supply, initialCount, supplyCount, updateInterval);
+    </script>
+  </body>
+</html>

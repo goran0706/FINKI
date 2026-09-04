@@ -1,0 +1,90 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      legend {
+        background-color: #000;
+        color: #fff;
+        padding: 3px 6px;
+      }
+
+      input {
+        margin: 0.4rem;
+      }
+
+      #content1,
+      #content2 {
+        padding: 1rem;
+        color: #333;
+        background-color: wheat;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <legend>Read as Text</legend>
+        <label for="fileInput1">Upload file</label>
+        <input type="file" id="fileInput1" name="fileInput1" />
+        <button id="upload1">Upload</button>
+        <a href="" id="link1">Download</a>
+        <div id="content1">File content will appear here.</div>
+      </fieldset>
+    </form>
+    <form>
+      <fieldset>
+        <legend>Read as Buffer</legend>
+        <label for="fileInput2">Upload file</label>
+        <input type="file" id="fileInput2" name="fileInput2" />
+        <button id="upload2">Upload</button>
+        <a href="" id="link2">Download</a>
+        <div id="content2">File content will appear here.</div>
+      </fieldset>
+    </form>
+    <script>
+      const fileInput1 = document.querySelector("#fileInput1");
+      const content1 = document.querySelector("#content1");
+      const link1 = document.querySelector("#link1");
+      const uploadBtn1 = document.querySelector("#upload1");
+      uploadBtn1.addEventListener("click", (e) => {
+        event.preventDefault();
+        const file = fileInput1.files[0];
+
+        if (file) {
+          link1.href = URL.createObjectURL(file);
+          const reader = new FileReader();
+          reader.readAsText(file);
+          reader.onload = (e) => (content1.textContent = e.target.result);
+          reader.onerror = () => console.log(reader.error);
+        } else {
+          console.log("No file selected");
+        }
+      });
+
+      const content2 = document.querySelector("#content2");
+      const fileInput2 = document.querySelector("#fileInput2");
+      const link2 = document.querySelector("#link2");
+      const uploadBtn2 = document.querySelector("#upload2");
+      uploadBtn2.addEventListener("click", (e) => {
+        event.preventDefault();
+        const file = fileInput2.files[0];
+
+        if (file) {
+          link2.href = URL.createObjectURL(file);
+          const reader = new FileReader();
+          reader.readAsArrayBuffer(file);
+          reader.onload = (e) => {
+            const decoder = new TextDecoder();
+            content2.textContent = decoder.decode(e.target.result);
+          };
+          reader.onerror = () => console.log(reader.error);
+        } else {
+          console.log("No file selected");
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!--
+### Exercise 2.4 — The Cascade and Inheritance
+
+**Topic:** Cascade order, specificity conflicts, inheritance
+
+**Exact requirements:**
+
+- Create a small HTML page with:
+
+- A `<section class="promo">` containing:
+- An `<h2 class="promo__title" id="headline">` with text: `Summer Roast Sale`
+- A `<p class="promo__text">` with text: `Up to 30% off selected single origins.`
+- An `<a href="#" class="btn btn--primary">` with text: `Shop Now`
+
+- Write the following CSS rules **in this exact order** and observe the cascade:
+
+```css
+/* Rule 1 */
+.promo__title {
+    color: #c8a96e;
+}
+
+/* Rule 2 */
+h2 {
+    color: red;
+}
+
+/* Rule 3 */
+#headline {
+    color: #1a1a1a;
+}
+
+/* Rule 4 — override with class specificity */
+.promo__title.promo__title {
+    color: #3a3a3a;
+}
+```
+
+- After writing these rules, answer these questions **as CSS comments at the bottom of your file**:
+- `/* Q1: What color does h2 render? Why? */`
+- `/* Q2: Which rule wins between Rule 1 and Rule 2 and why? */`
+- `/* Q3: Which rule wins between Rule 3 and Rule 4 and why? */`
+
+- Style the `.btn` and `.btn--primary`:
+- `.btn`: `display: inline-block`, `padding: 12px 28px`, `text-decoration: none`, `font-size: 0.9rem`,
+`border: 2px solid transparent`
+- `.btn--primary`: `background-color: #1a1a1a`, `color: #ffffff`, `border-color: #1a1a1a`
+- `.btn--primary:hover`: `background-color: transparent`, `color: #1a1a1a`
+
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Cascade and Inheritance Exercise</title>
+
+    <style>
+        /* Rule 1 */
+        /* Specificity: (0, 1, 0) */
+        .promo__title {
+            color: #c8a96e;
+        }
+
+        /* Rule 2 */
+        /* Specificity: (0, 0, 1) */
+        h2 {
+            color: red;
+        }
+
+        /* Rule 3 */
+        /* Specificity: (1, 0, 0) */
+        #headline {
+            color: #1a1a1a;
+        }
+
+        /* Rule 4 */
+        /* Specificity: (0, 2, 0) */
+        .promo__title.promo__title {
+            color: #3a3a3a;
+        }
+
+        /* Button styles */
+        /* Specificity: (0, 1, 0) */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 2px solid transparent;
+        }
+
+        /* Specificity: (0, 2, 0) */
+        .btn--primary {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            border-color: #1a1a1a;
+        }
+
+        /* Specificity: (0, 2, 1) — pseudo-class adds class-level specificity */
+        .btn--primary:hover {
+            background-color: transparent;
+            color: #1a1a1a;
+        }
+
+        /*
+            Q1: What color does h2 render? Why?
+            A1: #1a1a1a (Rule 3). ID selectors have the highest specificity (1, 0, 0),
+                which beats all other rules regardless of cascade order.
+
+            Q2: Which rule wins between Rule 1 and Rule 2 and why?
+            A2: Rule 1 (.promo__title) wins. It has specificity (0, 1, 0) vs Rule 2's (0, 0, 1).
+                Classes beat element selectors. Cascade order doesn't matter here.
+
+            Q3: Which rule wins between Rule 3 and Rule 4 and why?
+            A3: Rule 3 (#headline) wins. IDs (1, 0, 0) beat multiple classes (0, 2, 0).
+                The first digit (IDs) always takes precedence over subsequent digits. Significant digits.
+        */
+    </style>
+</head>
+<body>
+
+<section class="promo">
+    <h2 class="promo__title" id="headline">Summer Roast Sale</h2>
+    <p class="promo__text">Up to 30% off selected single origins.</p>
+    <a class="btn btn--primary" href="#">Shop Now</a>
+</section>
+
+</body>
+</html>

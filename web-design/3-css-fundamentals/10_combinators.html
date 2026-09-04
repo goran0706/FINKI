@@ -1,0 +1,49 @@
+<!--
+#### Exercise 2.7: Combinators
+
+Write selectors using combinators:
+
+1. All paragraphs inside articles (descendant)
+2. Direct children `<li>` of `<ul>` (child)
+3. First paragraph immediately after an h2 (adjacent sibling)
+4. All paragraphs after an h2 (general sibling)
+5. Combine: paragraphs immediately after h2 elements inside articles
+-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        /* 1. All paragraphs inside articles (descendant) */
+        article p {
+            color: #333;
+        }
+
+        /* 2. Direct children <li> of <ul> (child) */
+        ul > li {
+            list-style-type: square;
+        }
+
+        /* 3. First paragraph immediately after an h2 (adjacent sibling) */
+        h2 + p {
+            font-weight: bold;
+        }
+
+        /* 4. All paragraphs after an h2 (general sibling) */
+        h2 ~ p {
+            margin-top: 1em;
+        }
+
+        /* 5. Combine: paragraphs immediately after h2 elements inside articles */
+        article h2 + p {
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>

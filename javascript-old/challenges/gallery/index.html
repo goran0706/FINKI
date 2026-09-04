@@ -1,0 +1,58 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      .gallery {
+        display: grid;
+        gap: 1rem;
+        grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    </style>
+  </head>
+  <body>
+    <section class="gallery"></section>
+    <script>
+      const fetchPhotos = async () => {
+        const res = await fetch("https://jsonplaceholder.typicode.com/photos");
+        const data = await res.json();
+        return data;
+      };
+
+      fetchPhotos().then((photos) => {
+        const container = document.querySelector(".gallery");
+        container.addEventListener("mouseover", (event) => {
+          if (event.target.name !== "photo") return;
+          event.target.style.transform = "scale(1.03)";
+        });
+
+        container.addEventListener("mouseout", (event) => {
+          if (event.target.name !== "photo") return;
+          event.target.style.transform = "scale(1)";
+        });
+
+        // optimize this, instead of creating an img for each entry, create a fragment, then append it to the container.
+        photos.forEach(({ id, url, title }) => {
+          const img = document.createElement("img");
+          img.id = id - 1;
+          img.src = url;
+          img.alt = title;
+          img.name = "photo";
+          img.style.width = "250px";
+          img.style.height = "250px";
+          img.style.cursor = "pointer";
+          img.style.borderRadius = "10px";
+          img.style.boxShadow = "0 0 8px 1px gray";
+          img.style.transition = "all 0.3s ease-in-out";
+          container.appendChild(img);
+        });
+      });
+    </script>
+  </body>
+</html>

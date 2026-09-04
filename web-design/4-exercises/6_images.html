@@ -1,0 +1,54 @@
+<!--
+### Exercise 1.6 — Images
+
+**Topic:** `<img>`, `alt`, `width`, `height`, `<figure>`, `<figcaption>`, `loading`
+
+**What to build:** An image gallery section for a coffee blog.
+
+**Exact requirements:**
+- Use the following three placeholder image URLs (these are real, working URLs):
+- `https://picsum.photos/seed/coffee1/800/500`
+- `https://picsum.photos/seed/coffee2/800/500`
+- `https://picsum.photos/seed/coffee3/800/500`
+
+- Wrap each image in a `<figure>` element
+- Each `<figure>` must contain:
+- An `<img>` with correct `src`, `alt`, `width="800"`, `height="500"`
+- A `<figcaption>` with the following captions respectively:
+- `A single-origin pour over prepared at our Shoreditch location.`
+- `Green coffee beans before roasting at our warehouse facility.`
+- `Latte art competition entry from our head barista, 2023.`
+- The first image must NOT have `loading="lazy"` (it is above the fold)
+- The second and third images MUST have `loading="lazy"`
+- All images must have meaningful, descriptive `alt` text (write your own based on the caption)
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<figure>
+    <figcaption>A single-origin pour over prepared at our Shoreditch location.</figcaption>
+    <img alt="A single-origin pour" height="500" loading="eager" src="https://picsum.photos/seed/coffee1/800/500"
+         width="800">
+</figure>
+
+<figure>
+    <figcaption>Green coffee beans before roasting at our warehouse facility.</figcaption>
+    <img alt="Green coffee beans" height="500" loading="lazy" src="https://picsum.photos/seed/coffee2/800/500"
+         width="800">
+</figure>
+
+<figure>
+    <figcaption>Latte art competition entry from our head barista, 2023.</figcaption>
+    <img alt="latte from head barista" height="500" loading="lazy" src="https://picsum.photos/seed/coffee3/800/500"
+         width="800">
+</figure>
+
+</body>
+</html>

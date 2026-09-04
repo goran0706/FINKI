@@ -1,0 +1,42 @@
+<!--#### Exercise 7.1: Link Types-->
+
+<!--Create the following links:-->
+
+<!--1. External link to https://www.wikipedia.org that opens in a new tab (with proper security)-->
+<!--2. Internal link to an "about.html" page in the same folder-->
+<!--3. Internal link to "contact.html" in a "pages" subfolder-->
+<!--4. Email link to hello@example.com with subject "Website Inquiry"-->
+<!--5. Phone link to +1-234-567-8900-->
+<!--6. Same-page anchor link to a section with id "testimonials"-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+</head>
+<body>
+
+<ul>
+    <!-- External Link - absolute path-->
+    <li><a href="https://www.wikipedia.org" rel="noopener noreferrer" target="_blank">Wikipedia</a></li>
+
+    <!-- Internal Link - relative path -->
+    <li><a href="./about.html">About Page</a></li>
+
+    <!-- Internal Link-->
+    <li><a href="./pages/contact.html">Contact Page</a></li>
+
+    <!-- Email Link-->
+    <li><a href="mailto:hello@example.com?subject=Website%20Inquiry">Email</a></li>
+
+    <!-- Phone Link-->
+    <li><a href="tel:+1-234-567-8900">Telephone</a></li>
+
+    <!-- Fragment Link-->
+    <li><a href="#testimonials">Testimonials</a></li>
+</ul>
+
+</body>
+</html>

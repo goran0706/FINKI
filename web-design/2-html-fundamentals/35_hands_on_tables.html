@@ -1,0 +1,114 @@
+<!--
+CSS :nth-* Patterns Cheat Sheet (Forward → Backward)
+
+Pattern      | Step (a) | Offset (b) | Direction | Meaning / Effect
+------------ | -------- | ---------- | --------- | --------------------------------------
+n            | 1        | 0          | forward   | All elements
+n + b        | 1        | b          | forward   | From b onward
+an + b       | a        | b          | forward   | Every a elements, starting at b
+-----------------------------------------------------------------------------------------
+-n           | 1        | 0          | backward  | All elements (same as n)
+-n + b       | 1        | b          | backward  | First b elements
+-an + b      | a        | b          | backward  | Every a elements backward from b, stop at 1
+
+Notes:
+- Step (a): how many elements to move each time
+- Offset (b): starting point (forward: first element to include; backward: starting point to count down from)
+- n: counter (0,1,2,…) used to generate the sequence
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        table {
+            border: 2px solid #ececec;
+            border-collapse: collapse;
+            width: 100%;
+            border-spacing: 2px;
+        }
+
+        thead {
+            border: 2px solid #ececec;
+            background-color: rgba(18, 26, 110, 0.75);
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #e2e2e2;
+        }
+
+        th, td {
+            border: 2px solid #ececec;
+            padding: 16px;
+            text-align: center;
+        }
+
+        tfoot th {
+            text-align: right;
+        }
+
+        tfoot tr:last-child {
+            background-color: #e2e2e2;
+        }
+
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th colspan="3" scope="col">Item</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td colspan="2">Apple</td>
+        <td>In Stock</td>
+        <td>1</td>
+        <td>$10</td>
+    </tr>
+    <tr>
+        <td colspan="2">Orange</td>
+        <td>In Stock</td>
+        <td>2</td>
+        <td>$20</td>
+    </tr>
+    <tr>
+        <td colspan="2">Pear</td>
+        <td>Out of Stock</td>
+        <td>3</td>
+        <td>$30</td>
+    </tr>
+    <tr>
+        <td colspan="2">Grapes</td>
+        <td>In Stock</td>
+        <td>4</td>
+        <td>$40</td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+        <th colspan="4" scope="row">Subtotal</th>
+        <td>$10</td>
+    </tr>
+    <tr>
+        <th colspan="4" scope="row">Tax</th>
+        <td>$10</td>
+    </tr>
+    <tr>
+        <th colspan="4" scope="row">Total</th>
+        <td>$10</td>
+    </tr>
+    </tfoot>
+</table>
+</body>
+</html>

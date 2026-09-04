@@ -1,0 +1,45 @@
+<!--
+#### Exercise 9.5: min() and max()
+
+Use `min()` and `max()` for:
+
+1. Element width: `min(600px, 100%)` (never wider than 600px)
+2. Element height: `max(300px, 50vh)` (at least 300px tall)
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        .box {
+            border-radius: 1rem;
+            background-color: dodgerblue;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            align-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .box1 {
+            width: min(600px, 100%);
+        }
+
+        .box2 {
+            height: max(300px, 50vh);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="box box1">1</div>
+<div class="box box2">2</div>
+
+</body>
+</html>

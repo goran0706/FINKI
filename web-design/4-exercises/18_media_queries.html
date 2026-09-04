@@ -1,0 +1,156 @@
+<!--
+### Exercise 4.1 — Media Queries: Mobile-First Layout
+
+**Topic:** Mobile-first approach, breakpoints, media queries
+
+**What to build:** Take the product card row from Exercise 3.2 and make it properly responsive using mobile-first media
+queries.
+
+**Exact requirements:**
+
+Start from the HTML in Exercise 3.2.
+
+**Base styles (mobile — no media query):**
+ - `.product-grid__row`: `display: flex`, `flex-direction: column`, `gap: 16px`
+ - `.product-card`: `width: 100%`, `padding: 16px`
+
+**At `min-width: 600px`:**
+ - `.product-grid__row`: `flex-direction: row`, `flex-wrap: wrap`
+ - `.product-card`: `flex: 1 1 calc(50% - 12px)`
+
+**At `min-width: 960px`:**
+ - `.product-card`: `flex: 1 1 calc(25% - 18px)`
+
+**At `min-width: 1200px`:**
+ - `.product-grid`: `max-width: 1200px`, `margin: 0 auto`
+ 
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Flexbox Card Row</title>
+
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* Section container */
+        .product-grid {
+            padding: 48px;
+        }
+
+        /* Section title */
+        .product-grid__title {
+            font-size: 1.75rem;
+            margin-bottom: 32px;
+        }
+
+        /* Flex row container */
+        .product-grid__row {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Card item */
+        .product-card {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Card name */
+        .product-card__name {
+            font-size: 1rem;
+            margin: 0 0 8px;
+        }
+
+        /* Card tasting notes */
+        .product-card__notes {
+            font-size: 0.8rem;
+            color: #888;
+            margin: 0 0 16px;
+        }
+
+        /* Card price */
+        .product-card__price {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+
+        @media (min-width: 600px) {
+            .product-grid__row {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .product-card {
+                flex: 1 1 calc(50% - 12px);
+            }
+        }
+
+        @media (min-width: 960px) {
+            .product-card {
+                flex: 1 1 calc(25% - 18px);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .product-card {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (min-width: 768px) {
+            /*Mobile-first: Start with mobile styles, then use min-width to scale up.*/
+        }
+
+        @media (max-width: 768px) {
+            /*Desktop-first: Start with desktop styles, then use max-width to scale down.*/
+        }
+    </style>
+</head>
+<body>
+
+<section class="product-grid">
+    <h2 class="product-grid__title">This Month's Roasts</h2>
+    <div class="product-grid__row">
+        <div class="product-card">
+            <h3 class="product-card__name">Ethiopia Yirgacheffe</h3>
+            <p class="product-card__notes">Blueberry · Jasmine · Dark Chocolate</p>
+            <p class="product-card__price">£12.50</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Colombia Huila</h3>
+            <p class="product-card__notes">Caramel · Red Apple · Brown Sugar</p>
+            <p class="product-card__price">£13.00</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Guatemala Antigua</h3>
+            <p class="product-card__notes">Cocoa · Almond · Toffee</p>
+            <p class="product-card__price">£11.50</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Kenya AA</h3>
+            <p class="product-card__notes">Blackcurrant · Tomato · Citrus</p>
+            <p class="product-card__price">£14.00</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

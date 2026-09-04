@@ -1,0 +1,189 @@
+<!--
+### Exercise 4.2 — CSS Custom Properties (Variables)
+
+**Topic:** `--custom-properties`, `:root`, `var()`, theming
+
+**What to build:** Refactor any previous exercise's CSS to use variables.
+
+**Exact requirements:**
+
+ - Define all of the following on `:root`:
+
+:root {
+--color-bg: #ffffff;
+--color-text: #1a1a1a;
+--color-text-muted: #666666;
+--color-border: #e0e0e0;
+--color-primary: #1a1a1a;
+--color-accent: #c8a96e;
+--color-accent-hover: #b8955a;
+--font-base: Georgia, 'Times New Roman', serif;
+--font-size-sm: 0.875rem;
+--font-size-base: 1rem;
+--font-size-lg: 1.25rem;
+--font-size-xl: 1.75rem;
+--spacing-xs: 8px;
+--spacing-sm: 16px;
+--spacing-md: 24px;
+--spacing-lg: 48px;
+--border-radius: 0px;
+}
+
+ - Replace every hardcoded value in your previous CSS with the matching variable
+ - Then add a `.theme-warm` modifier class — when added to `<body class="theme-warm">` it overrides:
+ - `--color-bg: #fdf6ec`
+ - `--color-primary: #3b1f0e`
+ - `--color-accent: #b05c1a`
+
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+
+    <style>
+        :root {
+            --color-bg: #ffffff;
+            --color-text: #1a1a1a;
+            --color-text-muted: #666666;
+            --color-border: #e0e0e0;
+            --color-primary: #1a1a1a;
+            --color-accent: #c8a96e;
+            --color-accent-hover: #b8955a;
+            --font-base: Georgia, 'Times New Roman', serif;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.25rem;
+            --font-size-xl: 1.75rem;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --border-radius: 0px;
+        }
+
+        body.theme-warm {
+            --color-bg: #fdf6ec;
+            --color-primary: #3b1f0e;
+            --color-accent: #b05c1a;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-base),serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+        }
+
+        /* Section container */
+        .product-grid {
+            padding: var(--spacing-lg);
+        }
+
+        /* Section title */
+        .product-grid__title {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Flex row container */
+        .product-grid__row {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        /* Card item */
+        .product-card {
+            width: 100%;
+            padding: var(--spacing-sm);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+        }
+
+        /* Card name */
+        .product-card__name {
+            font-size: var(--font-size-base);
+            margin: 0 0 var(--spacing-xs) 0;
+            color: var(--color-primary);
+        }
+
+        /* Card tasting notes */
+        .product-card__notes {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-muted);
+            margin: 0 0 var(--spacing-sm) 0;
+        }
+
+        /* Card price */
+        .product-card__price {
+            font-size: 1.125rem;
+            font-weight: bold;
+            margin: 0;
+            color: var(--color-accent);
+        }
+
+        @media (min-width: 600px) {
+            .product-grid__row {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .product-card {
+                flex: 1 1 calc(50% - 12px);
+            }
+        }
+
+        @media (min-width: 960px) {
+            .product-card {
+                flex: 1 1 calc(25% - 18px);
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .product-card {
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body class="theme-warm">
+
+<section class="product-grid">
+    <h2 class="product-grid__title">This Month's Roasts</h2>
+    <div class="product-grid__row">
+        <div class="product-card">
+            <h3 class="product-card__name">Ethiopia Yirgacheffe</h3>
+            <p class="product-card__notes">Blueberry · Jasmine · Dark Chocolate</p>
+            <p class="product-card__price">£12.50</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Colombia Huila</h3>
+            <p class="product-card__notes">Caramel · Red Apple · Brown Sugar</p>
+            <p class="product-card__price">£13.00</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Guatemala Antigua</h3>
+            <p class="product-card__notes">Cocoa · Almond · Toffee</p>
+            <p class="product-card__price">£11.50</p>
+        </div>
+        <div class="product-card">
+            <h3 class="product-card__name">Kenya AA</h3>
+            <p class="product-card__notes">Blackcurrant · Tomato · Citrus</p>
+            <p class="product-card__price">£14.00</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
