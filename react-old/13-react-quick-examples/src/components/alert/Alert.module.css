@@ -1,0 +1,19 @@
+.alert {
+  border: 2px solid gray;
+  border-radius: 6px;
+  background-color: whitesmoke;
+  margin: 6px 0;
+  padding: 6px;
+}
+
+.info {
+  color: blue;
+}
+
+.warning {
+  color: orange;
+}
+
+.error {
+  color: crimson;
+}

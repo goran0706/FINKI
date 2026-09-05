@@ -1,0 +1,11 @@
+.container {
+  width: 480px;
+  margin: 0 auto;
+  background-color: bisque;
+  border: 2px solid gray;
+  border-radius: 6px;
+}
+
+.title {
+  color: blueviolet;
+}
