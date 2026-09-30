@@ -104,18 +104,14 @@ interface ExampleCreateUser {
 export const AxiosGetExample: FC<AxiosGetProps> = ({ url }: AxiosGetProps): ReactNode => {
   const [message, setMessage] = useState<string>("No request has been made.");
 
-  const handleRequest = (): void => {
-    const request: () => Promise<void> = async (): Promise<void> => {
-      try {
-        const response: AxiosResponse = await axios.get(url);
+  const handleRequest = async (): Promise<void> => {
+    try {
+      const response: AxiosResponse = await axios.get(url);
 
-        setMessage(`Request completed with HTTP ${response.status}.`);
-      } catch (error: unknown) {
-        setMessage("Axios rejected the request.");
-      }
-    };
-
-    void request();
+      setMessage(`Request completed with HTTP ${response.status}.`);
+    } catch {
+      setMessage("Axios rejected the request.");
+    }
   };
 
   return (
@@ -124,7 +120,12 @@ export const AxiosGetExample: FC<AxiosGetProps> = ({ url }: AxiosGetProps): Reac
 
       <p>{message}</p>
 
-      <button type="button" onClick={handleRequest}>
+      <button
+        type="button"
+        onClick={(): void => {
+          void handleRequest();
+        }}
+      >
         Send GET request
       </button>
     </section>
@@ -137,18 +138,14 @@ export const AxiosGetExample: FC<AxiosGetProps> = ({ url }: AxiosGetProps): Reac
 export const AxiosResponseDataExample: FC<AxiosResponseDataProps> = ({ url }: AxiosResponseDataProps): ReactNode => {
   const [user, setUser] = useState<ExampleUser | null>(null);
 
-  const handleRequest = (): void => {
-    const request: () => Promise<void> = async (): Promise<void> => {
-      try {
-        const response: AxiosResponse<ExampleUser> = await axios.get<ExampleUser>(url);
+  const handleRequest = async (): Promise<void> => {
+    try {
+      const response: AxiosResponse<ExampleUser> = await axios.get<ExampleUser>(url);
 
-        setUser(response.data);
-      } catch (error: unknown) {
-        setUser(null);
-      }
-    };
-
-    void request();
+      setUser(response.data);
+    } catch {
+      setUser(null);
+    }
   };
 
   return (
@@ -167,7 +164,12 @@ export const AxiosResponseDataExample: FC<AxiosResponseDataProps> = ({ url }: Ax
         </>
       )}
 
-      <button type="button" onClick={handleRequest}>
+      <button
+        type="button"
+        onClick={(): void => {
+          void handleRequest();
+        }}
+      >
         Load user
       </button>
     </section>
@@ -180,18 +182,14 @@ export const AxiosResponseDataExample: FC<AxiosResponseDataProps> = ({ url }: Ax
 export const AxiosStatusExample: FC<AxiosStatusProps> = ({ url }: AxiosStatusProps): ReactNode => {
   const [message, setMessage] = useState<string>("No response has been received.");
 
-  const handleRequest = (): void => {
-    const request: () => Promise<void> = async (): Promise<void> => {
-      try {
-        const response: AxiosResponse = await axios.get(url);
+  const handleRequest = async (): Promise<void> => {
+    try {
+      const response: AxiosResponse = await axios.get(url);
 
-        setMessage(`Status: ${response.status}; status text: ${response.statusText}`);
-      } catch (error: unknown) {
-        setMessage("Axios rejected the request.");
-      }
-    };
-
-    void request();
+      setMessage(`Status: ${response.status}; status text: ${response.statusText}`);
+    } catch {
+      setMessage("Axios rejected the request.");
+    }
   };
 
   return (
@@ -200,7 +198,12 @@ export const AxiosStatusExample: FC<AxiosStatusProps> = ({ url }: AxiosStatusPro
 
       <p>{message}</p>
 
-      <button type="button" onClick={handleRequest}>
+      <button
+        type="button"
+        onClick={(): void => {
+          void handleRequest();
+        }}
+      >
         Read response metadata
       </button>
     </section>
@@ -213,27 +216,23 @@ export const AxiosStatusExample: FC<AxiosStatusProps> = ({ url }: AxiosStatusPro
 export const AxiosPostExample: FC<AxiosPostProps> = ({ url, name, email }: AxiosPostProps): ReactNode => {
   const [message, setMessage] = useState<string>("No request has been sent.");
 
-  const handleRequest = (): void => {
+  const handleRequest = async (): Promise<void> => {
     const payload: ExampleCreateUser = {
       name,
       email,
     };
 
-    const request: () => Promise<void> = async (): Promise<void> => {
-      try {
-        const response: AxiosResponse<ExampleUser> = await axios.post<
-          ExampleUser,
-          AxiosResponse<ExampleUser>,
-          ExampleCreateUser
-        >(url, payload);
+    try {
+      const response: AxiosResponse<ExampleUser> = await axios.post<
+        ExampleUser,
+        AxiosResponse<ExampleUser>,
+        ExampleCreateUser
+      >(url, payload);
 
-        setMessage(`Created user with HTTP ${response.status}.`);
-      } catch (error: unknown) {
-        setMessage("Axios rejected the POST request.");
-      }
-    };
-
-    void request();
+      setMessage(`Created user with HTTP ${response.status}.`);
+    } catch {
+      setMessage("Axios rejected the POST request.");
+    }
   };
 
   return (
@@ -242,7 +241,12 @@ export const AxiosPostExample: FC<AxiosPostProps> = ({ url, name, email }: Axios
 
       <p>{message}</p>
 
-      <button type="button" onClick={handleRequest}>
+      <button
+        type="button"
+        onClick={(): void => {
+          void handleRequest();
+        }}
+      >
         Create user
       </button>
     </section>
@@ -318,25 +322,21 @@ export const AxiosErrorNarrowingExample: FC<AxiosErrorNarrowingProps> = ({
 export const AxiosConfigExample: FC<AxiosConfigProps> = ({ url, timeout }: AxiosConfigProps): ReactNode => {
   const [message, setMessage] = useState<string>("No request has been made.");
 
-  const handleRequest = (): void => {
-    const request: () => Promise<void> = async (): Promise<void> => {
-      try {
-        const response: AxiosResponse = await axios.get(url, {
-          timeout,
-        });
+  const handleRequest = async (): Promise<void> => {
+    try {
+      const response: AxiosResponse = await axios.get(url, {
+        timeout,
+      });
 
-        setMessage(`HTTP ${response.status}; configured timeout: ${timeout} ms.`);
-      } catch (error: unknown) {
-        if (axios.isAxiosError(error) && error.code === "ECONNABORTED") {
-          setMessage("Axios aborted the request because the configured timeout elapsed.");
-          return;
-        }
-
-        setMessage("Axios rejected the request.");
+      setMessage(`HTTP ${response.status}; configured timeout: ${timeout} ms.`);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.code === "ECONNABORTED") {
+        setMessage("Axios aborted the request because the configured timeout elapsed.");
+        return;
       }
-    };
 
-    void request();
+      setMessage("Axios rejected the request.");
+    }
   };
 
   return (
@@ -345,7 +345,12 @@ export const AxiosConfigExample: FC<AxiosConfigProps> = ({ url, timeout }: Axios
 
       <p>{message}</p>
 
-      <button type="button" onClick={handleRequest}>
+      <button
+        type="button"
+        onClick={(): void => {
+          void handleRequest();
+        }}
+      >
         Send configured request
       </button>
     </section>
@@ -362,22 +367,18 @@ export const AxiosHeadersExample: FC<AxiosHeadersProps> = ({
 }: AxiosHeadersProps): ReactNode => {
   const [message, setMessage] = useState<string>("No request has been made.");
 
-  const handleRequest = (): void => {
-    const request: () => Promise<void> = async (): Promise<void> => {
-      try {
-        const response: AxiosResponse = await axios.get(url, {
-          headers: {
-            [headerName]: headerValue,
-          },
-        });
+  const handleRequest = async (): Promise<void> => {
+    try {
+      const response: AxiosResponse = await axios.get(url, {
+        headers: {
+          [headerName]: headerValue,
+        },
+      });
 
-        setMessage(`HTTP ${response.status}; request header configured: ${headerName}.`);
-      } catch (error: unknown) {
-        setMessage("Axios rejected the request.");
-      }
-    };
-
-    void request();
+      setMessage(`HTTP ${response.status}; request header configured: ${headerName}.`);
+    } catch {
+      setMessage("Axios rejected the request.");
+    }
   };
 
   return (
@@ -386,7 +387,12 @@ export const AxiosHeadersExample: FC<AxiosHeadersProps> = ({
 
       <p>{message}</p>
 
-      <button type="button" onClick={handleRequest}>
+      <button
+        type="button"
+        onClick={(): void => {
+          void handleRequest();
+        }}
+      >
         Send request with header
       </button>
     </section>
@@ -403,27 +409,21 @@ export const AxiosValidateStatusExample: FC<AxiosValidateStatusProps> = ({
 }: AxiosValidateStatusProps): ReactNode => {
   const [message, setMessage] = useState<string>("No request has been made.");
 
-  const handleRequest = (): void => {
-    const request: () => Promise<void> = async (): Promise<void> => {
-      try {
-        const response: AxiosResponse = await axios.get(url, {
-          validateStatus: (responseStatus: number): boolean => responseStatus === status,
-        });
+  const handleRequest = async (): Promise<void> => {
+    try {
+      const response: AxiosResponse = await axios.get(url, {
+        validateStatus: (responseStatus: number): boolean => responseStatus === status,
+      });
 
-        setMessage(`Axios resolved because validateStatus accepted HTTP ${response.status}.`);
-      } catch (error: unknown) {
-        if (axios.isAxiosError(error)) {
-          setMessage(
-            `Axios rejected HTTP ${error.response?.status ?? "unknown"} because validateStatus returned false.`,
-          );
-          return;
-        }
-
-        setMessage("The request failed unexpectedly.");
+      setMessage(`Axios resolved because validateStatus accepted HTTP ${response.status}.`);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        setMessage(`Axios rejected HTTP ${error.response?.status ?? "unknown"} because validateStatus returned false.`);
+        return;
       }
-    };
 
-    void request();
+      setMessage("The request failed unexpectedly.");
+    }
   };
 
   return (
@@ -432,7 +432,12 @@ export const AxiosValidateStatusExample: FC<AxiosValidateStatusProps> = ({
 
       <p>{message}</p>
 
-      <button type="button" onClick={handleRequest}>
+      <button
+        type="button"
+        onClick={(): void => {
+          void handleRequest();
+        }}
+      >
         Test validateStatus
       </button>
     </section>
@@ -445,20 +450,16 @@ export const AxiosValidateStatusExample: FC<AxiosValidateStatusProps> = ({
 export const AxiosRequestStateExample: FC<AxiosRequestStateProps> = ({ url }: AxiosRequestStateProps): ReactNode => {
   const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  const handleRequest = (): void => {
-    const request: () => Promise<void> = async (): Promise<void> => {
-      setState("loading");
+  const handleRequest = async (): Promise<void> => {
+    setState("loading");
 
-      try {
-        await axios.get(url);
+    try {
+      await axios.get(url);
 
-        setState("success");
-      } catch (error: unknown) {
-        setState("error");
-      }
-    };
-
-    void request();
+      setState("success");
+    } catch {
+      setState("error");
+    }
   };
 
   return (
@@ -467,7 +468,12 @@ export const AxiosRequestStateExample: FC<AxiosRequestStateProps> = ({ url }: Ax
 
       <p>State: {state}</p>
 
-      <button type="button" onClick={handleRequest}>
+      <button
+        type="button"
+        onClick={(): void => {
+          void handleRequest();
+        }}
+      >
         Send request
       </button>
     </section>

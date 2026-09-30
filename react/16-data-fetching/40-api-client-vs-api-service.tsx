@@ -161,14 +161,15 @@ export const ApiClientResponsibilityExample: FC<ApiClientResponsibilityExamplePr
 
   return (
     <section>
-      {" "}
       <button type="button" onClick={handleLoadUsers}>
         Load Users Through API Client{" "}
       </button>
       <ul>
-        {users.map((user: User): ReactElement => (
-          <li key={user.id}>{user.name}</li>
-        ))}
+        {users.map(
+          (user: User): ReactElement => (
+            <li key={user.id}>{user.name}</li>
+          ),
+        )}
       </ul>
       {message !== "" && <p role="alert">{message}</p>}
     </section>
@@ -216,9 +217,11 @@ export const ApiServiceResponsibilityExample: FC<ApiServiceResponsibilityExample
         Load Active Users Through API Service{" "}
       </button>
       <ul>
-        {users.map((user: User): ReactElement => (
-          <li key={user.id}>{user.name}</li>
-        ))}
+        {users.map(
+          (user: User): ReactElement => (
+            <li key={user.id}>{user.name}</li>
+          ),
+        )}
       </ul>
       {message !== "" && <p role="alert">{message}</p>}
     </section>
@@ -334,14 +337,17 @@ const userService: UserApiService = new DefaultUserApiService(apiClient);
 export const ApiClientVsApiService: FC = (): ReactElement => {
   return (
     <main>
-      {" "}
       <h1>API Client vs API Service</h1>
+
       <h2>1. API Client Handles Transport Communication</h2>
       <ApiClientResponsibilityExample client={apiClient} />
+
       <h2>2. API Service Handles Domain Operations</h2>
       <ApiServiceResponsibilityExample service={userService} />
+
       <h2>3. Service Creates an Application-Focused Boundary</h2>
       <ApiClientVsServiceBoundaryExample service={userService} />
+
       <h2>4. Errors Can Propagate Through Both Layers</h2>
       <ApiClientVsServiceErrorExample service={userService} />
     </main>

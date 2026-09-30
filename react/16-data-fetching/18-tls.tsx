@@ -13,9 +13,42 @@
  * certificate is appropriate for the requested hostname.
  *
  * Modern TLS establishes symmetric session keys for protecting application
- * traffic. Public-key cryptography is used during the handshake to authenticate
- * the server and establish keying material, while symmetric cryptography is
- * used for the high-volume application data that follows.
+ * traffic. Public-key (asymmetric) cryptography is used during the handshake to
+ * authenticate the server and establish keying material, while symmetric
+ * cryptography is used for the high-volume application data that follows.
+ *
+ * Symmetric cryptography uses one shared secret key: the same key encrypts and
+ * decrypts (for example AES-GCM or ChaCha20-Poly1305). It is fast, which makes it
+ * suitable for bulk data, but both sides must already hold the key, and sending
+ * it over an untrusted network would defeat its purpose.
+ *
+ * Asymmetric cryptography uses a key pair: a public key that can be shared with
+ * anyone, and a private key that never leaves its owner. The pair is used in two
+ * different directions for two different goals:
+ *
+ * - Protecting a message (confidentiality): data encrypted with a public key can
+ *   only be decrypted with the matching private key. Anyone can encrypt, but
+ *   only the private key holder can read. This hides the message but does not
+ *   prove who sent it, because the public key is not secret.
+ *
+ * - Proving the signer (authentication): the signer creates a digital signature
+ *   over a hash of the data using the private key, and anyone can verify it
+ *   using the public key. This proves that the holder of the private key
+ *   produced the data and that it was not modified, but it does NOT hide the
+ *   data. (This is often informally described as "encrypting with the private
+ *   key", but it is a signing operation, not message protection.)
+ *
+ * In short: encryption protects the message and goes from public key to private
+ * key; signing proves the signer and goes from private key to public key.
+ *
+ * TLS uses both kinds of cryptography for different jobs. The certificate is a
+ * signature by a trusted certificate authority that binds a hostname to a public
+ * key. During the handshake the server signs handshake data with its private key,
+ * proving it owns the key in that certificate. The endpoints also perform an
+ * ephemeral Diffie-Hellman key exchange (ECDHE) to derive the same shared secret
+ * without ever sending it over the network; TLS 1.3 does not encrypt a secret with
+ * the server's public key. From that secret, symmetric session keys are derived
+ * and protect all application data.
  *
  * TLS provides confidentiality and integrity for protected traffic. An
  * authenticated TLS connection also provides server authentication when
@@ -123,9 +156,11 @@ export const TlsHandshakeExample: FC<TlsHandshakeProps> = ({ hostname, tlsVersio
       <p>Negotiated protocol: {tlsVersion}</p>
 
       <ol>
-        {steps.map((step: string, index: number): ReactNode => (
-          <li key={index}>{step}</li>
-        ))}
+        {steps.map(
+          (step: string, index: number): ReactNode => (
+            <li key={index}>{step}</li>
+          ),
+        )}
       </ol>
     </section>
   );
@@ -319,7 +354,11 @@ export default TlsContainer;
 // - TLS certificates provide server identity information and support authentication.
 // - Browsers validate certificates using trusted certificate authorities.
 // - Hostname validation helps prevent a certificate for one server from being used as another server's identity.
-// - Symmetric cryptography protects high-volume application data after the handshake.
+// - Symmetric cryptography uses one shared key for encryption and decryption; it is fast and protects the application data after the handshake.
+// - Asymmetric cryptography uses a public/private key pair and is used during the handshake, not for bulk data.
+// - Encryption protects a message: encrypt with the public key, only the private key can decrypt it.
+// - Signing proves the signer: sign with the private key, anyone verifies with the public key; the data is not hidden.
+// - Certificates are CA signatures; the server proves key ownership by signing handshake data; ECDHE derives the shared secret without sending it.
 // - TLS provides confidentiality and integrity for protected traffic.
 // - Browser JavaScript normally does not implement the TLS handshake directly.
 // - Application code should normally rely on browser and operating-system TLS implementations.

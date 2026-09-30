@@ -7,6 +7,56 @@
  * origin. An origin is defined by its scheme, hostname, and port, so changing
  * any of those components creates a different origin.
  *
+ * Why CORS exists
+ * ---------------
+ * By default, browsers apply the same-origin policy: JavaScript running on
+ * https://app.example.com cannot read responses from https://api.example.com.
+ * Without this rule, any website you visit could use your logged-in cookies to
+ * call another site's API and read the result. CORS is the controlled exception
+ * to that rule: the server declares which other origins may read its responses.
+ *
+ * Who does what
+ * -------------
+ * - The server configures CORS by sending response headers that say which
+ *   origins, methods, and headers it allows.
+ * - The browser enforces CORS. It adds the Origin header to cross-origin
+ *   requests, evaluates the server's response headers, and decides whether
+ *   JavaScript may read the response.
+ * - React does nothing for CORS. React code cannot grant itself access, bypass
+ *   a CORS failure, or change the headers the server sends. It can only send
+ *   the request with fetch(), opt into credentialed requests with
+ *   `credentials: "include"`, and handle the failure. A blocked CORS request
+ *   rejects fetch() with a generic TypeError, and JavaScript cannot read the
+ *   specific CORS reason. The details appear only in the browser console.
+ *
+ * Basic flow
+ * ----------
+ * 1. The page at https://app.example.com calls fetch("https://api.example.com/users").
+ * 2. The browser sends the request with "Origin: https://app.example.com".
+ * 3. The server responds with "Access-Control-Allow-Origin: https://app.example.com".
+ * 4. The browser compares the header with the page's origin. If it matches (or
+ *    is "*" for a non-credentialed request), JavaScript can read the response.
+ *    If the header is missing or different, the browser blocks JavaScript from
+ *    reading it and fetch() rejects.
+ *
+ * Server configuration example (Express, using the "cors" package)
+ * ----------------------------------------------------------------
+ * This code runs on the server, not in React. It only sets the response
+ * headers. The browser is what enforces them.
+ *
+ *   app.use(
+ *     cors({
+ *       origin: "https://app.example.com",                    // Access-Control-Allow-Origin
+ *       methods: ["GET", "POST", "PUT"],                      // Access-Control-Allow-Methods
+ *       allowedHeaders: ["content-type", "x-example-header"], // Access-Control-Allow-Headers
+ *       credentials: true,                                    // Access-Control-Allow-Credentials: true
+ *       maxAge: 600,                                          // Access-Control-Max-Age (preflight cache, seconds)
+ *     }),
+ *   );
+ *
+ * The components in this file do not configure CORS. They display the values
+ * that the server and browser exchange so each concept can be inspected.
+ *
  * CORS is implemented by browsers using HTTP request and response headers.
  * A server indicates which origins are allowed to access its resources with
  * response headers such as Access-Control-Allow-Origin. The browser evaluates
@@ -29,13 +79,16 @@
  * A CORS preflight response can use Access-Control-Allow-Origin,
  * Access-Control-Allow-Methods, and Access-Control-Allow-Headers to describe
  * the permitted cross-origin operation. The browser evaluates the response
- * before deciding whether the actual request may proceed.
+ * before deciding whether the actual request may proceed. The browser can
+ * cache the preflight result for the duration of Access-Control-Max-Age.
  *
  * Credentials such as cookies introduce additional CORS restrictions. When a
  * request includes credentials, the server must explicitly allow the
  * requesting origin and cannot use the wildcard "*" as the value of
- * Access-Control-Allow-Origin. The client must also opt into credentialed
- * requests, for example by using `credentials: "include"` with fetch().
+ * Access-Control-Allow-Origin. The server must also send
+ * Access-Control-Allow-Credentials: true. The client must also opt into
+ * credentialed requests, for example by using `credentials: "include"` with
+ * fetch().
  *
  * CORS is enforced by browsers and is not a replacement for server-side
  * authentication or authorization. A non-browser client such as a server-side
@@ -413,14 +466,19 @@ export default CorsContainer;
 // ---------------------------------------------------------------------
 // Summary
 // ---------------------------------------------------------------------
-// - CORS controls whether browser JavaScript can access cross-origin resources.
+// - By default, browsers block JavaScript from reading responses from a different origin (same-origin policy).
+// - CORS is the mechanism that lets a server relax that rule for specific origins.
+// - The server configures CORS with response headers; the browser enforces it; React does nothing for CORS.
+// - React code cannot grant itself access or bypass CORS; it can only send requests, opt into credentials, and handle failures.
+// - A CORS failure rejects fetch() with a generic TypeError; the specific reason is visible only in the browser console.
 // - An origin consists of a scheme, hostname, and port.
-// - Access-Control-Allow-Origin tells the browser which requesting origin may access a response.
+// - The browser sends an Origin header; the server answers with Access-Control-Allow-Origin; the browser compares them.
 // - Some cross-origin requests can be sent without a preflight when they satisfy CORS-safelisted requirements.
 // - A preflight request uses OPTIONS to ask whether a cross-origin operation is permitted.
 // - Access-Control-Allow-Methods identifies methods permitted after a preflight.
 // - Access-Control-Allow-Headers identifies non-safelisted request headers permitted after a preflight.
-// - Credentialed CORS requests require explicit server permission.
+// - Access-Control-Max-Age lets the browser cache a preflight result.
+// - Credentialed requests need client opt-in (credentials: "include") and server permission (an explicit origin plus Access-Control-Allow-Credentials: true).
 // - Access-Control-Allow-Origin cannot use `*` for a credentialed CORS response.
 // - CORS does not replace authentication or server-side authorization.
 // - CORS is enforced by browsers and is not a general restriction on non-browser HTTP clients.

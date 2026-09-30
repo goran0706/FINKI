@@ -221,10 +221,14 @@ const apiClient: ApiClient = new AxiosApiClient(httpClient);
 export const ApiClientDemo: FC = (): ReactElement => {
   return (
     <main>
-      {" "}
-      <h1>API Client</h1> <h2>1. Use a Typed API Client for Remote Data</h2> <ApiClientExample client={apiClient} />
+      <h1>API Client</h1>
+
+      <h2>1. Use a Typed API Client for Remote Data</h2>
+      <ApiClientExample client={apiClient} />
+
       <h2>2. Encapsulate API Mutations</h2>
       <ApiClientMutationExample client={apiClient} />
+
       <h2>3. Propagate Client Errors to the Calling Layer</h2>
       <ApiClientErrorExample client={apiClient} />
     </main>

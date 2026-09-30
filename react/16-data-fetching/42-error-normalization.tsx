@@ -277,12 +277,14 @@ const apiClient: AxiosInstance = axios.create({
 export const ErrorNormalizationDemo: FC = (): ReactElement => {
   return (
     <main>
-      {" "}
       <h1>Error Normalization</h1>
+
       <h2>1. Convert HTTP Errors Into a Stable Error Shape</h2>
       <ErrorNormalizationHttpExample error={httpError} />
+
       <h2>2. Safely Handle Values That Are Not Error Objects</h2>
       <ErrorNormalizationUnknownExample error={unknownThrownValue} />
+
       <h2>3. Normalize Errors at the Application Boundary</h2>
       <ErrorNormalizationBoundaryExample client={apiClient} />
     </main>

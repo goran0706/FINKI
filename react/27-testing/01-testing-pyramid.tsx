@@ -20,9 +20,9 @@ import { type FC, type ReactElement } from "react";
 
 // The traditional pyramid has three broad levels:
 //
-//                         / \
-//                        / E2E \
-//                       /-------\
+//                         /---------\
+//                        /   E2E     \
+//                       /-------------\
 //                      /  Integration  \
 //                     /-----------------\
 //                    /      Unit         \
