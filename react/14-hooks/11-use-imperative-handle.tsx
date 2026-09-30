@@ -329,13 +329,13 @@ export const ImperativeDialogExample: FC = (): ReactNode => {
  */
 export const ImperativeHandleGotchaExample: FC = (): ReactNode => {
   const declarativePattern: string = `
-// Prefer declarative state when the parent can describe the desired UI.
-<Dialog open={isOpen} onClose={handleClose} />
+  // Prefer declarative state when the parent can describe the desired UI.
+  <Dialog open={isOpen} onClose={handleClose} />
 
-// Use useImperativeHandle when an imperative operation is the
-// natural interface, such as focus, selection, or an animation.
-inputHandle.current?.focus();
-`;
+  // Use useImperativeHandle when an imperative operation is the
+  // natural interface, such as focus, selection, or an animation.
+  inputHandle.current?.focus();
+  `;
 
   return (
     <section>

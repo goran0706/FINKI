@@ -202,13 +202,14 @@ export const TodoReducerExample: FC<TodoReducerProps> = ({ initialTodos }: TodoR
 
       case "toggle":
         return {
-          todos: state.todos.map((todo: Todo): Todo =>
-            todo.id === action.id
-              ? {
-                  ...todo,
-                  completed: !todo.completed,
-                }
-              : todo,
+          todos: state.todos.map(
+            (todo: Todo): Todo =>
+              todo.id === action.id
+                ? {
+                    ...todo,
+                    completed: !todo.completed,
+                  }
+                : todo,
           ),
         };
 
@@ -261,11 +262,13 @@ export const TodoReducerExample: FC<TodoReducerProps> = ({ initialTodos }: TodoR
 
       {state.todos.length > 0 ? (
         <ul>
-          {state.todos.map((todo: Todo): ReactNode => (
-            <li key={todo.id}>
-              {todo.text} — {todo.completed ? "completed" : "open"}
-            </li>
-          ))}
+          {state.todos.map(
+            (todo: Todo): ReactNode => (
+              <li key={todo.id}>
+                {todo.text} — {todo.completed ? "completed" : "open"}
+              </li>
+            ),
+          )}
         </ul>
       ) : (
         <p>No todos.</p>
@@ -425,13 +428,11 @@ export const ReducerPurityExample: FC<InvalidReducerPatternProps> = ({
 // ---------------------------------------------------------------------
 
 const UseReducerContainer: FC = (): ReactNode => {
-  const invalidReducerExample: string = `
-// Avoid side effects inside a reducer.
-const reducer = (state, action) => {
-  fetch("/api/example");
-  return nextState;
-};
-`;
+  // Avoid side effects inside a reducer.
+  const reducer = (state, action) => {
+    fetch("/api/example");
+    return {}; // nextState
+  };
 
   return (
     <main>

@@ -174,14 +174,12 @@ export const ChildHookSequence: FC<ChildHookSequenceProps> = ({ initialValue }: 
  * sequence differ between renders.
  */
 export const InvalidHookOrderExample: FC = (): ReactNode => {
-  const invalidExample: string = `
-// Invalid: the second Hook does not execute on every render.
-const [first, setFirst] = useState(0);
+  // Invalid: the second Hook does not execute on every render.
+  const [first, setFirst] = useState(0);
 
-if (someCondition) {
-  const [second, setSecond] = useState(0);
-}
-`;
+  if (someCondition) {
+    const [second, setSecond] = useState(0);
+  }
 
   return (
     <section>

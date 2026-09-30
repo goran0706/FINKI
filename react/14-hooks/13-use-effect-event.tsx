@@ -4,7 +4,10 @@
  *
  * `useEffectEvent` creates a non-reactive Effect Event that can read the
  * latest committed props and state without causing the Effect that calls it
- * to re-synchronize when those values change.
+ * to re-synchronize when those values change. It isn't an effect at all; it
+ * wraps a function so that it is non-reactive: it always sees the latest props
+ * and state, but isn't a dependency and never triggers re-synchronization.
+ * It's stable as of React 19.2.
  *
  * An Effect Event is declared at the top level of a component and is called
  * from an Effect or another Effect Event in the same component. React keeps
@@ -27,7 +30,51 @@
  * `useEffectEvent` is not a mechanism for suppressing dependency warnings.
  * Removing a genuine dependency with an Effect Event changes the behavior of
  * the Effect and should only be done when the extracted logic is intentionally
- * non-reactive.
+ * non-reactive. It also replaces the old "latest ref" pattern
+ * (`ref.current = callback`) with something safer and lint-aware, but it is
+ * narrow by design: if you want it everywhere, the Effect probably has too
+ * many responsibilities and should be split.
+ *
+ * ---------------------------------------------------------------------
+ * useEffect vs useEffectEvent
+ * ---------------------------------------------------------------------
+ *
+ * `useEffect`: runs after React commits and the browser paints. It's for
+ * synchronizing with external systems (subscriptions, network, timers,
+ * non-React widgets). Everything it reads from render scope is reactive: it
+ * must be in the dependency array, and a change re-runs the effect (cleanup,
+ * then setup).
+ *
+ * `useEffectEvent`: non-reactive. It always sees the latest props and state,
+ * but isn't a dependency and never triggers re-synchronization.
+ *
+ * The problem it solves (see examples 1 and 2):
+ *
+ *   BAD  - `theme` is read inside the Effect, so the linter forces it into
+ *          the dependency array: [roomId, theme]. Changing the theme tears
+ *          down and reconnects the socket for no reason.
+ *
+ *            useEffect(() => {
+ *              const conn = createConnection(roomId);
+ *              conn.on("connected", () => showNotification("Connected!", theme));
+ *              conn.connect();
+ *              return () => conn.disconnect();
+ *            }, [roomId, theme]); // theme change => needless reconnect
+ *
+ *   GOOD - the `theme` read moves into an Effect Event. The Effect depends
+ *          only on [roomId], so it reconnects only when the room changes,
+ *          while the notification still shows the latest theme.
+ *
+ *            const onConnected = useEffectEvent(() => {
+ *              showNotification("Connected!", theme); // always latest theme
+ *            });
+ *
+ *            useEffect(() => {
+ *              const conn = createConnection(roomId);
+ *              conn.on("connected", onConnected);
+ *              conn.connect();
+ *              return () => conn.disconnect();
+ *            }, [roomId]); // only reconnects when roomId changes
  */
 
 import { type ChangeEvent, type FC, type ReactNode, useEffect, useEffectEvent, useState } from "react";
@@ -35,6 +82,11 @@ import { type ChangeEvent, type FC, type ReactNode, useEffect, useEffectEvent, u
 // ---------------------------------------------------------------------
 // 1. Interface Definitions
 // ---------------------------------------------------------------------
+
+export interface ChatRoomProps {
+  readonly initialRoom: string;
+  readonly initialTheme: string;
+}
 
 export interface LatestValueEffectEventProps {
   readonly initialMessage: string;
@@ -60,9 +112,177 @@ export interface EffectEventCleanupProps {
   readonly initialLabel: string;
 }
 
+interface ChatConnection {
+  readonly on: (event: "connected", callback: () => void) => void;
+  readonly connect: () => void;
+  readonly disconnect: () => void;
+}
+
 // ---------------------------------------------------------------------
-// 2. Component Implementations
+// 2. Fake external system (simulates a chat server connection)
 // ---------------------------------------------------------------------
+
+/**
+ * A tiny stand-in for a real socket. `connect()` emits the "connected" event
+ * after a short delay, `disconnect()` cancels it. This lets the examples show
+ * exactly when the Effect re-synchronizes.
+ */
+const createConnection = (roomId: string): ChatConnection => {
+  let listener: (() => void) | null = null;
+  let timerId: number | undefined;
+
+  return {
+    on: (_event: "connected", callback: () => void): void => {
+      listener = callback;
+    },
+    connect: (): void => {
+      console.log(`Connecting to ${roomId}...`);
+      timerId = window.setTimeout((): void => {
+        listener?.();
+      }, 200);
+    },
+    disconnect: (): void => {
+      console.log(`Disconnected from ${roomId}`);
+      window.clearTimeout(timerId);
+      listener = null;
+    },
+  };
+};
+
+// ---------------------------------------------------------------------
+// 3. Component Implementations
+// ---------------------------------------------------------------------
+
+/**
+ * BAD: `theme` is read inside the Effect, so it must be listed as a
+ * dependency. Changing the theme disconnects and reconnects the socket even
+ * though the room did not change. Watch "Connections made" climb when you
+ * only switch the theme.
+ */
+export const ChatRoomWithoutEffectEvent: FC<ChatRoomProps> = ({
+  initialRoom,
+  initialTheme,
+}: ChatRoomProps): ReactNode => {
+  const [roomId, setRoomId] = useState<string>(initialRoom);
+  const [theme, setTheme] = useState<string>(initialTheme);
+  const [connectionCount, setConnectionCount] = useState<number>(0);
+  const [notification, setNotification] = useState<string>("Not connected yet");
+
+  useEffect((): (() => void) => {
+    const connection: ChatConnection = createConnection(roomId);
+
+    connection.on("connected", (): void => {
+      setConnectionCount((previousCount: number): number => previousCount + 1);
+      setNotification(`Connected to ${roomId} (${theme} theme)`);
+    });
+
+    connection.connect();
+
+    return (): void => {
+      connection.disconnect();
+    };
+  }, [roomId, theme]); // theme change => needless reconnect
+
+  const handleRoomChange = (event: ChangeEvent<HTMLSelectElement>): void => {
+    setRoomId(event.target.value);
+  };
+
+  const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>): void => {
+    setTheme(event.target.value);
+  };
+
+  return (
+    <section>
+      <h3>BAD: without useEffectEvent (deps: roomId, theme)</h3>
+
+      <label>
+        Room
+        <select value={roomId} onChange={handleRoomChange}>
+          <option value="general">general</option>
+          <option value="travel">travel</option>
+          <option value="music">music</option>
+        </select>
+      </label>
+
+      <label>
+        Theme
+        <select value={theme} onChange={handleThemeChange}>
+          <option value="light">light</option>
+          <option value="dark">dark</option>
+        </select>
+      </label>
+
+      <p>Connections made: {connectionCount}</p>
+      <p>{notification}</p>
+      <p>Changing the theme reconnects, which is unnecessary.</p>
+    </section>
+  );
+};
+
+/**
+ * GOOD: the `theme` read moves into an Effect Event. The Effect depends only
+ * on `roomId`, so it reconnects only when the room changes. The notification
+ * still reports the latest theme because the Effect Event always reads the
+ * latest committed render. Changing the theme does not increase
+ * "Connections made".
+ */
+export const ChatRoomWithEffectEvent: FC<ChatRoomProps> = ({ initialRoom, initialTheme }: ChatRoomProps): ReactNode => {
+  const [roomId, setRoomId] = useState<string>(initialRoom);
+  const [theme, setTheme] = useState<string>(initialTheme);
+  const [connectionCount, setConnectionCount] = useState<number>(0);
+  const [notification, setNotification] = useState<string>("Not connected yet");
+
+  const onConnected = useEffectEvent((): void => {
+    setConnectionCount((previousCount: number): number => previousCount + 1);
+    setNotification(`Connected to ${roomId} (${theme} theme)`); // always latest theme
+  });
+
+  useEffect((): (() => void) => {
+    const connection: ChatConnection = createConnection(roomId);
+
+    connection.on("connected", onConnected);
+    connection.connect();
+
+    return (): void => {
+      connection.disconnect();
+    };
+  }, [roomId]); // only reconnects when roomId changes
+
+  const handleRoomChange = (event: ChangeEvent<HTMLSelectElement>): void => {
+    setRoomId(event.target.value);
+  };
+
+  const handleThemeChange = (event: ChangeEvent<HTMLSelectElement>): void => {
+    setTheme(event.target.value);
+  };
+
+  return (
+    <section>
+      <h3>GOOD: with useEffectEvent (deps: roomId only)</h3>
+
+      <label>
+        Room
+        <select value={roomId} onChange={handleRoomChange}>
+          <option value="general">general</option>
+          <option value="travel">travel</option>
+          <option value="music">music</option>
+        </select>
+      </label>
+
+      <label>
+        Theme
+        <select value={theme} onChange={handleThemeChange}>
+          <option value="light">light</option>
+          <option value="dark">dark</option>
+        </select>
+      </label>
+
+      <p>Connections made: {connectionCount}</p>
+      <p>{notification}</p>
+      <p>Changing the theme does not reconnect. Only changing the room does.</p>
+    </section>
+  );
+};
 
 /**
  * Demonstrates that an Effect Event reads the latest state when the external
@@ -399,7 +619,7 @@ useEffect(() => {
 };
 
 // ---------------------------------------------------------------------
-// 3. Main Container Component
+// 4. Main Container Component
 // ---------------------------------------------------------------------
 
 const UseEffectEventContainer: FC = (): ReactNode => {
@@ -407,25 +627,31 @@ const UseEffectEventContainer: FC = (): ReactNode => {
     <main>
       <h1>useEffectEvent</h1>
 
-      <h2>1. Reading the latest value from an Effect Event</h2>
+      <h2>1. The problem: theme as a dependency causes needless reconnects</h2>
+      <ChatRoomWithoutEffectEvent initialRoom="general" initialTheme="light" />
+
+      <h2>2. The fix: read theme through an Effect Event</h2>
+      <ChatRoomWithEffectEvent initialRoom="general" initialTheme="light" />
+
+      <h2>3. Reading the latest value from an Effect Event</h2>
       <LatestValueEffectEventExample initialMessage="John Doe" />
 
-      <h2>2. Reading the latest state from a timer</h2>
+      <h2>4. Reading the latest state from a timer</h2>
       <TimerEffectEventExample initialIncrement={1} />
 
-      <h2>3. Reading the latest state from an event listener</h2>
+      <h2>5. Reading the latest state from an event listener</h2>
       <EventListenerEffectEventExample initialEnabled />
 
-      <h2>4. Separating reactive setup from non-reactive event logic</h2>
+      <h2>6. Separating reactive setup from non-reactive event logic</h2>
       <DependencySeparationExample initialRoom="general" />
 
-      <h2>5. Keeping genuine Effect dependencies reactive</h2>
+      <h2>7. Keeping genuine Effect dependencies reactive</h2>
       <GenuineDependencyExample initialValue="example.com" />
 
-      <h2>6. Calling Effect Events only from Effects</h2>
+      <h2>8. Calling Effect Events only from Effects</h2>
       <EffectEventCleanupExample initialLabel="Ready" />
 
-      <h2>7. Avoiding Effect Events as a dependency workaround</h2>
+      <h2>9. Avoiding Effect Events as a dependency workaround</h2>
       <EffectEventDependencyGotchaExample />
     </main>
   );
@@ -436,9 +662,10 @@ export default UseEffectEventContainer;
 // ---------------------------------------------------------------------
 // Summary
 // ---------------------------------------------------------------------
-// - `useEffectEvent` creates a non-reactive function for logic called from an Effect.
-// - An Effect Event always reads the latest committed props and state when called.
-// - Effect Events can prevent an Effect from re-synchronizing for values that should not trigger synchronization.
+// - `useEffect` syncs with external systems after paint; everything it reads is reactive and belongs in deps.
+// - `useEffectEvent` is not an effect: it wraps non-reactive logic that always sees the latest props and state.
+// - Without it, reading `theme` inside the Effect forces deps [roomId, theme], so a theme change reconnects.
+// - With it, the Effect depends only on [roomId]; the theme is still read fresh when the event fires.
 // - Effect Events must be called from Effects or other Effect Events.
 // - Effect Events must not be called during rendering or passed to components or Hooks.
 // - Effect Event functions must not be included in Effect dependency arrays.

@@ -81,6 +81,26 @@ export const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export const UserContext = createContext<UserContextValue | null>(null);
 
+export const useTheme = (): ThemeContextValue => {
+  const context: ThemeContextValue | null = useContext(ThemeContext);
+
+  if (context === null) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+
+  return context;
+};
+
+export const useUser = (): UserContextValue => {
+  const context: UserContextValue | null = useContext(UserContext);
+
+  if (context === null) {
+    throw new Error("useUser must be used within a UserProvider");
+  }
+
+  return context;
+};
+
 /**
  * Provides a theme value and a function for changing that value to all
  * descendants that consume `ThemeContext`.
@@ -108,16 +128,7 @@ export const ThemeProvider: FC<ThemeProviderProps> = ({ children }: ThemeProvide
  * behavior that occurs when this component is rendered without a provider.
  */
 export const ThemeConsumerExample: FC<ThemeConsumerProps> = ({ label }: ThemeConsumerProps): ReactNode => {
-  const context: ThemeContextValue | null = useContext(ThemeContext);
-
-  if (context === null) {
-    return (
-      <section>
-        <h3>{label}</h3>
-        <p>No ThemeContext provider is available.</p>
-      </section>
-    );
-  }
+  const context: ThemeContextValue = useTheme();
 
   return (
     <section>
@@ -142,16 +153,7 @@ export const UserProvider: FC<UserProviderProps> = ({ children, user }: UserProv
  * Reads user data from the nearest `UserContext` provider.
  */
 export const UserConsumerExample: FC<ThemeConsumerProps> = ({ label }: ThemeConsumerProps): ReactNode => {
-  const user: UserContextValue | null = useContext(UserContext);
-
-  if (user === null) {
-    return (
-      <section>
-        <h3>{label}</h3>
-        <p>No UserContext provider is available.</p>
-      </section>
-    );
-  }
+  const user: UserContextValue = useUser();
 
   return (
     <section>

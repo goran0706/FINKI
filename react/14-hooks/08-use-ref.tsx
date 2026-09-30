@@ -265,22 +265,36 @@ export const MutableObjectRefExample: FC<MutableObjectRefProps> = ({
 };
 
 /**
- * Demonstrates a common misconception by displaying a ref mutation that does
- * not update the rendered UI. The example is shown as text and is not executed.
- */
-export const RefDoesNotTriggerRenderExample: FC = (): ReactNode => {
-  const incorrectPattern: string = `
-// Changing a ref does not schedule a render.
-valueRef.current = nextValue;
 
-// Use state when the value belongs in the rendered UI.
-setValue(nextValue);
-`;
+* Demonstrates a common misconception by mutating a ref and showing that the
+* rendered UI does not update because changing `.current` does not schedule
+* another render.
+*/
+export const RefDoesNotTriggerRenderExample: FC = (): ReactNode => {
+  const valueRef = useRef<number>(0);
+  const [renderVersion, setRenderVersion] = useState<number>(0);
+
+  const updateRef = (): void => {
+    valueRef.current += 1;
+  };
+
+  const forceRender = (): void => {
+    setRenderVersion((previousVersion: number): number => previousVersion + 1);
+  };
 
   return (
     <section>
       <h3>Refs do not trigger renders</h3>
-      <pre>{incorrectPattern}</pre>
+      <p>Ref value: {valueRef.current}</p>
+      <p>Render version: {renderVersion}</p>
+
+      <button type="button" onClick={updateRef}>
+        Change ref
+      </button>
+
+      <button type="button" onClick={forceRender}>
+        Render component
+      </button>
     </section>
   );
 };

@@ -297,11 +297,14 @@ export const ControlledInputStateExample: FC<ControlledInputStateProps> = ({
  * incorrect pattern as text so the invalid mutation is never executed.
  */
 export const StateMutationGotchaExample: FC = (): ReactNode => {
-  const incorrectPattern: string = `
-// Avoid mutating state directly.
-profile.age += 1;
-setProfile(profile);
-`;
+  const [profile, setProfile] = useState<{ name: string; age: number }>({
+    name: "John Doe",
+    age: 30,
+  });
+
+  // Incorrect Pattern: Avoid mutating state directly.
+  profile.age += 1;
+  setProfile(profile);
 
   return (
     <section>
