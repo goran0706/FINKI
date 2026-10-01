@@ -46,7 +46,6 @@ export interface ServerDataSnapshotProps {
 
 /**
  * Demonstrates client state.
- *
  * The counter has no remote source of truth. Its value is created and changed entirely
  * within the browser, so React state directly represents the authoritative client value.
  */
@@ -78,7 +77,6 @@ export const ClientStateExample: React.FC<ClientStateExampleProps> = ({
 
 /**
  * Demonstrates server state.
- *
  * The delayed operation represents an API request. The resulting object is only a client-side
  * representation of data whose authoritative source exists on the server.
  */
@@ -87,39 +85,56 @@ export const ServerStateExample: React.FC<ServerStateExampleProps> = ({
 }: ServerStateExampleProps): React.ReactElement => {
   const [user, setUser] = useState<ServerUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect((): (() => void) => {
-    let isCancelled: boolean = false;
+    const controller = new AbortController();
 
     const fetchUser = async (): Promise<void> => {
       setIsLoading(true);
       setUser(null);
+      setError(null);
 
-      await new Promise<void>((resolve): void => {
-        window.setTimeout(resolve, 500);
-      });
+      try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+          signal: controller.signal,
+        });
 
-      const remoteUser: ServerUser = {
-        id: userId,
-        name: "John Doe",
-        email: "john.doe@example.com",
-      };
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}.`);
+        }
 
-      if (!isCancelled) {
-        setUser(remoteUser);
-        setIsLoading(false);
+        const remoteUser: ServerUser = await response.json();
+
+        if (!controller.signal.aborted) {
+          setUser(remoteUser);
+          setIsLoading(false);
+        }
+      } catch (requestError: unknown) {
+        if (requestError instanceof DOMException && requestError.name === "AbortError") {
+          return;
+        }
+
+        if (!controller.signal.aborted) {
+          setError(requestError instanceof Error ? requestError.message : "An unknown error occurred.");
+          setIsLoading(false);
+        }
       }
     };
 
     void fetchUser();
 
     return (): void => {
-      isCancelled = true;
+      controller.abort();
     };
   }, [userId]);
 
   if (isLoading) {
     return <p>Loading server state...</p>;
+  }
+
+  if (error !== null) {
+    return <p>Failed to load server state: {error}</p>;
   }
 
   if (user === null) {
@@ -128,15 +143,13 @@ export const ServerStateExample: React.FC<ServerStateExampleProps> = ({
 
   return (
     <div>
-      <p>Server user: {user.name}</p>
-      <p>Email: {user.email}</p>
+      <p>Server user: {user.name}</p> <p>Email: {user.email}</p>
     </div>
   );
 };
 
 /**
  * Demonstrates that storage location does not determine state ownership.
- *
  * A server response can be placed inside useState, but the component does not become
  * the owner of that data. The remote system remains the authoritative source.
  */
@@ -146,10 +159,12 @@ export const ServerDataStoredInClientState: React.FC<ServerDataSnapshotProps> = 
   const [user, setUser] = useState<ServerUser>(initialUser);
 
   const changeLocalSnapshot = (): void => {
-    setUser((currentUser: ServerUser): ServerUser => ({
-      ...currentUser,
-      name: "Jane Doe",
-    }));
+    setUser(
+      (currentUser: ServerUser): ServerUser => ({
+        ...currentUser,
+        name: "Jane Doe",
+      }),
+    );
   };
 
   return (
@@ -174,7 +189,7 @@ const ClientStateVsServerState: React.FC = (): React.ReactElement => {
   const initialUser: ServerUser = {
     id: 1,
     name: "John Doe",
-    email: "john.doe@example.com",
+    email: "[john.doe@example.com](mailto:john.doe@example.com)",
   };
 
   return (

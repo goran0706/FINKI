@@ -41,9 +41,7 @@ export interface LocalStateExampleProps {
 // ---------------------------------------------------------------------
 
 /**
-
  * Demonstrates the basic shape of server state after it has been fetched.
- *
  * The component keeps the fetched value in React state so it can render the result,
  * but the source of truth remains the simulated remote server represented by fetchUser.
  */
@@ -52,38 +50,53 @@ export const ServerStateExample: React.FC<ServerStateExampleProps> = ({
 }: ServerStateExampleProps): React.ReactElement => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect((): (() => void) => {
-    let isCancelled: boolean = false;
+    const controller = new AbortController();
 
     const fetchUser = async (): Promise<void> => {
       setIsLoading(true);
+      setError(null);
 
-      await new Promise<void>((resolve): void => {
-        window.setTimeout(resolve, 500);
-      });
+      try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {
+          signal: controller.signal,
+        });
 
-      const fetchedUser: User = {
-        id: userId,
-        name: "John Doe",
-        email: "john.doe@example.com",
-      };
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}.`);
+        }
 
-      if (!isCancelled) {
+        const fetchedUser: User = await response.json();
+
         setUser(fetchedUser);
-        setIsLoading(false);
+      } catch (requestError: unknown) {
+        if (requestError instanceof DOMException && requestError.name === "AbortError") {
+          return;
+        }
+
+        setError(requestError instanceof Error ? requestError.message : "An unknown error occurred.");
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
       }
     };
 
     void fetchUser();
 
     return (): void => {
-      isCancelled = true;
+      controller.abort();
     };
   }, [userId]);
 
   if (isLoading) {
     return <p>Loading server data...</p>;
+  }
+
+  if (error !== null) {
+    return <p>Failed to load server data: {error}</p>;
   }
 
   if (user === null) {
@@ -98,7 +111,6 @@ export const ServerStateExample: React.FC<ServerStateExampleProps> = ({
 };
 
 /**
-
  * Demonstrates an important distinction: putting server data into useState does not
  * transform it into client-owned state. The value is still a snapshot of remote data.
  */
@@ -108,10 +120,12 @@ export const LocalStateDoesNotOwnServerData: React.FC<LocalStateExampleProps> = 
   const [user, setUser] = useState<User>(initialUser);
 
   const changeLocalSnapshot = (): void => {
-    setUser((currentUser: User): User => ({
-      ...currentUser,
-      name: "Jane Doe",
-    }));
+    setUser(
+      (currentUser: User): User => ({
+        ...currentUser,
+        name: currentUser.name === "John Doe" ? "Jane Doe" : "John Doe",
+      }),
+    );
   };
 
   return (
@@ -120,40 +134,74 @@ export const LocalStateDoesNotOwnServerData: React.FC<LocalStateExampleProps> = 
       <button type="button" onClick={changeLocalSnapshot}>
         Change Local Snapshot
       </button>
+      <p>This changes only the local snapshot. It does not update the remote server. </p>
     </div>
   );
 };
 
 /**
-
  * Demonstrates why server state differs from ordinary local UI state.
- *
  * A local UI value can be changed entirely inside the browser, while server data
  * may become outdated because another client or process changes the remote source.
  */
 export const ServerStateCanBecomeStale: React.FC = (): React.ReactElement => {
-  const [user, setUser] = useState<User>({
-    id: 1,
-    name: "John Doe",
-    email: "[john.doe@example.com](mailto:john.doe@example.com)",
-  });
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const simulateRemoteChange = (): void => {
-    setUser((currentUser: User): User => ({
-      ...currentUser,
-      name: currentUser.name === "John Doe" ? "Jane Doe" : "John Doe",
-    }));
+  const fetchUser = async (): Promise<void> => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("https://jsonplaceholder.typicode.com/users/1");
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}.`);
+      }
+
+      const fetchedUser: User = await response.json();
+
+      setUser(fetchedUser);
+    } catch (requestError: unknown) {
+      setError(requestError instanceof Error ? requestError.message : "An unknown error occurred.");
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  useEffect((): void => {
+    void fetchUser();
+  }, []);
+
+  if (isLoading && user === null) {
+    return <p>Loading server data...</p>;
+  }
+
+  if (error !== null) {
+    return (
+      <div>
+        <p>Failed to load server data: {error}</p>
+        <button type="button" onClick={() => void fetchUser()}>
+          Retry
+        </button>
+      </div>
+    );
+  }
+
+  if (user === null) {
+    return <p>No user data available.</p>;
+  }
 
   return (
     <div>
       <p>Currently displayed name: {user.name}</p>
-      <button type="button" onClick={simulateRemoteChange}>
-        Simulate Remote Data Change
+      <button type="button" onClick={() => void fetchUser()} disabled={isLoading}>
+        {isLoading ? "Refreshing..." : "Refetch Server Data"}
       </button>
       <p>
         In a real application, the browser would need to refetch or otherwise synchronize with the server to discover
-        this change.{" "}
+        this change.
       </p>
     </div>
   );

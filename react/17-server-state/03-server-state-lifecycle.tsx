@@ -177,10 +177,12 @@ export const ServerStateBackgroundRefetch: React.FC = (): React.ReactElement => 
     setIsRefetching(true);
 
     window.setTimeout((): void => {
-      setUser((currentUser: ServerUser): ServerUser => ({
-        ...currentUser,
-        name: "Jane Doe",
-      }));
+      setUser(
+        (currentUser: ServerUser): ServerUser => ({
+          ...currentUser,
+          name: "Jane Doe",
+        }),
+      );
       setIsRefetching(false);
     }, 1000);
   };
