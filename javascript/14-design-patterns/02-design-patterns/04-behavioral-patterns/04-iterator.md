@@ -28,9 +28,9 @@ Consider a collection implemented with an array:
 
 ```js
 class UserCollection {
-    constructor(users) {
-        this.users = users;
-    }
+  constructor(users) {
+    this.users = users;
+  }
 }
 ```
 
@@ -38,7 +38,7 @@ A client could directly access the representation:
 
 ```js
 for (const user of collection.users) {
-    console.log(user);
+  console.log(user);
 }
 ```
 
@@ -54,8 +54,8 @@ const iterator = collection.iterator();
 let result = iterator.next();
 
 while (!result.done) {
-    console.log(result.value);
-    result = iterator.next();
+  console.log(result.value);
+  result = iterator.next();
 }
 ```
 
@@ -69,13 +69,13 @@ A simple aggregate can provide an iterator:
 
 ```js
 class UserCollection {
-    constructor(users) {
-        this.users = users;
-    }
+  constructor(users) {
+    this.users = users;
+  }
 
-    iterator() {
-        return new UserIterator(this);
-    }
+  iterator() {
+    return new UserIterator(this);
+  }
 }
 ```
 
@@ -91,13 +91,13 @@ A traditional representation might expose:
 
 ```js
 class Iterator {
-    next() {
-        throw new Error("Not implemented");
-    }
+  next() {
+    throw new Error("Not implemented");
+  }
 
-    hasNext() {
-        throw new Error("Not implemented");
-    }
+  hasNext() {
+    throw new Error("Not implemented");
+  }
 }
 ```
 
@@ -131,24 +131,24 @@ A concrete iterator maintains traversal state.
 
 ```js
 class UserIterator {
-    constructor(collection) {
-        this.collection = collection;
-        this.index = 0;
+  constructor(collection) {
+    this.collection = collection;
+    this.index = 0;
+  }
+
+  next() {
+    if (this.index >= this.collection.users.length) {
+      return {
+        value: undefined,
+        done: true,
+      };
     }
 
-    next() {
-        if (this.index >= this.collection.users.length) {
-            return {
-                value: undefined,
-                done: true
-            };
-        }
-
-        return {
-            value: this.collection.users[this.index++],
-            done: false
-        };
-    }
+    return {
+      value: this.collection.users[this.index++],
+      done: false,
+    };
+  }
 }
 ```
 
@@ -185,12 +185,12 @@ An iterator object provides a `next()` method:
 
 ```js
 const iterator = {
-    next() {
-        return {
-            value: 42,
-            done: false
-        };
-    }
+  next() {
+    return {
+      value: 42,
+      done: false,
+    };
+  },
 };
 ```
 
@@ -198,21 +198,21 @@ A complete iterator eventually returns `done: true`.
 
 ```js
 const iterator = {
-    index: 0,
+  index: 0,
 
-    next() {
-        if (this.index >= 3) {
-            return {
-                value: undefined,
-                done: true
-            };
-        }
-
-        return {
-            value: this.index++,
-            done: false
-        };
+  next() {
+    if (this.index >= 3) {
+      return {
+        value: undefined,
+        done: true,
+      };
     }
+
+    return {
+      value: this.index++,
+      done: false,
+    };
+  },
 };
 ```
 
@@ -224,13 +224,13 @@ An iterable object implements `[Symbol.iterator]()`.
 
 ```js
 class UserCollection {
-    constructor(users) {
-        this.users = users;
-    }
+  constructor(users) {
+    this.users = users;
+  }
 
-    [Symbol.iterator]() {
-        return this.users[Symbol.iterator]();
-    }
+  [Symbol.iterator]() {
+    return this.users[Symbol.iterator]();
+  }
 }
 ```
 
@@ -238,7 +238,7 @@ The collection can now be consumed by `for...of`:
 
 ```js
 for (const user of collection) {
-    console.log(user);
+  console.log(user);
 }
 ```
 
@@ -252,7 +252,7 @@ The `[Symbol.iterator]()` method provides the iterator for a new traversal.
 
 ```js
 for (const item of collection) {
-    console.log(item);
+  console.log(item);
 }
 ```
 
@@ -294,15 +294,15 @@ Generators provide a concise way to implement iterators.
 
 ```js
 class UserCollection {
-    constructor(users) {
-        this.users = users;
-    }
+  constructor(users) {
+    this.users = users;
+  }
 
-    * [Symbol.iterator]() {
-        for (const user of this.users) {
-            yield user;
-        }
+  *[Symbol.iterator]() {
+    for (const user of this.users) {
+      yield user;
     }
+  }
 }
 ```
 
@@ -312,7 +312,7 @@ The client can use:
 
 ```js
 for (const user of collection) {
-    console.log(user);
+  console.log(user);
 }
 ```
 
@@ -328,9 +328,9 @@ Therefore:
 
 ```js
 function* values() {
-    yield 1;
-    yield 2;
-    yield 3;
+  yield 1;
+  yield 2;
+  yield 3;
 }
 ```
 
@@ -347,18 +347,18 @@ For example, a linked structure can expose iteration without exposing its nodes:
 
 ```js
 class LinkedCollection {
-    constructor(head) {
-        this.head = head;
-    }
+  constructor(head) {
+    this.head = head;
+  }
 
-    * [Symbol.iterator]() {
-        let current = this.head;
+  *[Symbol.iterator]() {
+    let current = this.head;
 
-        while (current) {
-            yield current.value;
-            current = current.next;
-        }
+    while (current) {
+      yield current.value;
+      current = current.next;
     }
+  }
 }
 ```
 
@@ -366,7 +366,7 @@ Clients can simply write:
 
 ```js
 for (const value of collection) {
-    console.log(value);
+  console.log(value);
 }
 ```
 
@@ -378,13 +378,13 @@ Iterator can encapsulate traversal of a tree.
 
 ```js
 class Tree {
-    constructor(root) {
-        this.root = root;
-    }
+  constructor(root) {
+    this.root = root;
+  }
 
-    * [Symbol.iterator]() {
-        yield* traverse(this.root);
-    }
+  *[Symbol.iterator]() {
+    yield* traverse(this.root);
+  }
 }
 ```
 
@@ -392,14 +392,14 @@ The traversal function can implement depth-first traversal:
 
 ```js
 function* traverse(node) {
-    if (!node) {
-        return;
-    }
+  if (!node) {
+    return;
+  }
 
-    yield node.value;
+  yield node.value;
 
-    yield* traverse(node.left);
-    yield* traverse(node.right);
+  yield* traverse(node.left);
+  yield* traverse(node.right);
 }
 ```
 
@@ -413,21 +413,21 @@ For example:
 
 ```js
 class Tree {
-    constructor(root) {
-        this.root = root;
-    }
+  constructor(root) {
+    this.root = root;
+  }
 
-    * preOrder() {
-        yield* traversePreOrder(this.root);
-    }
+  *preOrder() {
+    yield* traversePreOrder(this.root);
+  }
 
-    * inOrder() {
-        yield* traverseInOrder(this.root);
-    }
+  *inOrder() {
+    yield* traverseInOrder(this.root);
+  }
 
-    * postOrder() {
-        yield* traversePostOrder(this.root);
-    }
+  *postOrder() {
+    yield* traversePostOrder(this.root);
+  }
 }
 ```
 
@@ -435,7 +435,7 @@ The traversal algorithm becomes an explicit choice.
 
 ```js
 for (const value of tree.preOrder()) {
-    console.log(value);
+  console.log(value);
 }
 ```
 
@@ -447,32 +447,32 @@ Instead of exposing traversal methods directly, separate iterator objects can re
 
 ```js
 class InOrderIterator {
-    constructor(root) {
-        this.stack = [];
-        this.current = root;
+  constructor(root) {
+    this.stack = [];
+    this.current = root;
+  }
+
+  next() {
+    while (this.current) {
+      this.stack.push(this.current);
+      this.current = this.current.left;
     }
 
-    next() {
-        while (this.current) {
-            this.stack.push(this.current);
-            this.current = this.current.left;
-        }
-
-        if (this.stack.length === 0) {
-            return {
-                value: undefined,
-                done: true
-            };
-        }
-
-        const node = this.stack.pop();
-        this.current = node.right;
-
-        return {
-            value: node.value,
-            done: false
-        };
+    if (this.stack.length === 0) {
+      return {
+        value: undefined,
+        done: true,
+      };
     }
+
+    const node = this.stack.pop();
+    this.current = node.right;
+
+    return {
+      value: node.value,
+      done: false,
+    };
+  }
 }
 ```
 
@@ -483,14 +483,14 @@ independently.
 
 An iterator may maintain:
 
-* current index
-* current node
-* traversal stack
-* traversal queue
-* cursor position
-* pagination state
-* filtering state
-* transformation state
+- current index
+- current node
+- traversal stack
+- traversal queue
+- cursor position
+- pagination state
+- filtering state
+- transformation state
 
 The state belongs to the traversal rather than necessarily to the aggregate.
 
@@ -504,11 +504,11 @@ A generator does not need to produce every element immediately:
 
 ```js
 function* numbers() {
-    let value = 0;
+  let value = 0;
 
-    while (true) {
-        yield value++;
-    }
+  while (true) {
+    yield value++;
+  }
 }
 ```
 
@@ -530,11 +530,11 @@ Iterators can represent sequences that have no natural end.
 
 ```js
 function* ids() {
-    let id = 1;
+  let id = 1;
 
-    while (true) {
-        yield id++;
-    }
+  while (true) {
+    yield id++;
+  }
 }
 ```
 
@@ -542,11 +542,11 @@ Consumers must impose their own termination condition.
 
 ```js
 for (const id of ids()) {
-    if (id > 10) {
-        break;
-    }
+  if (id > 10) {
+    break;
+  }
 
-    console.log(id);
+  console.log(id);
 }
 ```
 
@@ -558,9 +558,9 @@ An iterator can defer expensive computation.
 
 ```js
 function* expensiveValues(values) {
-    for (const value of values) {
-        yield expensiveCalculation(value);
-    }
+  for (const value of values) {
+    yield expensiveCalculation(value);
+  }
 }
 ```
 
@@ -576,21 +576,18 @@ Iterator-based traversal can filter values lazily.
 
 ```js
 function* filter(iterable, predicate) {
-    for (const value of iterable) {
-        if (predicate(value)) {
-            yield value;
-        }
+  for (const value of iterable) {
+    if (predicate(value)) {
+      yield value;
     }
+  }
 }
 ```
 
 Usage:
 
 ```js
-const activeUsers = filter(
-    users,
-    user => user.active
-);
+const activeUsers = filter(users, (user) => user.active);
 ```
 
 The resulting iterable does not need to allocate an intermediate array.
@@ -601,9 +598,9 @@ Mapping can also be lazy:
 
 ```js
 function* map(iterable, transform) {
-    for (const value of iterable) {
-        yield transform(value);
-    }
+  for (const value of iterable) {
+    yield transform(value);
+  }
 }
 ```
 
@@ -611,8 +608,8 @@ This allows iterator pipelines:
 
 ```js
 const names = map(
-    filter(users, user => user.active),
-    user => user.name
+  filter(users, (user) => user.active),
+  (user) => user.name,
 );
 ```
 
@@ -626,11 +623,8 @@ Iterator transformations can be composed.
 
 ```js
 const result = map(
-    filter(
-        users,
-        user => user.active
-    ),
-    user => user.name
+  filter(users, (user) => user.active),
+  (user) => user.name,
 );
 ```
 
@@ -648,9 +642,9 @@ Consumers can stop iteration before the aggregate is exhausted.
 
 ```js
 for (const user of users) {
-    if (user.id === targetId) {
-        break;
-    }
+  if (user.id === targetId) {
+    break;
+  }
 }
 ```
 
@@ -664,9 +658,9 @@ JavaScript's iterator protocol allows `next()` to return a final value:
 
 ```js
 function* example() {
-    yield 1;
-    yield 2;
-    return 42;
+  yield 1;
+  yield 2;
+  return 42;
 }
 ```
 
@@ -674,7 +668,7 @@ Direct iteration generally ignores the final return value:
 
 ```js
 for (const value of example()) {
-    console.log(value);
+  console.log(value);
 }
 ```
 
@@ -697,20 +691,20 @@ Iterators can optionally define a `return()` method.
 
 ```js
 const iterator = {
-    next() {
-        return {
-            value: 1,
-            done: false
-        };
-    },
+  next() {
+    return {
+      value: 1,
+      done: false,
+    };
+  },
 
-    return() {
-        console.log("cleanup");
-        return {
-            value: undefined,
-            done: true
-        };
-    }
+  return() {
+    console.log("cleanup");
+    return {
+      value: undefined,
+      done: true,
+    };
+  },
 };
 ```
 
@@ -724,11 +718,11 @@ An iterator may represent a resource-backed sequence.
 
 Examples include:
 
-* database cursors
-* file streams
-* network streams
-* paginated APIs
-* external service cursors
+- database cursors
+- file streams
+- network streams
+- paginated APIs
+- external service cursors
 
 In these cases, traversal is not merely an in-memory operation.
 
@@ -742,15 +736,15 @@ JavaScript also provides an asynchronous iterator protocol through `Symbol.async
 
 ```js
 class EventStream {
-    constructor(source) {
-        this.source = source;
-    }
+  constructor(source) {
+    this.source = source;
+  }
 
-    async* [Symbol.asyncIterator]() {
-        for await (const event of this.source) {
-            yield event;
-        }
+  async *[Symbol.asyncIterator]() {
+    for await (const event of this.source) {
+      yield event;
     }
+  }
 }
 ```
 
@@ -758,7 +752,7 @@ The consumer can use:
 
 ```js
 for await (const event of stream) {
-    console.log(event);
+  console.log(event);
 }
 ```
 
@@ -770,12 +764,12 @@ An asynchronous iterator provides `next()` returning a Promise:
 
 ```js
 const iterator = {
-    async next() {
-        return {
-            value: await loadNextValue(),
-            done: false
-        };
-    }
+  async next() {
+    return {
+      value: await loadNextValue(),
+      done: false,
+    };
+  },
 };
 ```
 
@@ -790,23 +784,23 @@ An async iterator can hide pagination mechanics.
 
 ```js
 async function* usersFromApi(api) {
-    let page = 1;
+  let page = 1;
 
-    while (true) {
-        const result = await api.getUsers({
-            page
-        });
+  while (true) {
+    const result = await api.getUsers({
+      page,
+    });
 
-        for (const user of result.items) {
-            yield user;
-        }
-
-        if (!result.nextPage) {
-            break;
-        }
-
-        page = result.nextPage;
+    for (const user of result.items) {
+      yield user;
     }
+
+    if (!result.nextPage) {
+      break;
+    }
+
+    page = result.nextPage;
+  }
 }
 ```
 
@@ -814,7 +808,7 @@ The consumer sees a logical sequence:
 
 ```js
 for await (const user of usersFromApi(api)) {
-    process(user);
+  process(user);
 }
 ```
 
@@ -826,15 +820,15 @@ Iterators can expose streams of values incrementally.
 
 ```js
 async function* readMessages(socket) {
-    while (true) {
-        const message = await socket.read();
+  while (true) {
+    const message = await socket.read();
 
-        if (message === null) {
-            return;
-        }
-
-        yield message;
+    if (message === null) {
+      return;
     }
+
+    yield message;
+  }
 }
 ```
 
@@ -848,7 +842,7 @@ In asynchronous systems, iterator consumption can provide a natural demand bound
 
 ```js
 for await (const item of stream) {
-    await process(item);
+  await process(item);
 }
 ```
 
@@ -880,11 +874,11 @@ An iterable collection usually creates a new iterator each time:
 
 ```js
 for (const item of collection) {
-    // first traversal
+  // first traversal
 }
 
 for (const item of collection) {
-    // second traversal
+  // second traversal
 }
 ```
 
@@ -894,11 +888,11 @@ A generator object, by contrast, represents a particular execution and is genera
 const iterator = numbers();
 
 for (const value of iterator) {
-    console.log(value);
+  console.log(value);
 }
 
 for (const value of iterator) {
-    console.log(value);
+  console.log(value);
 }
 ```
 
@@ -912,9 +906,9 @@ An iterable provides a way to obtain an iterator.
 
 ```js
 const iterable = {
-    [Symbol.iterator]() {
-        return iterator;
-    }
+  [Symbol.iterator]() {
+    return iterator;
+  },
 };
 ```
 
@@ -922,18 +916,18 @@ An iterator provides `next()`.
 
 ```js
 const iterator = {
-    next() {
-        return {
-            value: 1,
-            done: false
-        };
-    }
+  next() {
+    return {
+      value: 1,
+      done: false,
+    };
+  },
 };
 ```
 
 A common design is therefore:
 
-```text id="a2x4j1"
+```text
 Aggregate → Iterable → Iterator
 ```
 
@@ -964,7 +958,7 @@ Mutation of an aggregate while it is being traversed can create difficult semant
 
 ```js
 for (const item of collection) {
-    collection.remove(item);
+  collection.remove(item);
 }
 ```
 
@@ -972,13 +966,13 @@ The result depends on the collection's iterator implementation.
 
 Possible semantics include:
 
-* newly added elements are visible
-* newly added elements are ignored
-* removed elements are skipped
-* removed elements remain visible
-* iteration throws
-* iteration uses a snapshot
-* behavior is unspecified
+- newly added elements are visible
+- newly added elements are ignored
+- removed elements are skipped
+- removed elements remain visible
+- iteration throws
+- iteration uses a snapshot
+- behavior is unspecified
 
 A collection should define meaningful mutation semantics when iteration and mutation can overlap.
 
@@ -988,17 +982,17 @@ A collection can iterate over a snapshot.
 
 ```js
 class Collection {
-    constructor(items) {
-        this.items = items;
-    }
+  constructor(items) {
+    this.items = items;
+  }
 
-    * [Symbol.iterator]() {
-        const snapshot = [...this.items];
+  *[Symbol.iterator]() {
+    const snapshot = [...this.items];
 
-        for (const item of snapshot) {
-            yield item;
-        }
+    for (const item of snapshot) {
+      yield item;
     }
+  }
 }
 ```
 
@@ -1012,15 +1006,15 @@ A live iterator observes the underlying collection as traversal proceeds.
 
 ```js
 class Collection {
-    constructor(items) {
-        this.items = items;
-    }
+  constructor(items) {
+    this.items = items;
+  }
 
-    * [Symbol.iterator]() {
-        for (let i = 0; i < this.items.length; i++) {
-            yield this.items[i];
-        }
+  *[Symbol.iterator]() {
+    for (let i = 0; i < this.items.length; i++) {
+      yield this.items[i];
     }
+  }
 }
 ```
 
@@ -1040,7 +1034,7 @@ A Composite tree can expose an iterator for traversal:
 
 ```js
 for (const node of tree) {
-    console.log(node);
+  console.log(node);
 }
 ```
 
@@ -1061,7 +1055,7 @@ For example:
 
 ```js
 for (const node of tree) {
-    node.accept(visitor);
+  node.accept(visitor);
 }
 ```
 
@@ -1077,9 +1071,9 @@ For example, a tree may support different traversal policies:
 
 ```js
 class DepthFirstStrategy {
-    * traverse(root) {
-        yield* traverseDepthFirst(root);
-    }
+  *traverse(root) {
+    yield* traverseDepthFirst(root);
+  }
 }
 ```
 
@@ -1095,8 +1089,8 @@ The following is an iterator:
 
 ```js
 function* values() {
-    yield 1;
-    yield 2;
+  yield 1;
+  yield 2;
 }
 ```
 
@@ -1118,7 +1112,7 @@ JavaScript arrays already support iteration.
 
 ```js
 for (const item of items) {
-    console.log(item);
+  console.log(item);
 }
 ```
 
@@ -1169,9 +1163,9 @@ For example:
 
 ```js
 for (const item of collection) {
-    if (predicate(item)) {
-        return item;
-    }
+  if (predicate(item)) {
+    return item;
+  }
 }
 ```
 
@@ -1240,33 +1234,33 @@ For example, breadth-first traversal can maintain a queue:
 
 ```js
 class BreadthFirstIterator {
-    constructor(root) {
-        this.queue = root ? [root] : [];
+  constructor(root) {
+    this.queue = root ? [root] : [];
+  }
+
+  next() {
+    if (this.queue.length === 0) {
+      return {
+        value: undefined,
+        done: true,
+      };
     }
 
-    next() {
-        if (this.queue.length === 0) {
-            return {
-                value: undefined,
-                done: true
-            };
-        }
+    const node = this.queue.shift();
 
-        const node = this.queue.shift();
-
-        if (node.left) {
-            this.queue.push(node.left);
-        }
-
-        if (node.right) {
-            this.queue.push(node.right);
-        }
-
-        return {
-            value: node.value,
-            done: false
-        };
+    if (node.left) {
+      this.queue.push(node.left);
     }
+
+    if (node.right) {
+      this.queue.push(node.right);
+    }
+
+    return {
+      value: node.value,
+      done: false,
+    };
+  }
 }
 ```
 
@@ -1285,14 +1279,14 @@ For example, this design is problematic:
 
 ```js
 class Collection {
-    constructor(items) {
-        this.items = items;
-        this.index = 0;
-    }
+  constructor(items) {
+    this.items = items;
+    this.index = 0;
+  }
 
-    next() {
-        return this.items[this.index++];
-    }
+  next() {
+    return this.items[this.index++];
+  }
 }
 ```
 
@@ -1308,9 +1302,9 @@ A consumer may terminate early:
 
 ```js
 for (const row of cursor) {
-    if (shouldStop(row)) {
-        break;
-    }
+  if (shouldStop(row)) {
+    break;
+  }
 }
 ```
 
@@ -1327,7 +1321,7 @@ Errors may occur when obtaining the next element.
 
 ```js
 for await (const item of stream) {
-    process(item);
+  process(item);
 }
 ```
 
@@ -1345,9 +1339,9 @@ Async iteration can reject while producing a value:
 
 ```js
 async function* stream() {
-    yield await loadFirst();
+  yield await loadFirst();
 
-    yield await loadSecond();
+  yield await loadSecond();
 }
 ```
 
@@ -1355,11 +1349,11 @@ Consumers can handle failures normally:
 
 ```js
 try {
-    for await (const item of stream()) {
-        process(item);
-    }
+  for await (const item of stream()) {
+    process(item);
+  }
 } catch (error) {
-    handle(error);
+  handle(error);
 }
 ```
 
@@ -1373,12 +1367,12 @@ Long-running asynchronous iteration may need cancellation.
 const controller = new AbortController();
 
 for await (const item of readStream({
-    signal: controller.signal
+  signal: controller.signal,
 })) {
-    if (shouldStop(item)) {
-        controller.abort();
-        break;
-    }
+  if (shouldStop(item)) {
+    controller.abort();
+    break;
+  }
 }
 ```
 
@@ -1393,14 +1387,11 @@ TypeScript provides built-in types for iterators and iterables.
 
 ```ts
 class UserCollection implements Iterable<User> {
-    constructor(
-        private readonly users: User[]
-    ) {
-    }
+  constructor(private readonly users: User[]) {}
 
-    [Symbol.iterator](): Iterator<User> {
-        return this.users[Symbol.iterator]();
-    }
+  [Symbol.iterator](): Iterator<User> {
+    return this.users[Symbol.iterator]();
+  }
 }
 ```
 
@@ -1408,26 +1399,23 @@ A custom iterator can implement `Iterator<T>`:
 
 ```ts
 class UserIterator implements Iterator<User> {
-    private index = 0;
+  private index = 0;
 
-    constructor(
-        private readonly users: User[]
-    ) {
+  constructor(private readonly users: User[]) {}
+
+  next(): IteratorResult<User> {
+    if (this.index >= this.users.length) {
+      return {
+        value: undefined,
+        done: true,
+      };
     }
 
-    next(): IteratorResult<User> {
-        if (this.index >= this.users.length) {
-            return {
-                value: undefined,
-                done: true
-            };
-        }
-
-        return {
-            value: this.users[this.index++],
-            done: false
-        };
-    }
+    return {
+      value: this.users[this.index++],
+      done: false,
+    };
+  }
 }
 ```
 
@@ -1439,17 +1427,17 @@ Generic abstractions can support arbitrary element types.
 
 ```ts
 function collect<T>(iterator: Iterator<T>): T[] {
-    const result: T[] = [];
+  const result: T[] = [];
 
-    while (true) {
-        const next = iterator.next();
+  while (true) {
+    const next = iterator.next();
 
-        if (next.done) {
-            return result;
-        }
-
-        result.push(next.value);
+    if (next.done) {
+      return result;
     }
+
+    result.push(next.value);
+  }
 }
 ```
 
@@ -1461,8 +1449,8 @@ TypeScript provides `AsyncIterator<T>` and `AsyncIterable<T>`.
 
 ```ts
 async function* users(): AsyncIterable<User> {
-    yield await loadUser(1);
-    yield await loadUser(2);
+  yield await loadUser(1);
+  yield await loadUser(2);
 }
 ```
 
@@ -1470,7 +1458,7 @@ The consumer can use:
 
 ```ts
 for await (const user of users()) {
-    console.log(user);
+  console.log(user);
 }
 ```
 
@@ -1490,16 +1478,16 @@ console.assert(iterator.next().done === true);
 
 For custom traversal algorithms, tests should verify:
 
-* traversal order
-* termination
-* empty collections
-* single-element collections
-* nested structures
-* mutation behavior
-* repeated independent traversals
-* early termination
-* error behavior
-* resource cleanup where applicable
+- traversal order
+- termination
+- empty collections
+- single-element collections
+- nested structures
+- mutation behavior
+- repeated independent traversals
+- early termination
+- error behavior
+- resource cleanup where applicable
 
 ## Testing Multiple Iterators
 
@@ -1512,9 +1500,7 @@ const second = collection[Symbol.iterator]();
 first.next();
 second.next();
 
-console.assert(
-    first.next().value === second.next().value
-);
+console.assert(first.next().value === second.next().value);
 ```
 
 More complex cases should verify that advancing one iterator does not unexpectedly advance another.
@@ -1525,9 +1511,9 @@ Iterator-based traversal can reduce memory usage by avoiding materialization.
 
 ```js
 function* values() {
-    for (const value of source()) {
-        yield transform(value);
-    }
+  for (const value of source()) {
+    yield transform(value);
+  }
 }
 ```
 
@@ -1554,7 +1540,7 @@ the application can consume:
 
 ```js
 for (const value of loadValues()) {
-    process(value);
+  process(value);
 }
 ```
 
@@ -1567,21 +1553,13 @@ The exact memory characteristics depend on the source and buffering strategy.
 Iterator pipelines can avoid intermediate arrays:
 
 ```js
-const result = map(
-    filter(
-        values,
-        predicate
-    ),
-    transform
-);
+const result = map(filter(values, predicate), transform);
 ```
 
 The alternative might create multiple arrays:
 
 ```js
-const result = values
-    .filter(predicate)
-    .map(transform);
+const result = values.filter(predicate).map(transform);
 ```
 
 The iterator version can be more memory-efficient, particularly for large sequences.
@@ -1596,14 +1574,14 @@ representation.
 
 ```js
 class ArrayIterator {
-    constructor(array) {
-        this.array = array;
-        this.index = 0;
-    }
+  constructor(array) {
+    this.array = array;
+    this.index = 0;
+  }
 
-    next() {
-        // Reimplements Array's existing iterator.
-    }
+  next() {
+    // Reimplements Array's existing iterator.
+  }
 }
 ```
 
@@ -1627,7 +1605,7 @@ A simple generator may be sufficient:
 
 Creating a hierarchy such as:
 
-```text id="r0z8hl"
+```text
 AbstractIterator
 ConcreteIterator
 IteratorFactory
@@ -1662,9 +1640,9 @@ True lazy iteration requires that values be obtained progressively.
 A collection intended to support repeated traversal should return a fresh iterator.
 
 ```js
-[Symbol.iterator]()
+[Symbol.iterator]();
 {
-    return this.createIterator();
+  return this.createIterator();
 }
 ```
 
@@ -1673,9 +1651,9 @@ Returning the same iterator instance can accidentally make the collection single
 For example:
 
 ```js
-[Symbol.iterator]()
+[Symbol.iterator]();
 {
-    return this.iterator;
+  return this.iterator;
 }
 ```
 
@@ -1694,7 +1672,7 @@ Possible approaches include:
 const snapshot = collection.snapshot();
 
 for (const item of snapshot) {
-    collection.remove(item);
+  collection.remove(item);
 }
 ```
 
@@ -1712,8 +1690,8 @@ Suppose several consumers directly access internal nodes:
 let node = tree.root;
 
 while (node) {
-    process(node);
-    node = node.next;
+  process(node);
+  node = node.next;
 }
 ```
 
@@ -1723,8 +1701,8 @@ Another consumer duplicates the same knowledge:
 let node = tree.root;
 
 while (node) {
-    validate(node);
-    node = node.next;
+  validate(node);
+  node = node.next;
 }
 ```
 
@@ -1732,14 +1710,14 @@ The traversal knowledge can be centralized:
 
 ```js
 class Tree {
-    * [Symbol.iterator]() {
-        let node = this.root;
+  *[Symbol.iterator]() {
+    let node = this.root;
 
-        while (node) {
-            yield node;
-            node = node.next;
-        }
+    while (node) {
+      yield node;
+      node = node.next;
     }
+  }
 }
 ```
 
@@ -1747,7 +1725,7 @@ Consumers now depend only on the iteration protocol:
 
 ```js
 for (const node of tree) {
-    process(node);
+  process(node);
 }
 ```
 
@@ -1757,16 +1735,16 @@ The collection can change its internal representation without forcing every cons
 
 Iterator is appropriate when:
 
-* clients need sequential access to a collection
-* collection representation should remain private
-* multiple traversal algorithms exist
-* traversal state should be independent between consumers
-* traversal should be lazy
-* data is generated incrementally
-* the source is asynchronous
-* a large collection should not be materialized
-* traversal logic is duplicated across clients
-* a collection needs to integrate with JavaScript iteration syntax
+- clients need sequential access to a collection
+- collection representation should remain private
+- multiple traversal algorithms exist
+- traversal state should be independent between consumers
+- traversal should be lazy
+- data is generated incrementally
+- the source is asynchronous
+- a large collection should not be materialized
+- traversal logic is duplicated across clients
+- a collection needs to integrate with JavaScript iteration syntax
 
 The strongest signal is that clients know too much about how a collection is traversed.
 
@@ -1786,30 +1764,30 @@ synchronization. Those concerns may be layered around traversal when necessary.
 
 Iterator provides several important benefits:
 
-* hides collection representation
-* separates traversal from collection implementation
-* supports independent traversal state
-* allows multiple traversal strategies
-* supports lazy evaluation
-* avoids unnecessary materialization
-* supports potentially infinite sequences
-* integrates naturally with JavaScript language features
-* supports synchronous and asynchronous traversal
-* can encapsulate complex traversal algorithms
-* provides a uniform interface for heterogeneous aggregate implementations
+- hides collection representation
+- separates traversal from collection implementation
+- supports independent traversal state
+- allows multiple traversal strategies
+- supports lazy evaluation
+- avoids unnecessary materialization
+- supports potentially infinite sequences
+- integrates naturally with JavaScript language features
+- supports synchronous and asynchronous traversal
+- can encapsulate complex traversal algorithms
+- provides a uniform interface for heterogeneous aggregate implementations
 
 ## Costs
 
 Iterator also introduces costs:
 
-* additional traversal state
-* additional abstraction
-* possible generator or iterator overhead
-* more complicated mutation semantics
-* lifecycle concerns for resource-backed iterators
-* asynchronous error and cancellation concerns
-* potentially harder debugging because computation is deferred
-* additional complexity when traversal semantics are unusual
+- additional traversal state
+- additional abstraction
+- possible generator or iterator overhead
+- more complicated mutation semantics
+- lifecycle concerns for resource-backed iterators
+- asynchronous error and cancellation concerns
+- potentially harder debugging because computation is deferred
+- additional complexity when traversal semantics are unusual
 
 For ordinary arrays, the native iteration facilities are usually sufficient.
 
