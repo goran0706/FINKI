@@ -1,4 +1,4 @@
-package fundamentals;
+package _01_fundamentals;
 
 public class _28_LambdaExpressions {
 

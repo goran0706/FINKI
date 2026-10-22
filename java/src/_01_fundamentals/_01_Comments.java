@@ -2,7 +2,7 @@ package _01_fundamentals;
 
 public class _01_Comments {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
         // Single-line comment
 
         /*
