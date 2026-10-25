@@ -1,4 +1,4 @@
-package labs.exe_02_lists;
+package labs.exe_02_intro;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

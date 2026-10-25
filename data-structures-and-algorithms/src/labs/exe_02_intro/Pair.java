@@ -1,4 +1,4 @@
-package labs.exe_02_lists;
+package labs.exe_02_intro;
 
 public class Pair<K, V> {
     private final K key;
