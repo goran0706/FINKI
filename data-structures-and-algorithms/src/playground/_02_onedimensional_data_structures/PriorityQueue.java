@@ -1,4 +1,4 @@
-package playground.еднодимензионални_податочни_структури;
+package playground._02_onedimensional_data_structures;
 
 /**
  * Приоритетна редица (Priority Queue)

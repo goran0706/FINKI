@@ -1,4 +1,4 @@
-package playground.низи_и_листи;
+package playground._01_arrays_and_lists;
 
 
 public class SLL<E> {
