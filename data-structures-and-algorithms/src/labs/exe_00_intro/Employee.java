@@ -1,4 +1,4 @@
-package labs.exe_01_intro;
+package labs.exe_00_intro;
 
 import java.text.DecimalFormat;
 

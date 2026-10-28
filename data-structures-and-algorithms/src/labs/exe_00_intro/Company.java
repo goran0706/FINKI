@@ -1,4 +1,4 @@
-package labs.exe_01_intro;
+package labs.exe_00_intro;
 
 // has-a relationship (composition)
 public class Company {

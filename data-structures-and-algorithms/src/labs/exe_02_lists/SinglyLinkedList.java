@@ -1,4 +1,4 @@
-package labs.exe_03_lists;
+package labs.exe_02_lists;
 
 import java.util.Objects;
 

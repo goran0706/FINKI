@@ -1,4 +1,4 @@
-package labs.exe_01_intro;
+package labs.exe_00_intro;
 
 // is-a relationship
 public class Developer extends Employee {

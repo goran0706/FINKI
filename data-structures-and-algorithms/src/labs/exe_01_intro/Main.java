@@ -1,180 +1,181 @@
 package labs.exe_01_intro;
 
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /*
-Да се напише програма за пресметка на плати во софтверската компанија FINKI Soft.
+Да се напише програма за магацин во кој производите се чуваат во контејнери.
 
-Класата Employee е основната класа. Секој вработен има:
+Класата Product има:
 
-    id (String)
-    name (String)
-    baseSalary (double)
+name (String)
+price (double)
 
-Методот calculateSalary() ја враќа основната плата. Методот toString() враќа текст во формат ID NAME salary=SALARY, каде SALARY е резултатот од calculateSalary(), печатен на 2 децимали.
+Методот finalPrice() ја враќа цената. Методот toString() враќа текст во формат NAME price=PRICE final=FINAL, каде двете цени се печатат на 2 децимали.
 
-Класата Developer наследува од Employee и има дополнителен атрибут overtimeHours (int). Платата се пресметува како основната плата плус 300 за секој прекувремен час. На toString() се додава overtime=H.
+Класата Food наследува од Product и има атрибут daysToExpiry (int). Ако до истекот на рокот има 3 или помалку дена, крајната цена е 50% од цената. На toString() се додава days=D.
 
-Класата TeamLead наследува од Developer и има дополнителен атрибут teamSize (int). Платата е платата од Developerплус 1000 за секој член на тимот. Ако тимот има 5 или повеќе членови, вкупната плата се зголемува за 5%. На toString() се додава team=T.
+Класата Electronics наследува од Product и има атрибут warrantyMonths (int). Ако гаранцијата е подолга од 24 месеци, крајната цена се зголемува за 15%. На toString() се додава warranty=W.
 
-Класата Intern наследува од Employee и има дополнителен атрибут months (int). Практикантот добива 60% од основната плата, или 80% ако е во компанијата 6 или повеќе месеци. На toString() се додава months=M.
+Генеричката класа Pair<K, V> чува клуч и вредност. Има конструктор и методи getKey() и getValue().
 
-Класата Company ги чува вработените во низа Employee[]. Се креира со име и капацитет. Треба да ги има следниве методи:
+Генеричката класа Container<T extends Product> чува производи од типот T. Ознаката extends Product значи дека T мора да биде Product или некоја негова поткласа, па затоа во контејнерот може да се повика finalPrice(). Контејнерот има име, капацитет и ArrayList<T>. Треба да ги има следниве методи:
 
-    hire(Employee e) – додава вработен
-    printAll() – печати === NAME ===, а потоа секој вработен во посебен ред
-    printStatistics() – печати Developers: X, Team leads: Y, Interns: Z, Others: W. Водачите на тимови не се бројат како програмери, а Others се обичните вработени.
-    totalPayroll() – збир на сите плати
-    averageSalary() – просечна плата
-    highestPaid() – вработениот со највисока плата; при еднаквост се враќа првиот
-    countAbove(double threshold) – број на вработени со плата строго поголема од прагот
+boolean add(T item) – додава производ; враќа false ако контејнерот е полн
+int size()
+double totalValue() – збир на крајните цени
+T mostExpensive() – производот со највисока крајна цена; при еднаквост се враќа првиот, а ако контејнерот е празен се враќа null
+Pair<String, Double> summary() – враќа пар (име на контејнерот, вкупна вредност)
+void print() – печати === NAME (SIZE/CAPACITY) ===, па сите производи, па Total: X, па Most expensive: NAME (PRICE)или Most expensive: none
 
-Сите конструктори на изведените класи мора да го повикаат super(...). Сите пресметки во изведените класи мора да го користат super.calculateSalary(). Не смеат да се користат генерици (ArrayList<>, List<> итн.).
+Во главната класа се креираат три контејнери:
+
+Container<Food> со име Fridge
+Container<Electronics> со име Tech
+Container<Product> со име Overflow
+
+Храната се става во Fridge, а електрониката во Tech. Ако соодветниот контејнер е полн, производот се става во Overflow. Ова е можно затоа што и Food и Electronics се Product. Ако и Overflow е полн, се печати Rejected: NAME. Не смее да се користи кастирање.
 
 Влез:
 
-    во првиот ред е N, бројот на вработени
-    потоа следуваат N редови, секој во еден од следниве формати:
-        E id name base
-        D id name base overtime
-        L id name base overtime teamSize
-        I id name base months
-    во последниот ред е прагот X
+во првиот ред се капацитетите на Fridge, Tech и Overflow
+во вториот ред е N, бројот на производи
+потоа следуваат N редови во формат F name price days или E name price warranty
 
 Излез:
-Се креира компанија со име FINKI Soft и се печати по следниов редослед:
 
-    листата на вработени (printAll)
-    статистиката (printStatistics)
-    Total payroll: TOTAL
-    Average salary: AVG
-    Highest paid: ID NAME (SALARY)
-    Employees with salary above X: COUNT
+пораките Rejected (во редоследот на читање)
+print() за Fridge, Tech и Overflow, по тој редослед
+Most valuable container: NAME (TOTAL), пресметано со summary() (при еднаквост се печати првиот)
+Top food expires in D days, ако Fridge не е празен
+Top electronics warranty: W months, ако Tech не е празен
 
-Сите децимални броеви се печатат на 2 децимали.
+Ставките 4 и 5 се добиваат директно од mostExpensive(), без кастирање.
 
-Write a program that calculates salaries in the software company FINKI Soft.
+Write a program for a warehouse in which products are stored in containers.
 
-The class Employee is the base class. Each employee has:
+        The class Product has:
 
-    id (String)
-    name (String)
-    baseSalary (double)
+name (String)
+price (double)
 
-The method calculateSalary() returns the base salary. The method toString() returns a string in the format ID NAME salary=SALARY, where SALARY is the result of calculateSalary(), printed with 2 decimals.
+The method finalPrice() returns the price. The method toString() returns a string in the format NAME price=PRICE final=FINAL, with both prices printed to 2 decimals.
 
-The class Developer extends Employee and adds the attribute overtimeHours (int). The salary is the base salary plus 300 per overtime hour. toString() appends overtime=H.
+        The class Food extends Product and has the attribute daysToExpiry (int). If there are 3 or fewer days until expiry, the final price is 50% of the price. toString() appends days=D.
 
-The class TeamLead extends Developer and adds the attribute teamSize (int). The salary is the Developer salary plus 1000 per team member. If the team has 5 or more members, the total salary is increased by 5%. toString() appends team=T.
+        The class Electronics extends Product and has the attribute warrantyMonths (int). If the warranty is longer than 24 months, the final price is increased by 15%. toString() appends warranty=W.
 
-The class Intern extends Employee and adds the attribute months (int). An intern receives 60% of the base salary, or 80% if they have been with the company 6 or more months. toString() appends months=M.
+The generic class Pair<K, V> stores a key and a value. It has a constructor and the methods getKey() and getValue().
 
-The class Company stores employees in an Employee[] array. It is created with a name and a capacity. It must have the following methods:
+The generic class Container<T extends Product> stores products of type T. The notation extends Product means T must be Productor one of its subclasses, which is why the container can call finalPrice(). A container has a name, a capacity and an ArrayList<T>. It must have the following methods:
 
-    hire(Employee e) – adds an employee
-    printAll() – prints === NAME ===, then each employee on a separate line
-    printStatistics() – prints Developers: X, Team leads: Y, Interns: Z, Others: W. Team leads are not counted as developers, and Others are plain employees.
-    totalPayroll() – the sum of all salaries
-    averageSalary() – the average salary
-    highestPaid() – the employee with the highest salary; on a tie, return the first one
-    countAbove(double threshold) – the number of employees whose salary is strictly greater than the threshold
+boolean add(T item) – adds a product; returns false if the container is full
+int size()
+double totalValue() – the sum of the final prices
+T mostExpensive() – the product with the highest final price; on a tie, return the first one, and if the container is empty, return null
+Pair<String, Double> summary() – returns a pair of (container name, total value)
+void print() – prints === NAME (SIZE/CAPACITY) ===, then all products, then Total: X, then Most expensive: NAME (PRICE) or Most expensive: none
 
-All subclass constructors must call super(...). All subclass calculations must use super.calculateSalary(). Generics are not allowed (ArrayList<>, List<>, etc.).
+The main class creates three containers:
+
+a Container<Food> named Fridge
+a Container<Electronics> named Tech
+a Container<Product> named Overflow
+
+Food goes into Fridge and electronics into Tech. If the matching container is full, the product goes into Overflow. This works because both Food and Electronics are a Product. If Overflow is also full, print Rejected: NAME. Casting is not allowed.
 
 Input:
 
-    the first line contains N, the number of employees
-    then follow N lines, each in one of these formats:
-        E id name base
-        D id name base overtime
-        L id name base overtime teamSize
-        I id name base months
-    the last line contains the threshold X
+the first line contains the capacities of Fridge, Tech and Overflow
+the second line contains N, the number of products
+then follow N lines in the format F name price days or E name price warranty
 
 Output:
-Create a company named FINKI Soft and print the following, in this order:
 
-    the list of employees (printAll)
-    the statistics (printStatistics)
-    Total payroll: TOTAL
-    Average salary: AVG
-    Highest paid: ID NAME (SALARY)
-    Employees with salary above X: COUNT
+the Rejected messages (in reading order)
+print() for Fridge, Tech and Overflow, in that order
+Most valuable container: NAME (TOTAL), computed with summary() (on a tie, print the first one)
+Top food expires in D days, if Fridge is not empty
+Top electronics warranty: W months, if Tech is not empty
 
-All decimal values are printed with 2 decimals.
+Items 4 and 5 are obtained directly from mostExpensive(), without casting.
+
 */
+
 public class Main {
-    // Notes:
-    // Use old syntax e.g. Java SE 8 or similar
-    // Courses/ispit will complain for short static void main()
-    static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        DecimalFormat formatter = new DecimalFormat("0.00");
+
+        int foodCapacity = scanner.nextInt();
+        int electronicsCapacity = scanner.nextInt();
+        int overflowCapacity = scanner.nextInt();
+
+        Container<Food> foodContainer = new Container<>("Fridge", foodCapacity);
+        Container<Electronics> electronicsContainer = new Container<>("Tech", electronicsCapacity);
+        Container<Product> overflowContainer = new Container<>("Overflow", overflowCapacity);
 
         int n = scanner.nextInt();
-        Company company = new Company("FINKI Soft", n);
 
         for (int i = 0; i < n; i++) {
             String type = scanner.next();
-            String id = scanner.next();
             String name = scanner.next();
-            double baseSalary = scanner.nextDouble();
+            double price = scanner.nextDouble();
 
-            // use regular switch or if
-            // do not use lambda with switch
             switch (type) {
-                case "E":
-                    company.hire(new Employee(id, name, baseSalary));
-                    break;
+                case "F": {
+                    int days = scanner.nextInt();
+                    Food food = new Food(name, price, days);
 
-                case "D": {
-                    int overtime = scanner.nextInt();
-                    company.hire(new Developer(id, name, baseSalary, overtime));
-                    break;
-                }
-
-                case "L": {
-                    int overtime = scanner.nextInt();
-                    int teamSize = scanner.nextInt();
-                    company.hire(new TeamLead(id, name, baseSalary, overtime, teamSize));
+                    if (!foodContainer.add(food) && !overflowContainer.add(food)) {
+                        System.out.println("Rejected: " + name);
+                    }
                     break;
                 }
 
-                case "I": {
-                    int months = scanner.nextInt();
-                    company.hire(new Intern(id, name, baseSalary, months));
+                case "E": {
+                    int warranty = scanner.nextInt();
+                    Electronics electronics = new Electronics(name, price, warranty);
+
+                    if (!electronicsContainer.add(electronics) && !overflowContainer.add(electronics)) {
+                        System.out.println("Rejected: " + name);
+                    }
                     break;
                 }
 
                 default:
-                    throw new IllegalArgumentException("Unknown employee type: " + type);
+                    throw new IllegalArgumentException("Unknown product type: " + type);
             }
         }
 
-        double threshold = scanner.nextDouble();
+        foodContainer.print();
+        electronicsContainer.print();
+        overflowContainer.print();
 
-        DecimalFormat formatter = new DecimalFormat("0.00");
-        formatter.setRoundingMode(RoundingMode.HALF_UP);
+        Pair<String, Double> mostValuable = foodContainer.summary();
 
-        company.printAll();
-        company.printStatistics();
-        System.out.println("Total payroll: " + formatter.format(company.totalPayroll()));
+        Pair<String, Double> techSummary = electronicsContainer.summary();
+        if (techSummary.getValue() > mostValuable.getValue()) {
+            mostValuable = techSummary;
+        }
 
-        // System.out.println("Average salary: " + formatter.format(Math.ceil(company.averageSalary())));
-        System.out.println("Average salary: " + formatter.format(company.averageSalary()));
+        Pair<String, Double> overflowSummary = overflowContainer.summary();
+        if (overflowSummary.getValue() > mostValuable.getValue()) {
+            mostValuable = overflowSummary;
+        }
 
-        Employee highestPaid = company.highestPaid();
-        System.out.println("Highest paid: " + highestPaid.getId() + " " + highestPaid.getName() + " " + "(" + formatter.format(highestPaid.calculateSalary()) + ")");
-        System.out.println("Employees with salary above " + formatter.format(threshold) + ": " + company.countAbove(threshold));
+        System.out.println("Most valuable container: " + mostValuable.getKey() + " (" + formatter.format(mostValuable.getValue()) + ")");
+
+        Food mostExpensiveFood = foodContainer.mostExpensive();
+        if (mostExpensiveFood != null) {
+            System.out.println("Top food expires in " + mostExpensiveFood.getDaysToExpiry() + " days");
+        }
+
+        Electronics mostExpensiveElectronics = electronicsContainer.mostExpensive();
+        if (mostExpensiveElectronics != null) {
+            System.out.println("Top electronics warranty: " + mostExpensiveElectronics.getWarrantyMonths() + " months");
+        }
 
         scanner.close();
     }
 }
-
-// TEST DATA
-//4
-//E 1 John 100
-//D 2 Jane 100 10
-//L 3 Tom 100 20 5
-//I 4 Ana 100 6

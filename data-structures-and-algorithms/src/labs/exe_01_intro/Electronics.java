@@ -1,4 +1,4 @@
-package labs.exe_02_intro;
+package labs.exe_01_intro;
 
 public class Electronics extends Product {
     private int warrantyMonths;

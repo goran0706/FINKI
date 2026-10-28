@@ -1,4 +1,4 @@
-package labs.exe_03_lists;
+package labs.exe_02_lists;
 
 import java.util.Scanner;
 
@@ -54,7 +54,7 @@ Prazna lista!!!
 
 */
 
-public class Main {
+public class ExeHome {
     static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
