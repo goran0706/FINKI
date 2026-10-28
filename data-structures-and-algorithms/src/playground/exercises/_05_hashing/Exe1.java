@@ -140,59 +140,59 @@ import java.util.Scanner;
 // Дополнително осигурете се дека вашата клуч класа ќе ги имплементира потребните
 // hashCode и equals методи
 
-class Person {
-    // поставете ги потребните полиња овде
-    ...
-
-    // имплементирајте соодветен конструктор
-    Person(...) {
-        ...
-    }
-
-    @Override
-    public String toString() {
-        // имплементирајте го toString методот според барањето во текстот
-        ...
-    }
-
-
-    // имплементирајте ги следните два методи за да работи табелата правилно
-    @Override
-    public boolean equals(Object o) {
-        ...
-    }
-    @Override
-    public int hashCode() {
-        ...
-    }
-}
-
-class Project {
-    ...
-
-    Project(...) {
-        ...
-    }
-
-
-    @Override
-    public String toString() {
-        ...
-    }
-}
-
-public class Solution {
-    public static void main(String[] args) {
-        // Креирајте ја табелата според барањата
-        ... table = new ...;
-
-        // Прочитајте ги податоците од влезот и пополнете ја табелата
-
-
-        // отпечатете ја вашата табела
-        System.out.println(table);
-    }
-}
+//class Person {
+//    // поставете ги потребните полиња овде
+//    ...
+//
+//    // имплементирајте соодветен конструктор
+//    Person(...) {
+//        ...
+//    }
+//
+//    @Override
+//    public String toString() {
+//        // имплементирајте го toString методот според барањето во текстот
+//        ...
+//    }
+//
+//
+//    // имплементирајте ги следните два методи за да работи табелата правилно
+//    @Override
+//    public boolean equals(Object o) {
+//        ...
+//    }
+//    @Override
+//    public int hashCode() {
+//        ...
+//    }
+//}
+//
+//class Project {
+//    ...
+//
+//    Project(...) {
+//        ...
+//    }
+//
+//
+//    @Override
+//    public String toString() {
+//        ...
+//    }
+//}
+//
+//public class Solution {
+//    public static void main(String[] args) {
+//        // Креирајте ја табелата според барањата
+//        ... table = new ...;
+//
+//        // Прочитајте ги податоците од влезот и пополнете ја табелата
+//
+//
+//        // отпечатете ја вашата табела
+//        System.out.println(table);
+//    }
+//}
 
 public class Exe1 {
 }

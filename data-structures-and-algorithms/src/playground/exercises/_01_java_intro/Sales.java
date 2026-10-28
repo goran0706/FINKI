@@ -9,65 +9,6 @@ import java.util.Scanner;
     • Метод SalesPerson salesChampion(SalesPerson [] arr) кој за дадената низа од работници ќе го врати работникот со најголем остварен приход (од сите квартали).
     • Да се дополни main методот во кој ќе се иницијализира низа од вработени во одделот за продажба и квартали согласно влезните тест примери. Во првиот ред се чита број на вработени, а понатаму прво во еден ред се чита името, па за секој квартал во еден ред бројот на продажби, и во следниот ред приходот добиен од секоја од тие продажби.
     • На стандарден излез да се испечати низата од вработени во одделот за продажба со помош на методата void table(SalesPerson [] arr) која за низата од вработени ќе отпечати приказ во следниот формат (за простор при печатење се користат три празни места):
-
-    Input:
-    5
-    Damian
-    3
-    2000 1500 1000
-    5
-    1000 1300 2500 800 1100
-    2
-    3000 2000
-    1
-    1700
-    Samantha
-    4
-    1500 2000 1700 1200
-    6
-    900 1200 1800 1100 1500 1300
-    3
-    2500 3000 2000
-    5
-    800 1000 1300 1200 900
-    Jackson
-    5
-    1300 1500 1600 1200 1400
-    4
-    1700 2100 2000 1900
-    6
-    900 1200 1500 1800 2000 2200
-    7
-    500 700 900 1100 1300 1500 1700
-    Olivia
-    2
-    3500 3000
-    3
-    2000 2500 3000
-    4
-    1500 1800 2100 2400
-    5
-    1000 1300 1600 1900 2200
-    Liam
-    6
-    1100 1400 1700 2000 2300 2600
-    7
-    500 700 900 1100 1300 1500 1700
-    8
-    800 1000 1200 1400 1600 1800 2000 2200
-    3
-    2700 3000 3300
-
-
-    Result:
-    SP   1   2   3   4   Total
-    Damian   4500   6700   5000   1700   17900
-    Samantha   6400   7800   7500   5200   26900
-    Jackson   7000   7700   9600   7700   32000
-    Olivia   6500   7500   7800   8000   29800
-    Liam   11100   7700   12000   9000   39800
-
-    SALES CHAMPION: Liam
 */
 
 class QuarterlySales {
@@ -81,9 +22,31 @@ class QuarterlySales {
         this.quarterNo = quarterNo;
     }
 
+    public int getNumOfSales() {
+        return numOfSales;
+    }
+
+    public int[] getRevenues() {
+        return revenues;
+    }
+
+    public int getQuarterNo() {
+        return quarterNo;
+    }
+
+    public int totalRevenues() {
+        int total = 0;
+
+        for (int revenue : revenues) {
+            total += revenue;
+        }
+
+        return total;
+    }
+
     @Override
     public String toString() {
-        return "";
+        return String.valueOf(totalRevenues());
     }
 }
 
@@ -96,30 +59,90 @@ class SalesPerson {
         this.quarters = quarters;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public QuarterlySales[] getQuarters() {
+        return quarters;
+    }
+
+    public int sumSales() {
+        int total = 0;
+
+        for (QuarterlySales quarter : quarters) {
+            total += quarter.totalRevenues();
+        }
+
+        return total;
+    }
+
     @Override
     public String toString() {
-        return "";
+        StringBuilder result = new StringBuilder(name);
+
+        for (QuarterlySales quarter : quarters) {
+            result.append("   ").append(quarter.totalRevenues());
+        }
+
+        result.append("   ").append(sumSales());
+
+        return result.toString();
     }
 }
 
-
 public class Sales {
+
+    public static int sumSales(SalesPerson sp) {
+        return sp.sumSales();
+    }
+
     public static SalesPerson salesChampion(SalesPerson[] arr) {
-        return null;
+        if (arr.length == 0) {
+            return null;
+        }
+
+        SalesPerson champion = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            if (sumSales(arr[i]) > sumSales(champion)) {
+                champion = arr[i];
+            }
+        }
+
+        return champion;
     }
 
     public static void table(SalesPerson[] arr) {
+        System.out.println("SP   1   2   3   4   Total");
 
+        for (SalesPerson sp : arr) {
+            System.out.println(sp);
+        }
     }
 
     static void main(String[] args) {
-
-        int n;
         Scanner input = new Scanner(System.in);
-        n = input.nextInt();
+
+        int n = input.nextInt();
         SalesPerson[] arr = new SalesPerson[n];
+
         for (int i = 0; i < n; i++) {
-            //your code goes here
+            String name = input.next();
+            QuarterlySales[] quarters = new QuarterlySales[4];
+
+            for (int j = 0; j < 4; j++) {
+                int numOfSales = input.nextInt();
+                int[] revenues = new int[numOfSales];
+
+                for (int k = 0; k < numOfSales; k++) {
+                    revenues[k] = input.nextInt();
+                }
+
+                quarters[j] = new QuarterlySales(numOfSales, revenues, j + 1);
+            }
+
+            arr[i] = new SalesPerson(name, quarters);
         }
 
         table(arr);

@@ -22,26 +22,26 @@ package playground.exercises.midterm_1;
     1
 */
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
-
-
-public class card_trick {
-    public static int count(int N){
-        // Vasiot kod tuka
-
-    }
-
-    public static void main(String[] args) throws NumberFormatException, IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in) );
-        System.out.println(count(Integer.parseInt(br.readLine())));
-    }
-
-}
+//import java.io.BufferedReader;
+//import java.io.IOException;
+//import java.io.InputStreamReader;
+//import java.util.LinkedList;
+//import java.util.Queue;
+//import java.util.Stack;
+//
+//
+//public class card_trick {
+//    public static int count(int N){
+//        // Vasiot kod tuka
+//
+//    }
+//
+//    public static void main(String[] args) throws NumberFormatException, IOException {
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in) );
+//        System.out.println(count(Integer.parseInt(br.readLine())));
+//    }
+//
+//}
 
 
 public class Exe5 {
