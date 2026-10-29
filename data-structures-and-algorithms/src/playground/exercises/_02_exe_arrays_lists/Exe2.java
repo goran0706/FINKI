@@ -29,92 +29,6 @@ package playground.exercises._02_exe_arrays_lists;
 
 import java.util.Scanner;
 
-class Node<E> {
-    protected E elem;
-    protected Node<E> succ;
-
-    Node(E elem, Node<E> succ) {
-        this.elem = elem;
-        this.succ = succ;
-    }
-}
-
-class SLL<E> {
-    private Node<E> first;
-
-    public Node<E> getFirst() {
-        return first;
-    }
-
-    public void insertLast(E elem) {
-        Node<E> ins = new Node<>(elem, null);
-
-        if (first == null) {
-            first = ins;
-        } else {
-            Node<E> curr = first;
-
-            while (curr.succ != null) {
-                curr = curr.succ;
-            }
-
-            curr.succ = ins;
-        }
-    }
-
-    public E deleteFirst() {
-        if (first == null) {
-            return null;
-        }
-
-        E elem = first.elem;
-        first = first.succ;
-
-        return elem;
-    }
-
-    public E delete(Node<E> del) {
-        if (first == null || del == null) {
-            return null;
-        }
-
-        if (first == del) {
-            return deleteFirst();
-        }
-
-        Node<E> curr = first;
-
-        while (curr.succ != null && curr.succ != del) {
-            curr = curr.succ;
-        }
-
-        if (curr.succ == null) {
-            return null;
-        }
-
-        curr.succ = del.succ;
-        return del.elem;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        Node<E> curr = first;
-
-        while (curr != null) {
-            result.append(curr.elem);
-
-            if (curr.succ != null) {
-                result.append("->");
-            }
-
-            curr = curr.succ;
-        }
-
-        return result.toString();
-    }
-}
-
 public class Exe2 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -142,5 +56,91 @@ public class Exe2 {
         }
 
         System.out.println(list);
+    }
+
+    private static class Node<E> {
+        protected E elem;
+        protected Node<E> succ;
+
+        Node(E elem, Node<E> succ) {
+            this.elem = elem;
+            this.succ = succ;
+        }
+    }
+
+    private static class SLL<E> {
+        private Node<E> first;
+
+        public Node<E> getFirst() {
+            return first;
+        }
+
+        public void insertLast(E elem) {
+            Node<E> ins = new Node<>(elem, null);
+
+            if (first == null) {
+                first = ins;
+            } else {
+                Node<E> curr = first;
+
+                while (curr.succ != null) {
+                    curr = curr.succ;
+                }
+
+                curr.succ = ins;
+            }
+        }
+
+        public E deleteFirst() {
+            if (first == null) {
+                return null;
+            }
+
+            E elem = first.elem;
+            first = first.succ;
+
+            return elem;
+        }
+
+        public E delete(Node<E> del) {
+            if (first == null || del == null) {
+                return null;
+            }
+
+            if (first == del) {
+                return deleteFirst();
+            }
+
+            Node<E> curr = first;
+
+            while (curr.succ != null && curr.succ != del) {
+                curr = curr.succ;
+            }
+
+            if (curr.succ == null) {
+                return null;
+            }
+
+            curr.succ = del.succ;
+            return del.elem;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder result = new StringBuilder();
+            Node<E> curr = first;
+
+            while (curr != null) {
+                result.append(curr.elem);
+
+                if (curr.succ != null) {
+                    result.append("->");
+                }
+
+                curr = curr.succ;
+            }
+
+            return result.toString();
+        }
     }
 }
