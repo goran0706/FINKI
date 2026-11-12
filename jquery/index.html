@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Document</title>
+    <link href="jquery-ui.css" rel="stylesheet">
+    <script src="jquery.js"></script>
+    <script src="jquery-ui.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        header {
+            background: #0f172a;
+            padding: 32px;
+            width: 100%;
+
+            nav {
+                margin: 0 auto;
+            }
+
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                list-style: none;
+                gap: 32px;
+            }
+
+            /* Hover moved onto the link so it matches the clickable area */
+
+            ul li a {
+                color: #fff;
+                font-weight: bold;
+                text-decoration: none;
+                display: inline-block;
+                border-radius: 1rem;
+                cursor: pointer;
+                padding: 1rem 2rem;
+                background-color: #192849;
+                transition: background-color .2s ease, outline-color .2s ease;
+            }
+
+            ul li a:hover,
+            ul li a:focus-visible {
+                outline: 2px solid #007bff;
+                outline-offset: 2px;
+                background-color: #213561;
+            }
+
+            ul li a.active {
+                background-color: #213561;
+                outline: 2px solid #007bff;
+                outline-offset: 2px;
+            }
+        }
+
+        #movie-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            margin-block: 2px;
+
+            li {
+                background: #213561;
+                width: 100%;
+                padding: 16px;
+                color: white;
+                font-weight: bold;
+            }
+        }
+
+        #movie-controls {
+            display: none;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("li:first-child a").addClass("active");
+
+            const movies = [
+                {
+                    title: "The Dark Knight",
+                    description: "Batman raises the stakes in his war on crime with the help of Lt. Jim Gordon and DA Harvey Dent, but a rising criminal mastermind known as the Joker plunges Gotham into anarchy."
+                },
+                {
+                    title: "Inception",
+                    description: "A skilled thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O."
+                },
+                {
+                    title: "Interstellar",
+                    description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival as Earth becomes uninhabitable."
+                },
+                {
+                    title: "The Matrix",
+                    description: "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers."
+                },
+            ]
+
+            let selectedIndex = 0;
+
+
+            for (let i = 0; i < movies.length; i++) {
+                $("#movie-list").append(`<li data-index="${i}">${`${i}. ${movies[i].title}`}</li>`);
+            }
+
+            $("#movie-list li").click(function () {
+                selectedIndex = $(this).data("index");
+                const selectedMovie = movies[selectedIndex];
+
+                $("#movie-list").hide();
+                $("#movie-details").show();
+                $("#movie-controls").show();
+                $("#movie-details #movie-title").text(selectedMovie.title);
+                $("#movie-details #movie-description").text(selectedMovie.description);
+            });
+
+
+            $("#prev").click(function () {
+                selectedIndex = (selectedIndex - 1 + movies.length) % movies.length;
+                updateDetails();
+            });
+
+            $("#next").click(function () {
+                selectedIndex = (selectedIndex + 1) % movies.length;
+                updateDetails();
+            });
+
+            $("#top").click(function () {
+                toggleDetails();
+            });
+
+            function toggleDetails() {
+                $("#movie-list").show();
+                $("#movie-details").hide();
+            }
+
+            function updateDetails() {
+                const selectedMovie = movies[selectedIndex];
+                $("#movie-details #movie-title").text(selectedMovie.title);
+                $("#movie-details #movie-description").text(selectedMovie.description);
+            }
+        });
+    </script>
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <ul id="movie-list"></ul>
+    <div id="movie-details">
+        <div id="movie-controls">
+            <button id="prev">Prev</button>
+            <button id="top">Top</button>
+            <button id="next">Next</button>
+        </div>
+        <p id="movie-title"></p>
+        <p id="movie-description"></p>
+    </div>
+</main>
+
+</body>
+</html>
